@@ -179,3 +179,48 @@ nav {
 	margin: 30px;
 	background-color: white;
 }
+
+/* Home page */
+
+.mainHome {
+	width: 100%;
+	padding-top: 90px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.mainHomeLeft {
+	width: 20%;
+	height: 200px;
+	border-right: 1px #afb2b7 solid;
+	border-bottom: 1px #afb2b7 solid;
+	padding-left: 10px;
+}
+
+.mainHomeRight {
+	width: 80%;
+	height: 200px;
+	padding-left: 10px;
+	border-bottom: 1px #afb2b7 solid;
+}
+
+.mainHomeBottom {
+	width: 100%;
+	margin-top: 20px;
+	display: flex;
+	justify-content: center;
+}
+
+.lastAccessory {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	align-content: stretch;
+}
+
+.lastAccessoryAdded {
+	width: 175px;
+	height: 175px;
+	margin: 20px;
+	background-color: white;
+}
