@@ -1,0 +1,142 @@
+/* 
+Color Palettes 
+
+Toolbar: (Most grayish)
+#7f8084
+
+Background 2: (Gray)
+#afb2b7
+
+: (Light gray)
+#d7d8da
+
+Ligth light gray)
+#f3f3f3
+
+Accents: (black)
+#262526
+*/
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f3f3f3;
+}
+
+body > * {
+	font-family: 'Playfair Display', serif;
+}
+
+nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position: fixed;
+    width: 100%;
+    height: 50px;
+    background-color: #7f8084;
+}
+
+.menuDiv {
+	width: 33%;
+	height: 100%;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.menuLink {
+	width: 40px;
+	height: 40px;
+	margin-left: 10px;
+}
+
+.logoDiv {
+	width: 33%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.logoLink {
+	width: 150px;
+}
+
+.icon {
+	width: 40px;
+    height: 40px;
+}
+
+.iconLink {
+	width: 40px;
+    height: 40px;
+	margin: 6px;
+}
+
+.userLinksDiv {
+	width: 33%;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.userName {
+	display: flex;
+	align-content: center;
+	margin-left: 10px;
+	margin-right: 20px;
+	color: white;
+	font-size: 1.5em;
+	text-decoration: none;
+}
+
+.userName > p {
+	line-height: unset;
+	margin: 0;
+}
+
+main {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+aside {
+	width: 20%;
+	margin-top: 50px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.categories{
+	order: 1;
+	height: 50%;
+	width: 80%;
+	margin: 20px;
+	background-color: red;
+}
+
+.filter {
+	order: 2;
+	height: 50%;
+	width: 80%;
+	margin: 0 20px 20px 20px;
+	background-color: blue;	
+}
+
+section {
+	width: 80%;
+	padding: 70px 80px 0 100px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+}
+
+.accesoryItem {
+	width: 225px;
+	height: 225px;
+	margin: 30px;
+	background-color: white;
+}
+
