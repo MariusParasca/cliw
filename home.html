@@ -1,18 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-US">
 
 <head>
     <title>Home Page</title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
+    <script src="script.js"></script>
 </head>
 
 <body>
     <nav>
         <div class="menuDiv">
-            <a class="menuLink" href="">
-                <img class="icon" src="./Icons/menu.png">
-            </a>
+            <div class="dropdown">
+                <a class="menuLink" id="navMenu" href=""></a>
+                <div class="dropdownContent">
+                    <ul>
+                        <li><a href="">All Categories</a></li>
+                        <li><a href="">Baseball cap</a></li>
+                        <li><a href="">Beanie</a></li>
+                        <li><a href="">Beret</a></li>
+                        <li><a href="">Bobble hat</a></li>
+                        <li><a href="">Fedora</a></li>
+                        <li><a href="">Cowboy hat</a></li>
+                        <li><a href="">Flat cap</a></li>
+                        <li><a href="">Knit cap</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
         <div class="logoDiv">
             <a href="">
@@ -20,29 +34,17 @@
             </a>
         </div>
         <div class="userLinksDiv">
-            <a class="iconLink" href="">
-                <img class="icon" src="./Icons/heart_white.png">
-            </a>
-            <a class="iconLink" href="">
-                <img class="icon" src="./Icons/shopping_cart_white.png">
-            </a>
-            <a class="iconLink" href="">
-                <img class="icon" src="./Icons/user_avatar_white.png">
-            </a>
+            <a class="iconLink dot" id="navHeart" href=""></a>
+            <a class="iconLink" id="navCart" href=""></a>
+            <a class="iconLink" id="navUser" href=""></a>
             <a class="userName" href="">
-                <p>
-                    User
-                </p>
+                User
             </a>
         </div>
     </nav>
     <main>
         <div class="mainHome">
-            <aside class="mainHomeLeft">
-                sfs
-            </aside>
-            <section class="mainHomeRight">
-                fsdfs
+            <section class="mainHomeTop">
             </section>
         </div>
         <section class="mainHomeBottom">
