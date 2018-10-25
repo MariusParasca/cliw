@@ -389,7 +389,6 @@ hr.horizontalLine {
 .lastAccessory {
 	display: flex;
 	justify-content: center;
-	
 	align-content: stretch;
 }
 
@@ -404,6 +403,71 @@ hr.horizontalLine {
 .lastAccessoryImage {
 	width: 200px;
 	height: 200px;
+}
+
+/* Login page */
+
+.login {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+
+}
+
+.loginBlock {
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, .2);
+	width: 400px;
+	height: 320px;
+	background-color: white;
+	display: flex;
+	align-items: center;
+	flex-direction:  column;
+}
+
+.loginBlock h2 {
+	color: #afb2b7;
+	text-align: center;
+	font: 32px;
+}
+
+.loginBlock p {
+	color: #262526;
+	text-align: center;
+}
+
+.loginBlock p:last-of-type {
+	color: #262526;
+	font-size: 13px;
+}
+
+.loginBlock input {
+	width: 320px;
+	height: 30px;
+	font-size: 16px;
+	padding-left: 5px;
+	padding-right: 5px;
+	margin-top: -10px;
+}
+
+.loginButton {
+	width: 330px;
+	height: 40px;
+	background-color: #a0a2a7;
+	font-size: 16px;
+	color: white;
+	cursor: pointer;
+	font-family: 'Playfair Display', serif;
+}
+
+.loginButton:hover { 
+	background-color: #7f8084;
+}
+
+.loginLogoImage {
+	margin-top: 40px;
+	margin-bottom: 30px;
+	width: 200px;
 }
 
 /* Common */
