@@ -36,7 +36,8 @@ nav {
 	position: fixed;
     width: 100%;
     height: 50px;
-    background-color: #7f8084;
+	background-color: #7f8084;
+	z-index: 100;
 }
 
 .menuDiv {
@@ -110,15 +111,15 @@ nav {
 	width: 15%;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
 }
 
 .categories{
 	order: 1;
-	/* height: 50%; */
-	width: 80%;
+	width: 190px;
+	height: 250px;
 	margin: 20px;
 	background-color: #d7d8da;
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, .2);
 }
 
 .categoriesHeader {
@@ -147,12 +148,59 @@ nav {
 	color: white;
 }
 
-.filter {
+.filters {
 	order: 2;
-	height: 50%;
-	width: 80%;
+	width: 190px;
+	height: 250px;
 	margin: 0 20px 20px 20px;
-	background-color: #d7d8da;	
+	background-color: #d7d8da;
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, .2);	
+}
+
+.filtersHeader {
+	cursor: default;
+	margin: 0;
+	margin-top: 5px;
+	padding-left: 10px;
+}
+
+.filters > ul {
+	margin-top: 8px;
+	padding-left: 16px;
+}
+
+.filters > ul > li {
+	list-style-type: none;
+}
+
+.filters > ul > li > a {
+	color: #7f8084;
+	text-decoration: none;
+	margin: 0;
+}
+
+.filters > ul > li > p {
+	margin: 0;
+	color: #7f8084;
+	cursor: default;
+}
+
+.filters > ul > li > ul {
+	padding-left: 15px;
+}
+
+.filters > ul > li > ul > li {
+	list-style-type: none;
+}
+
+.filters > ul > li > ul > li > a {
+	color: #7f8084;
+	text-decoration: none;
+	margin: 0;
+}
+
+.filters > ul > li > a:hover, .filters > ul > li > ul > li > a:hover {
+	color: white;
 }
 
 .accesoryList {
@@ -174,10 +222,68 @@ nav {
 }
 
 .accesoryItem {
-	width: 225px;
-	height: 225px;
+	width: 250px;
+	height: 310px;
 	margin: 30px;
 	background-color: white;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, .2);
+}
+
+.accessoryLink {
+	text-decoration: none;
+}
+
+.accessoryImage {
+	width: 250px;
+	height: 250px;
+}
+
+/* .dot {
+	position: relative;
+	top: -40px;
+	left: 60px;
+	height: 30px;
+	width: 30px;
+	background-color: yellow;
+	border-radius: 50%;
+	display: inline-block;
+	z-index: 0;
+} */
+
+#itemHeart {
+	width: 40px;
+	height: 40px;
+	top: -100px;
+	background-image: url('./icons/circle_heart_red.png');
+}
+
+#itemHeart:hover {
+	background-image: url('./icons/circle_heard_red_filled.png');
+}
+
+.likeAccessory {
+	height: 28px;
+	width: 28px;
+}
+
+.accessoryTitle {
+	height: 10px;
+	text-align: center;
+	margin: 0;
+	font-size: 1.2em;
+	color: #262526;
+	text-decoration: none;	
+}
+
+.accesoryPrice {
+	text-align: center;
+	margin: 0;
+	margin-top: 20px;
+	color: #7f8084;
+	cursor: default;
 }
 
 /* Home page */
