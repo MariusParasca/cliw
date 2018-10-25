@@ -346,26 +346,64 @@ nav {
 	border-bottom: 1px #afb2b7 solid;
 }
 
+.mainHomeCenterVertical {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+}
+
+.mainHomeCenterVertical {
+	display: flex;
+	justify-content: center;
+}
+
+.mainHomeCenterVertical h2 {
+	display: inline-block;
+	margin-top: 20px;
+	margin-bottom: 10px;
+
+	font-size: 19px;
+	color: #262526;
+}
+
+hr.horizontalLine {
+	display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #262526;
+	padding: 0; 
+	margin-left: 185px;
+	margin-right : 185px;
+}
+
+
 .mainHomeBottom {
 	width: 100%;
 	margin-top: 20px;
 	display: flex;
 	justify-content: center;
+	flex-wrap: wrap;
 }
 
 .lastAccessory {
 	display: flex;
 	justify-content: center;
-	flex-wrap: wrap;
+	
 	align-content: stretch;
 }
 
 .lastAccessoryAdded {
 	box-shadow: 2px 2px 4px rgba(0, 0, 0, .2);
-	width: 175px;
-	height: 175px;
+	width: 200px;
+	height: 200px;
 	margin: 20px;
 	background-color: white;
+}
+
+.lastAccessoryImage {
+	width: 200px;
+	height: 200px;
 }
 
 /* Common */
