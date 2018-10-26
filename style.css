@@ -459,12 +459,7 @@ footer {
 	color: #262526;
 }
 
-hr.horizontalLine {
-	display: block;
-    height: 1px;
-    border: 0;
-    border-top: 1px solid #262526;
-	padding: 0; 
+.horizontalLine {
 	margin-left: 185px;
 	margin-right : 185px;
 }
@@ -472,6 +467,7 @@ hr.horizontalLine {
 .mainHomeBottom {
 	width: 100%;
 	margin-top: 20px;
+	margin-bottom: 40px;
 	display: flex;
 	justify-content: center;
 	flex-wrap: wrap;
@@ -548,6 +544,7 @@ hr.horizontalLine {
 	font-size: 16px;
 	color: white;
 	cursor: pointer;
+	border: 0px solid black; 
 	font-family: 'Playfair Display', serif;
 }
 
@@ -600,4 +597,120 @@ hr.horizontalLine {
 
 .dropdown:hover .dropdownContent {
     display: block;
+}
+
+/* Item page */
+
+.mainItemPage {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	padding-top: 100px;
+}
+
+.mainItemPageTop {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	height: 380px;
+	width: 68%;
+	margin-bottom: 30px;
+}
+
+.mainItemPageTopLeft {
+	height: 380px;
+	width: 380px;
+	background: green;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.mainItemPageTopRight {
+	height: 380px;
+	width: 420px;
+	margin-left: 20px;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+}
+
+.mainItemPageTopRight p:nth-of-type(1) {
+	display: block;
+	width: 420px;
+	padding: 5px;
+	border: 1px solid #262526;
+	font-size: 25px;
+	margin-top: 0px;
+}
+.mainItemPageTopRight p:nth-of-type(2) {
+	display: inline-block;
+	width: 210px;
+	padding: 5px;
+	font-size: 18px;
+	margin: 0;
+	margin-top: -10px;
+	border: 1px solid #262526;
+}
+.mainItemPageCenter {
+	height: 70px;
+	width: 68%;
+	margin-bottom: 30px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.mainItemPageBottom {
+	height: 250px;
+	width: 68%;
+	margin-bottom: 30px;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+.itemImage {
+	height: 380px;
+	width: 380px;
+}
+
+.itemPageWidth {
+	width: 68%;
+}
+
+#itemHeartItemPage {
+	position: absolute;
+	display: block;
+	width: 30px;
+	height: 30px;
+	right: 1px;
+	top: 6px;
+	background-image: url('./icons/circle_heart_red.png');
+}
+
+#itemHeartItemPage:hover {
+	background-image: url('./icons/circle_heard_red_filled.png');
+}
+
+
+.tryIt {
+	width: 380px;
+	height: 40px;
+	background-color: #a0a2a7;
+	font-size: 16px;
+	color: white;
+	cursor: pointer;
+	border: 0px solid black; 
+	font-family: 'Playfair Display', serif;
+}
+
+.addToCart {
+	width: 380px;
+	height: 40px;
+	margin-left: 15px;
+	background-color: #a0a2a7;
+	font-size: 16px;
+	color: white;
+	cursor: pointer;
+	border: 0px solid black; 
+	font-family: 'Playfair Display', serif;
 }
