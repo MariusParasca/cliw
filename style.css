@@ -748,8 +748,8 @@ footer {
 
 /* Item page */
 
-.mainItemPage {
-	display: flex;
+#mainItemPage {
+	display: flex; /*//////////////////////////////////////////////// */
 	align-items: center;
 	flex-direction: column;
 	padding-top: 100px;
@@ -767,7 +767,6 @@ footer {
 .mainItemPageTopLeft {
 	height: 380px;
 	width: 380px;
-	background: green;
 	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
 
@@ -871,11 +870,10 @@ footer {
 	background-image: url('./icons/circle_heard_red_filled.png');
 }
 
-
-.tryIt {
+#tryIt {
 	position: relative;
 	width: 380px;
-	height: 60px;
+	height: 48px;
 	background-color: #fafafa;
 	font-size: 24px;
 	cursor: pointer;
@@ -884,9 +882,11 @@ footer {
 	color: #7f8095;
 	box-shadow: 0px 4px 16px 0px rgba(0,0,0,0.2);
 	border: 1px solid rgb(209, 209, 209);
+	text-align: center;
+	padding-top: 12px;
 }
 
-.tryIt:hover {
+#tryIt:hover {
 	background-color: white;
 	color: black;
 }
@@ -935,6 +935,94 @@ footer {
 	border: 1px solid rgb(209, 209, 209);
 	box-shadow: 0px 4px 16px 0px rgba(0,0,0,0.2);
 	font-family: 'Playfair Display', serif;
+}
+
+#mainWebcamPage {
+	display: none; /* /////////////// */
+	flex-direction: row;
+	justify-content: center;
+	margin: 0 auto;
+	padding-top: 100px;
+	width: 80%;
+	margin-bottom: 70px;
+}
+
+.webcamPageWidth {
+	width: 80%;
+}
+
+#backToItem {
+	width: 50px;
+	height: 50px;
+	background-image: url('./icons/back_arrow_gray_50px.png');
+	margin-right: 20px;
+	cursor: pointer;
+}
+
+#backToItem:hover {
+	background-image: url('./icons/back_arrow_black_50px.png')
+}
+
+.webcam {
+	width: 800px;
+	height: 600px;
+	display: flex;
+	flex-direction: column;
+}
+
+.webcam img {
+	width: 800px;
+	background-color: #fafafa;
+	box-shadow: 0px 4px 16px 0px rgba(0,0,0,0.2);
+	border: 1px solid rgb(209, 209, 209);
+}
+
+.takePhoto {
+	margin-top: 15px;
+	background-color: #fafafa;
+	font-size: 24px;
+	cursor: pointer;
+	border: 0px solid black; 
+	font-family: 'Playfair Display', serif;
+	color: #7f8095;
+	box-shadow: 0px 4px 16px 0px rgba(0,0,0,0.2);
+	border: 1px solid rgb(209, 209, 209);
+}
+
+.takePhoto:hover {
+	background-color: white;
+	color: black;
+}
+
+.itemChoices {
+	display: flex;
+	flex-direction: column;
+	margin-left: 20px;
+}
+
+.itemChoices > a {
+	display: block;
+}
+
+.itemChoicesFavorites {
+	width: 50px;
+	height: 50px;
+	background-image: url('./icons/circle_red_heart_50px.png');
+	margin-bottom: 20px;
+}
+
+.itemChoicesFavorites:hover {
+	background-image: url('./icons/circle_red_heart_filled_50px.png');
+}
+
+.itemChoicesCart {
+	width: 50px;
+	height: 50px;
+	background-image: url('./icons/shopping_cart_gray_50px.png');
+}
+
+.itemChoicesCart:hover {
+	background-image: url('./icons/shopping_cart_black_50px.png');
 }
 
 /* Cart Page */
@@ -1068,6 +1156,5 @@ footer {
 }
 
 .checkOutButton:hover {
-	/* background-color: white; */
 	color: #afb2b7;
 }

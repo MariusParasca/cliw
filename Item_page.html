@@ -9,7 +9,7 @@
     <script src="script.js"></script>
 </head>
 
-<body>
+<body id="bodyItemPage">
     <nav>
         <div class="menuDiv">
             <div class="dropdown">
@@ -44,7 +44,7 @@
         </div>
     </nav>
     <main>
-        <section class="mainItemPage">
+        <section id="mainItemPage">
             <div class="mainItemPageTop">
                 <div class="mainItemPageTopLeft">
                     <img class="itemImage" src="./images/navy_cap.jpg" alt="navy cap">
@@ -68,12 +68,10 @@
                 </div>
             </div>
             <div class="mainItemPageCenter">
-                <a href="">
-                    <button class="tryIt">
-                        Try it LIVE
-                        <div id='imgHat'></div>
-                    </button>
-                </a>
+                <div id="tryIt">
+                    Try it LIVE
+                    <div id='imgHat'></div>
+                </div>
                 <a href="">
                     <button class="addToCart">
                         Add to cart
@@ -111,8 +109,21 @@
             </div>
             <hr class="horizontalLine itemPageWidth" />
         </section>
+        <section id="mainWebcamPage">
+            <div id="backToItem">
+            </div>
+            <div class="webcam">
+                <img src="./images/woman_wearing_hat.jpg" alt="woman wearing hat">
+                <button class="takePhoto">Take photo</button>
+            </div>
+            <div class="itemChoices">
+                <a href="#" class="itemChoicesFavorites"></a>
+                <a href="#" class="itemChoicesCart"></a>
+            </div>
+        </section>
+        <!-- <hr class="horizontalLine webcamPageWidth" /> -->
     </main>
-    <footer>
+    <footer id="itemPageFooter">
         HEGE a headgear company
     </footer>
 </body>
