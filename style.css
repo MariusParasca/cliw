@@ -581,12 +581,7 @@ footer {
 	color: #262526;
 }
 
-hr.horizontalLine {
-	display: block;
-    height: 1px;
-    border: 0;
-    border-top: 1px solid #262526;
-	padding: 0; 
+.horizontalLine {
 	margin-left: 185px;
 	margin-right : 185px;
 }
@@ -594,6 +589,7 @@ hr.horizontalLine {
 .mainHomeBottom {
 	width: 100%;
 	margin-top: 20px;
+	margin-bottom: 40px;
 	display: flex;
 	justify-content: center;
 	flex-wrap: wrap;
@@ -602,7 +598,6 @@ hr.horizontalLine {
 .lastAccessory {
 	display: flex;
 	justify-content: center;
-	
 	align-content: stretch;
 }
 
@@ -617,6 +612,72 @@ hr.horizontalLine {
 .lastAccessoryImage {
 	width: 200px;
 	height: 200px;
+}
+
+/* Login page */
+
+.login {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+
+}
+
+.loginBlock {
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, .2);
+	width: 400px;
+	height: 320px;
+	background-color: white;
+	display: flex;
+	align-items: center;
+	flex-direction:  column;
+}
+
+.loginBlock h2 {
+	color: #afb2b7;
+	text-align: center;
+	font: 32px;
+}
+
+.loginBlock p {
+	color: #262526;
+	text-align: center;
+}
+
+.loginBlock p:last-of-type {
+	color: #262526;
+	font-size: 13px;
+}
+
+.loginBlock input {
+	width: 320px;
+	height: 30px;
+	font-size: 16px;
+	padding-left: 5px;
+	padding-right: 5px;
+	margin-top: -10px;
+}
+
+.loginButton {
+	width: 330px;
+	height: 40px;
+	background-color: #a0a2a7;
+	font-size: 16px;
+	color: white;
+	cursor: pointer;
+	border: 0px solid black; 
+	font-family: 'Playfair Display', serif;
+}
+
+.loginButton:hover { 
+	background-color: #7f8084;
+}
+
+.loginLogoImage {
+	margin-top: 40px;
+	margin-bottom: 30px;
+	width: 200px;
 }
 
 /* Common */
@@ -658,4 +719,195 @@ hr.horizontalLine {
 
 .dropdown:hover .dropdownContent {
     display: block;
+}
+
+/* Item page */
+
+.mainItemPage {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	padding-top: 100px;
+}
+
+.mainItemPageTop {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	height: 380px;
+	width: 68%;
+	margin-bottom: 30px;
+}
+
+.mainItemPageTopLeft {
+	height: 380px;
+	width: 380px;
+	background: green;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.mainItemPageTopRight {
+	height: 380px;
+	width: 420px;
+	margin-left: 20px;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	border-bottom: 1px solid #262526;
+}
+
+.mainItemPageTopRight p:nth-of-type(1) {
+	display: block;
+	width: 420px;
+	padding: 5px;
+	border-bottom: 1px solid #262526;
+	font-size: 25px;
+	margin-top: 0px;
+}
+
+.mainItemPageTopRight p:nth-of-type(2) {
+	display: inline-block;
+	width: 210px;
+	padding: 5px;
+	font-size: 18px;
+	margin: 0;
+	margin-top: -10px;
+	margin-bottom: 25px;
+}
+
+.mainItemPageTopRight p:nth-of-type(3) {
+	display: block;
+	width: 420px;
+	padding: 5px;
+	font-size: 14px;
+	margin: 0;
+	color: #7f8095;
+}
+
+.mainItemPageTopRight p:nth-of-type(4) {
+	display: block;
+	width: 420px;
+	padding: 5px;
+	font-size: 13px;
+	margin: 0;
+	margin-top: -10px;
+	margin-left: 10px;
+	margin-bottom: 35px;
+}
+
+.mainItemPageTopRight p:nth-of-type(5) {
+	display: block;
+	width: 420px;
+	padding: 5px;
+	font-size: 14px;
+	margin: 0;
+	color: #7f8095;
+	margin-top: -10px;
+}
+
+.mainItemPageCenter {
+	height: 70px;
+	width: 68%;
+	margin-bottom: 30px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.mainItemPageBottom {
+	height: 250px;
+	width: 68%;
+	margin-bottom: 30px;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+.itemImage {
+	height: 380px;
+	width: 380px;
+}
+
+.itemPageWidth {
+	width: 68%;
+}
+
+#itemHeartItemPage {
+	position: absolute;
+	display: block;
+	width: 30px;
+	height: 30px;
+	right: 1px;
+	top: 6px;
+	background-image: url('./icons/circle_heart_red.png');
+}
+
+#itemHeartItemPage:hover {
+	background-image: url('./icons/circle_heard_red_filled.png');
+}
+
+
+.tryIt {
+	position: relative;
+	width: 380px;
+	height: 60px;
+	background-color: #fafafa;
+	font-size: 24px;
+	cursor: pointer;
+	border: 0px solid black; 
+	font-family: 'Playfair Display', serif;
+	color: #7f8095;
+	box-shadow: 0px 4px 16px 0px rgba(0,0,0,0.2);
+	border: 1px solid rgb(209, 209, 209);
+}
+
+.tryIt:hover {
+	background-color: white;
+	color: black;
+}
+
+#imgHat {
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	left: 10px;
+	top: 12px;
+	background-image: url('./icons/hat_gray_40px.png');
+}
+
+.addToCart {
+	position: relative;
+	width: 380px;
+	height: 60px;
+	margin-left: 15px;
+	background-color: #fafafa;
+	box-shadow: 0px 4px 16px 0px rgba(0,0,0,0.2);
+	font-size: 24px;
+	color: #7f8095;
+	cursor: pointer;
+	border: 0px solid black; 
+	font-family: 'Playfair Display', serif;
+	border: 1px solid rgb(209, 209, 209);
+}
+
+.addToCart:hover {
+	background-color: #ffffff;
+	color: black;
+}
+
+#imgCart {
+	width: 40px;
+	height: 35px;
+	position: absolute;
+	left: 10px;
+	top: 12px;
+	background-image: url('./icons/cart_gray_40x35px.png');
+}
+
+.size {
+	height: 35px;
+	background-color: #fafafa;
+	border: 1px solid rgb(209, 209, 209);
+	box-shadow: 0px 4px 16px 0px rgba(0,0,0,0.2);
+	font-family: 'Playfair Display', serif;
 }
