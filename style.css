@@ -631,16 +631,18 @@ footer {
 	display: flex;
 	flex-direction: column;
 	position: relative;
+	border-bottom: 1px solid #262526;
 }
 
 .mainItemPageTopRight p:nth-of-type(1) {
 	display: block;
 	width: 420px;
 	padding: 5px;
-	border: 1px solid #262526;
+	border-bottom: 1px solid #262526;
 	font-size: 25px;
 	margin-top: 0px;
 }
+
 .mainItemPageTopRight p:nth-of-type(2) {
 	display: inline-block;
 	width: 210px;
@@ -648,8 +650,39 @@ footer {
 	font-size: 18px;
 	margin: 0;
 	margin-top: -10px;
-	border: 1px solid #262526;
+	margin-bottom: 25px;
 }
+
+.mainItemPageTopRight p:nth-of-type(3) {
+	display: block;
+	width: 420px;
+	padding: 5px;
+	font-size: 14px;
+	margin: 0;
+	color: #7f8095;
+}
+
+.mainItemPageTopRight p:nth-of-type(4) {
+	display: block;
+	width: 420px;
+	padding: 5px;
+	font-size: 13px;
+	margin: 0;
+	margin-top: -10px;
+	margin-left: 10px;
+	margin-bottom: 35px;
+}
+
+.mainItemPageTopRight p:nth-of-type(5) {
+	display: block;
+	width: 420px;
+	padding: 5px;
+	font-size: 14px;
+	margin: 0;
+	color: #7f8095;
+	margin-top: -10px;
+}
+
 .mainItemPageCenter {
 	height: 70px;
 	width: 68%;
@@ -693,24 +726,66 @@ footer {
 
 
 .tryIt {
+	position: relative;
 	width: 380px;
-	height: 40px;
-	background-color: #a0a2a7;
-	font-size: 16px;
-	color: white;
+	height: 60px;
+	background-color: #fafafa;
+	font-size: 24px;
 	cursor: pointer;
 	border: 0px solid black; 
 	font-family: 'Playfair Display', serif;
+	color: #7f8095;
+	box-shadow: 0px 4px 16px 0px rgba(0,0,0,0.2);
+	border: 1px solid rgb(209, 209, 209);
+}
+
+.tryIt:hover {
+	background-color: white;
+	color: black;
+}
+
+#imgHat {
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	left: 10px;
+	top: 12px;
+	background-image: url('./icons/hat_gray_40px.png');
 }
 
 .addToCart {
+	position: relative;
 	width: 380px;
-	height: 40px;
+	height: 60px;
 	margin-left: 15px;
-	background-color: #a0a2a7;
-	font-size: 16px;
-	color: white;
+	background-color: #fafafa;
+	box-shadow: 0px 4px 16px 0px rgba(0,0,0,0.2);
+	font-size: 24px;
+	color: #7f8095;
 	cursor: pointer;
 	border: 0px solid black; 
+	font-family: 'Playfair Display', serif;
+	border: 1px solid rgb(209, 209, 209);
+}
+
+.addToCart:hover {
+	background-color: #ffffff;
+	color: black;
+}
+
+#imgCart {
+	width: 40px;
+	height: 35px;
+	position: absolute;
+	left: 10px;
+	top: 12px;
+	background-image: url('./icons/cart_gray_40x35px.png');
+}
+
+.size {
+	height: 35px;
+	background-color: #fafafa;
+	border: 1px solid rgb(209, 209, 209);
+	box-shadow: 0px 4px 16px 0px rgba(0,0,0,0.2);
 	font-family: 'Playfair Display', serif;
 }
