@@ -10,6 +10,7 @@ window.onload = function () {
 };
 
 //------------------------ Tool bar ------------------------//
+
 function onLoadPage() {
     setBarEventListeners();
 }
@@ -65,8 +66,10 @@ function onLoadItemPage() {
 function setItemEventListeners() {
     document.getElementsByClassName("addToCart")[0].addEventListener("mouseover", enableCartImgHover);
     document.getElementsByClassName("addToCart")[0].addEventListener("mouseout", disableCartImgHover);
-    document.getElementsByClassName("tryIt")[0].addEventListener("mouseover", enableHatImgHover);
-    document.getElementsByClassName("tryIt")[0].addEventListener("mouseout", disableHatImgHover);
+    document.getElementById("tryIt").addEventListener("mouseover", enableHatImgHover);
+    document.getElementById("tryIt").addEventListener("mouseout", disableHatImgHover);
+    document.getElementById("tryIt").addEventListener("click", changeToWebCam);
+    document.getElementById("backToItem").addEventListener("click", backToItemPage);
 }
 
 function enableCartImgHover() {
@@ -83,4 +86,19 @@ function enableHatImgHover() {
 
 function disableHatImgHover() {
     document.getElementById("imgHat").style.backgroundImage = "url('./icons/hat_gray_40px.png')"
+}
+
+function changeToWebCam() {
+    document.getElementById("mainItemPage").style.display = "none";
+    document.getElementById("mainWebcamPage").style.display = "flex";
+    document.getElementById("itemPageFooter").style.display = "none";
+    document.getElementById("bodyItemPage").style.overflow = "hidden";
+    
+}
+
+function backToItemPage() {
+    document.getElementById("mainItemPage").style.display = "flex";
+    document.getElementById("mainWebcamPage").style.display = "none";
+    document.getElementById("itemPageFooter").style.display = "inline-block";
+    document.getElementById("bodyItemPage").style.overflow = "auto";
 }
