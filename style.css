@@ -305,11 +305,11 @@ footer {
 	height: 30px;
 	top: -50px;
 	right: -210px;
-	background-image: url('./icons/circle_heart_red.png');
+	background-image: url('./icons/circle_red_heart_30px.png');
 }
 
 #itemHeart:hover {
-	background-image: url('./icons/circle_heard_red_filled.png');
+	background-image: url('./icons/circle_red_heart_filled_30px.png');
 }
 
 .likeAccessory {
@@ -390,11 +390,11 @@ footer {
 	height: 30px;
 	top: -50px;
 	right: -210px;
-	background-image: url('./icons/circle_heard_red_filled.png');
+	background-image: url('./icons/circle_red_heart_filled.png');
 }
 
 #favoritesHeart:hover {
-	background-image: url('./icons/circle_heart_red.png');
+	background-image: url('./icons/circle_red_heart_30px.png');
 }
 
 .likeAccessory {
