@@ -468,6 +468,31 @@ footer {
 	margin-left: 40px; 
 }
 
+.userPageButton {
+	position: relative;
+	width: 268px;
+	height: 50px;
+	background-color: #fafafa;
+	font-size: 20px;
+	cursor: pointer;
+	border: 0px solid black; 
+	font-family: 'Playfair Display', serif;
+	color: #7f8095;
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, .2);
+	border: 1px solid rgb(209, 209, 209);
+	margin-top: 10px;
+	border-radius: 3px;
+}
+
+.updateImageButton {
+	width: 100%;
+}
+
+.userPageButton:hover {
+	background-color: white;
+	color: black;
+}
+
 .inputLabel {
 	font-size: 1.2em;
 	margin: 0;
