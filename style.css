@@ -659,6 +659,14 @@ footer {
 	flex-direction:  column;
 }
 
+.extendToRegister {
+	height: 450px;
+}
+
+.extendToStepTwo {
+	height: 300px;
+}
+
 .loginBlock h2 {
 	color: #afb2b7;
 	text-align: center;
@@ -749,7 +757,7 @@ footer {
 /* Item page */
 
 #mainItemPage {
-	display: flex; /*//////////////////////////////////////////////// */
+	display: flex; 
 	align-items: center;
 	flex-direction: column;
 	padding-top: 100px;
@@ -938,11 +946,11 @@ footer {
 }
 
 #mainWebcamPage {
-	display: none; /* /////////////// */
+	display: none; 
 	flex-direction: row;
 	justify-content: center;
 	margin: 0 auto;
-	padding-top: 100px;
+	padding-top: 140px;
 	width: 80%;
 	margin-bottom: 70px;
 }
