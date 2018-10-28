@@ -51,8 +51,9 @@ nav {
 }
 
 .menuLink {
+	cursor: pointer;
 	display: block;
-	width: 40px;
+	min-width: 40px;
 	height: 40px;
 	margin-left: 10px;
 	margin-top: 3px;
@@ -77,7 +78,7 @@ nav {
 }
 
 .iconLink {
-	width: 40px;
+	min-width: 40px;
     height: 40px;
 	margin: 6px;
 	display: block;
@@ -145,6 +146,26 @@ nav {
 	margin: 0;
 }
 
+@media only screen and (max-width: 650px) {
+	.menuDiv {
+		width: 50px;
+	}
+	
+	.logoDiv {
+		width: 45px;
+		display: flex;
+		justify-content: center;
+	}
+
+	.logoLink {
+		width: 80px;
+	}
+
+	.userLinksDiv {
+		width: 230px;
+	}
+}
+
 /* 
 ============ Footer ===================================================================================================================
 */
@@ -159,6 +180,14 @@ footer {
 /* 
 ============ Accesory Page ===================================================================================================================
 */
+
+.pressedMenu {
+	cursor: default;
+}
+
+.accessoriesDropdown {
+	display: none;
+}
 
 .accesoryPageList {
 	width: 100%;
@@ -192,7 +221,7 @@ footer {
 }
 
 .categories > ul {
-	margin-top: 8px;
+	margin-top: 4px;
 	padding-left: 16px;
 }
 
@@ -227,7 +256,7 @@ footer {
 }
 
 .filters > ul {
-	margin-top: 8px;
+	margin-top: 4px;
 	padding-left: 16px;
 }
 
@@ -281,10 +310,15 @@ footer {
 	margin-right: 30px;
 }
 
-.accesoryItemsList {
+.accessoryItemsListContainer {
 	display: flex;
-	flex-wrap: wrap;
-	justify-content: flex-start;
+	justify-content: center;
+	margin-bottom: 20px;
+}
+
+.accesoryItemsList {
+	display: grid;
+	grid-template-columns: auto auto auto auto;
 }
 
 .accesoryItem {
@@ -340,6 +374,61 @@ footer {
 	cursor: default;
 }
 
+@media only screen and (max-width: 500px) {
+	.pressedMenu {
+		display: none;
+	}
+	
+	.dropdown {
+		display: initial;
+	}
+
+	.selectionMenus > * {
+		display: none;
+	}
+
+	.filters {
+		margin: initial;
+		height: initial;
+		box-shadow: none;
+	}
+
+	.accesoryList {
+		width: 100%;
+		margin: 0;
+	}
+
+	.accesoryItemsList {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.accesoryItem {
+		margin: 10px;
+	}
+}
+
+@media only screen and (max-width: 1470px) {
+	.accesoryItemsList {
+		display: grid;
+		grid-template-columns: auto auto auto;
+	}
+}
+
+@media only screen and (max-width: 1160px) {
+	.accesoryItemsList {
+		display: grid;
+		grid-template-columns: auto auto;
+	}
+}
+
+@media only screen and (max-width: 850px) {
+	.accesoryItemsList {
+		display: grid;
+		grid-template-columns: auto;
+	}
+}
+
 /* 
 ============ Favorites Page ===================================================================================================================
 */
@@ -371,7 +460,7 @@ footer {
 .favoritesItemsList {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: flex-start;
+	justify-content: center;
 }
 
 .favoritesItem {
@@ -729,7 +818,7 @@ footer {
 }
 
 .dropdownContent {
-	top: 46px;
+	top: 48px;
     display: none;
     position: absolute;
     min-width: 160px;
@@ -740,8 +829,16 @@ footer {
 	cursor: default;
 }
 
+.dropdownCategoriesHeader {
+	cursor: default;
+	margin: 0;
+	margin-top: 5px;
+	padding-left: 10px;
+}
+
 .dropdownContent > ul {
 	padding-left: 16px;
+	margin-top: 4px;
 }
 
 .dropdownContent > ul > li {
