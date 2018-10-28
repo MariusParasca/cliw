@@ -5,14 +5,30 @@
 	<title>Favorites</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
-	<link rel="shortcut icon" href="./icons/hege_icon.ico" type="image/x-icon">
 	<link rel="icon" href="./icons/hege_icon.ico" type="image/x-icon">
+	<script src="script.js"></script>
 </head>
 
 <body>
 	<nav>
 		<div class="menuDiv">
-			<div class="menuLink" id="navMenuPressed" href=""></div>
+			<div class="dropdown">
+				<a class="menuLink" id="navMenu" href="#"></a>
+				<div class="dropdownContent">
+					<h3 class="dropdownCategoriesHeader">Categories:</h3>
+					<ul>
+						<li><a href="accessory_page_list.html">All Categories</a></li>
+						<li><a href="">Baseball cap</a></li>
+						<li><a href="">Beanie</a></li>
+						<li><a href="">Beret</a></li>
+						<li><a href="">Bobble hat</a></li>
+						<li><a href="">Fedora</a></li>
+						<li><a href="">Cowboy hat</a></li>
+						<li><a href="">Flat cap</a></li>
+						<li><a href="">Knit cap</a></li>
+					</ul>
+				</div>
+			</div>
 		</div>
 		<div class="logoDiv">
 			<a href="home.html">
@@ -20,13 +36,13 @@
 			</a>
 		</div>
 		<div class="userLinksDiv">
-            <a class="iconLink" id="navHeart" href=""></a>
-            <a class="iconLink" id="navCart" href=""></a>
-            <a class="iconLink" id="navUser" href=""></a>
-            <a class="userName" href="">
-                User
-            </a>
-        </div>
+			<a class="iconLink" id="navHeart" href="favorites_page.html"></a>
+			<a class="iconLink" id="navCart" href="user_cart.html"></a>
+			<a class="iconLink" id="navUser" href="user_page.html"></a>
+			<a class="userName" href="user_page.html">
+				User
+			</a>
+		</div>
 	</nav>
 	<main class="favoritesPageList">
 		<section class="favoritesList">
@@ -73,12 +89,13 @@
 					<a id="favoritesHeart" href=""></a>
 					<p class="favoritesPrice">40.00</p>
 				</div>
-            </div>
-            <hr class="favoritesLine">
-        </section>
-    </main>
-    <footer>
-        HEGE a headgear company
-    </footer>
+			</div>
+			<hr class="favoritesLine">
+		</section>
+	</main>
+	<footer>
+		HEGE a headgear company
+	</footer>
 </body>
+
 </html>

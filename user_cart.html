@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Your Cart</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
+    <link rel="shortcut icon" href="./icons/hege_icon.ico" type="image/x-icon">
+    <link rel="icon" href="./icons/hege_icon.ico" type="image/x-icon">
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <nav>
+        <div class="menuDiv">
+            <div class="dropdown">
+				<a class="menuLink" id="navMenu" href=""></a>
+				<div class="dropdownContent">
+					<ul>
+						<li><a href="accessory_page_list.html">All Categories</a></li>
+						<li><a href="">Baseball cap</a></li>
+						<li><a href="">Beanie</a></li>
+						<li><a href="">Beret</a></li>
+						<li><a href="">Bobble hat</a></li>
+						<li><a href="">Fedora</a></li>
+						<li><a href="">Cowboy hat</a></li>
+						<li><a href="">Flat cap</a></li>
+						<li><a href="">Knit cap</a></li>
+					</ul>
+				</div>
+			</div>
+        </div>
+        <div class="logoDiv">
+            <a href="home.html">
+                <img class="logoLink" src="./icons/hege_logo_crop.png">
+            </a>
+        </div>
+        <div class="userLinksDiv">
+            <a class="iconLink" id="navHeart" href="favorites_page.html"></a>
+            <a class="iconLink" id="navCart" href="user_cart.html"></a>
+            <a class="iconLink" id="navUser" href="login.html"></a>
+            <a class="userName" href="login.html">
+                User
+            </a>
+        </div>
+    </nav>
+    <main class="cartPage">
+        <section class="cartSection">
+            <h1 class="cartHeading">Your Cart</h1>
+            <hr class="cartPageLine">
+            <div class="usersOrder">
+                <div class="cartSingleOrder">
+                    <img class="orderImage" src="./images/flat_cap.jpg" alt="order image">
+                    <div class="orderDescription">
+                        <a class="deleteOrder" title="Delete order" href=""></a>
+                        <p class="orderTitle">Flat cap</p>
+                        <p class="orderPrice">70.00</p>
+                    </div>
+                </div>
+                <div class="cartSingleOrder">
+                    <img class="orderImage" src="./images/grey_cap.jpg" alt="order image">
+                    <div class="orderDescription">
+                        <a class="deleteOrder" title="Delete order" href=""></a>
+                        <p class="orderTitle">Cap</p>
+                        <p class="orderPrice">40.00</p>
+                    </div>
+                </div>
+                <div class="cartSingleOrder">
+                    <img class="orderImage" src="./images/red_hat.jpg" alt="order image">
+                    <div class="orderDescription">
+                        <a class="deleteOrder" title="Delete order" href=""></a>
+                        <p class="orderTitle">Red Hat</p>
+                        <p class="orderPrice">50.00</p>
+                    </div>
+                </div>
+                <div class="orderTotal">
+                    <div class="orderLabels">
+                        <p class="totalText">Total:</p>
+                        <p class="totalPrice">160.00</p>
+                    </div>
+                    <div class="orederButton">
+                        <a href="">
+                            <button class="checkOutButton">
+                                Check Out
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <hr class="userPageLine">
+        </section>
+    </main>
+    <footer>
+        HEGE a headgear company
+    </footer>
+</body>
+
+</html>
