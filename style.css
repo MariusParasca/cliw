@@ -1196,13 +1196,16 @@ footer {
 	padding-top: 50px;
 	padding-bottom: 20px;
 	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
+	justify-content: center;
 }
 
 .cartSection {
-	padding-left: 300px;
-	padding-right: 200px;
+	/* padding-left: 300px;
+	padding-right: 200px; */
+	width: 1000px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 
 .cartHeading {
@@ -1321,4 +1324,76 @@ footer {
 
 .checkOutButton:hover {
 	color: #afb2b7;
+}
+
+@media only screen and (max-width: 700px) {
+	.cartSection {
+		width: 100%;
+	}
+
+	.usersOrder {
+		margin-left: 30px;
+		margin-right: 30px;
+		margin-bottom: 10px;
+	}
+}
+
+@media only screen and (max-width: 510px) {
+	.cartSingleOrder {
+		width: 100%;
+		height: 150px;
+		margin-top: 20px;
+		margin-bottom: 20px;
+	}
+
+	.orderImage {
+		width: 150px;
+		height: 150px;
+	}
+
+	.orderDescription {
+		width: 100%;
+		margin: 20px;
+	}
+
+	.orderTitle {
+		font-size: 1.2em;
+	}
+	
+	.orderPrice {
+		font-size: 1.1em;
+	}
+	
+	.deleteOrder {
+		width: 15px;
+		height: 15px;
+		background-size: 15px 15px;
+	}
+
+	.orderTotal {
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+
+	.totalText {
+		width: 150px;
+		font-size: 1.2em;
+	}
+	
+	.totalPrice {
+		margin-top: 20px;
+		margin-left: 10px;
+		font-size: 1.1em;
+	}
+
+	.orederButton {
+		margin-left: 155px;
+		margin-bottom: 20px;
+	}
+
+	.checkOutButton {
+		width: 140px;
+		height: 43px;
+		font-size: 15px;
+	}
 }
