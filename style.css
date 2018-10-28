@@ -398,11 +398,6 @@ footer {
 		margin: 0;
 	}
 
-	.accesoryItemsList {
-		flex-direction: column;
-		align-items: center;
-	}
-
 	.accesoryItem {
 		margin: 10px;
 	}
@@ -410,21 +405,18 @@ footer {
 
 @media only screen and (max-width: 1470px) {
 	.accesoryItemsList {
-		display: grid;
 		grid-template-columns: auto auto auto;
 	}
 }
 
 @media only screen and (max-width: 1160px) {
 	.accesoryItemsList {
-		display: grid;
 		grid-template-columns: auto auto;
 	}
 }
 
 @media only screen and (max-width: 850px) {
 	.accesoryItemsList {
-		display: grid;
 		grid-template-columns: auto;
 	}
 }
@@ -441,10 +433,13 @@ footer {
 }
 
 .favoritesList {
-	width: 85%;
-	margin-left: 210px;
-	margin-right: 130px;
+	width: 100%;
+	margin-left: 100px;
+	margin-right: 100px;
 	margin-bottom: 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 
 .favoritesListHeading {
@@ -453,20 +448,26 @@ footer {
 }
 
 .favoritesLine {
+	margin-top: 0;
 	margin-left: 30px;
 	margin-right: 30px;
 }
 
-.favoritesItemsList {
+.favoritesItemsListContainer {
 	display: flex;
-	flex-wrap: wrap;
 	justify-content: center;
+	margin-bottom: 20px
+}
+
+.favoritesItemsList {
+	display: grid;
+	grid-template-columns: auto auto auto auto;
 }
 
 .favoritesItem {
 	width: 250px;
 	height: 310px;
-	margin: 30px;
+	margin: 20px;
 	background-color: white;
 	box-shadow: 2px 2px 4px rgba(0, 0, 0, .2);
 }
@@ -514,6 +515,44 @@ footer {
 	margin-top: -10px;
 	color: #7f8084;
 	cursor: default;
+}
+
+@media only screen and (max-width: 1370px) {
+	.favoritesItemsList {
+		grid-template-columns: auto auto auto;
+	}
+
+	.favoritesList {
+		margin-left: 70px;
+		margin-right: 70px;
+	}
+}
+
+@media only screen and (max-width: 1030px) {
+	.favoritesItemsList {
+		grid-template-columns: auto auto;
+	}
+
+	.favoritesItem {
+		margin: 10px;
+	}
+}
+
+@media only screen and (max-width: 800px) {
+	.favoritesList {
+		margin-left: 0px;
+		margin-right: 0px;
+	}
+
+	/* .favoritesItemsList {
+		grid-template-columns: auto;
+	} */
+}
+
+@media only screen and (max-width: 600px) {
+	.favoritesItemsList {
+		grid-template-columns: auto;
+	}
 }
 
 /* 
