@@ -17,8 +17,8 @@ Accents: (black)
 #262526
 */
 
-/* 
-============ Toolbar ===================================================================================================================
+/*
+============ Common ===================================================================================================================
 */
 
 body {
@@ -40,6 +40,57 @@ nav {
     height: 50px;
 	background-color: #7f8084;
 	z-index: 100;
+}
+
+/* 
+============ Toolbar ===================================================================================================================
+*/
+
+.dropdown {
+	position: relative;
+	width: 50px;
+}
+
+.dropdownContent {
+	top: 48px;
+    display: none;
+    position: absolute;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+	z-index: 1;
+	background-color: #d7d8da;
+	cursor: default;
+}
+
+.dropdownCategoriesHeader {
+	cursor: default;
+	margin: 0;
+	margin-top: 5px;
+	padding-left: 10px;
+}
+
+.dropdownContent > ul {
+	padding-left: 16px;
+	margin-top: 4px;
+}
+
+.dropdownContent > ul > li {
+	list-style-type: none;
+}
+
+.dropdownContent > ul > li > a {
+	color: #7f8084;
+	text-decoration: none;
+	margin: 0;
+}
+
+.dropdownContent > ul > li > a:hover {
+	color: white;
+}
+
+.dropdown:hover .dropdownContent {
+    display: block;
 }
 
 .menuDiv {
@@ -86,38 +137,43 @@ nav {
 
 #navHeart {
 	background-image: url('./Icons/heart_white_40px.png');
+	background-repeat: no-repeat;
 }
 
 #navHeart:hover {
-	background-image: url('./Icons/heart_red_40px.png')
+	background-image: url('./Icons/heart_red_40px.png');
 }
 
 #navCart {
-	background-image: url('./Icons/shopping_cart_white_40px.png')
+	background-image: url('./Icons/shopping_cart_white_40px.png');
+	background-repeat: no-repeat;
 }
 
 #navCart:hover {
-	background-image: url('./Icons/shopping_cart_gray_40px.png')
+	background-image: url('./Icons/shopping_cart_gray_40px.png');
 }
 
 #navUser {
-	background-image: url('./Icons/user_avatar_white_40px.png')
+	background-image: url('./Icons/user_avatar_white_40px.png');
+	background-repeat: no-repeat;
 }
 
 #navUser:hover {
-	background-image: url('./Icons/user_avatar_gray_40px.png')
+	background-image: url('./Icons/user_avatar_gray_40px.png');
 }
 
 #navMenu { 
-	background-image: url('./Icons/menu_40px.png')
+	background-image: url('./Icons/menu_40px.png');
+	background-repeat: no-repeat;
 }
 
 #navMenu:hover { 
-	background-image: url('./Icons/menu_gray_40px.png')
+	background-image: url('./Icons/menu_gray_40px.png');
 }
 
 #navMenuPressed {
-	background-image: url('./Icons/menu_gray_40px.png')
+	background-image: url('./Icons/menu_gray_40px.png');
+	background-repeat: no-repeat;
 }
 
 .userLinksDiv {
@@ -163,6 +219,24 @@ nav {
 
 	.userLinksDiv {
 		width: 230px;
+	}
+
+	#navHeart, #navCart, #navUser, #navMenu {
+		margin: 0;
+		background-size: 30px 30px;;
+		background-position: center center;
+	}
+
+	nav {
+		height: 41px;
+	}
+
+	.userName {
+		font-size: 1.3em;
+	}
+
+	.dropdownContent {
+		top: 40px;
 	}
 }
 
@@ -711,17 +785,13 @@ footer {
 .mainHome {
 	width: 100%;
 	padding-top: 50px;
-	display: flex;
-	justify-content: space-between;
 }
 
 .mainHomeTop {
-	background-image: url('./images/bg.png');
 	background-position: center;
 	background-repeat: repeat;
 	width: 100%;
 	height: 300px;
-	padding-left: 10px;
 	border-bottom: 1px #afb2b7 solid;
 }
 
@@ -741,14 +811,13 @@ footer {
 	display: inline-block;
 	margin-top: 20px;
 	margin-bottom: 10px;
-
 	font-size: 19px;
 	color: #262526;
 }
 
 .horizontalLine {
-	margin-left: 185px;
-	margin-right : 185px;
+	display: inline-block;
+	width: 80%;
 }
 
 .mainHomeBottom {
@@ -779,6 +848,12 @@ footer {
 	height: 200px;
 }
 
+@media only screen and (max-width: 650px) {
+	.mainHome {
+		padding-top: 41px;
+	}
+}
+
 /* 
 ============ Login Page ===================================================================================================================
 */
@@ -802,7 +877,7 @@ footer {
 }
 
 .extendToRegister {
-	height: 450px;
+	height: 400px;
 }
 
 .extendToStepTwo {
@@ -855,55 +930,36 @@ footer {
 	width: 200px;
 }
 
-/*
-============ Common ===================================================================================================================
-*/
+@media only screen and (max-width: 410px) {
+	.loginBlock {
+		width: 100%;
+		height: 100%;
+		padding-bottom: 10%;
+	}
 
-.dropdown {
-	position: relative;
-	width: 50px;
-}
+	.loginBlock input {
+		width: 80%;
+		margin-left: 10%;
+		margin-right: 10%;
+	}
 
-.dropdownContent {
-	top: 48px;
-    display: none;
-    position: absolute;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    padding: 12px 16px;
-	z-index: 1;
-	background-color: #d7d8da;
-	cursor: default;
-}
+	.loginBlock p {
+		font-size: 14px;
+	}
 
-.dropdownCategoriesHeader {
-	cursor: default;
-	margin: 0;
-	margin-top: 5px;
-	padding-left: 10px;
-}
+	.loginBlock p:last-of-type {
+		color: #262526;
+		font-size: 12px;
+	}
 
-.dropdownContent > ul {
-	padding-left: 16px;
-	margin-top: 4px;
-}
+	.loginButton {
+		width: 200px;
+		font-size: 14px;
+	}
 
-.dropdownContent > ul > li {
-	list-style-type: none;
-}
-
-.dropdownContent > ul > li > a {
-	color: #7f8084;
-	text-decoration: none;
-	margin: 0;
-}
-
-.dropdownContent > ul > li > a:hover {
-	color: white;
-}
-
-.dropdown:hover .dropdownContent {
-    display: block;
+	.loginLogoImage {
+		width: 150px;
+	}
 }
 
 /*
