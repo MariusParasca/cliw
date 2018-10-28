@@ -214,11 +214,11 @@ nav {
 	}
 
 	.logoLink {
-		width: 80px;
+		width: 70px;
 	}
 
 	.userLinksDiv {
-		width: 230px;
+		width: 200px;
 	}
 
 	#navHeart, #navCart, #navUser, #navMenu {
@@ -617,10 +617,6 @@ footer {
 		margin-left: 0px;
 		margin-right: 0px;
 	}
-
-	/* .favoritesItemsList {
-		grid-template-columns: auto;
-	} */
 }
 
 @media only screen and (max-width: 600px) {
@@ -639,12 +635,23 @@ footer {
 	padding-bottom: 20px;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
+	align-items: center;
+}
+
+.userPageContainer {
+	width: 1000px;
 }
 
 .userSettings {
-	padding-left: 300px;
-	padding-right: 200px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.savedImages {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 
 .userImage {
@@ -668,11 +675,16 @@ footer {
 	margin-left: 30px;
 	margin-right: 30px;
 	display: flex;
-	justify-content: flex-start;
+	justify-content: center;
 }
 
 .userPageSettingsImage {
 	width: 250px;
+}
+
+.userSettingsPaneOptions {
+	display: flex;
+	flex-direction: row;
 }
 
 .userPageSettingsOptions {
@@ -725,10 +737,21 @@ footer {
 	height: 21px;
 }
 
+.savedImagesCardsContainer {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 20px
+}
+
+.savedImagesCards {
+	display: grid;
+	grid-template-columns: auto auto auto auto;
+}
+
 .userImageTakenCard {
 	width: 200px;
 	height: 260px;
-	margin: 30px;
+	margin: 20px;
 	background-color: white;
 	box-shadow: 2px 2px 4px rgba(0, 0, 0, .2);
 }
@@ -767,15 +790,90 @@ footer {
 	background-image: url('./icons/download_icon_30px.png');
 }
 
-.savedImages {
-	padding-left: 300px;
-	padding-right: 200px;
+@media only screen and (max-width: 1200px) {
+	.userPageContainer {
+		width: 90%;
+	}
 }
 
-.savedImagesCards {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: flex-start;
+@media only screen and (max-width: 1060px) {
+	.savedImagesCards {
+		grid-template-columns: auto auto auto;
+	}
+
+	.userSettingsPaneOptions {
+		flex-direction: column;
+	}
+
+	.userPageSettingsOptions:first-of-type {
+		margin-bottom: 35px;
+	}
+
+	.userImageTakenCard {
+		margin: 10px;
+	}
+}
+
+@media only screen and (max-width: 810px) {
+	.savedImagesCards {
+		grid-template-columns: auto auto;
+	}
+
+	.savedImagesCardsContainer {
+		margin-top: 10px;
+	}
+}
+
+@media only screen and (max-width: 720px) {
+	.userPageContainer {
+		width: 100%;
+	}
+}
+
+@media only screen and (max-width: 630px) {
+	.userPageContainer {
+		width: 100%;
+	}
+	
+	.userSettings {
+		width: 100%;
+	}
+
+	.userPageLine {
+		margin-top: 0;
+	}
+
+	.userSettingsPane {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.userPageSettingsImage {
+		margin-bottom: 35px;
+	}
+
+	.userPageSettingsOptions {
+		width: 250px;
+		margin-left: 0; 
+	}
+	
+	.inputLabel + input {
+		width: 234px;
+	}
+
+	.userPageButton {
+		width: 250px;
+	}
+
+	.savedImages {
+		width: 100%;
+	}
+}
+
+@media only screen and (max-width: 500px) {
+	.savedImagesCards {
+		grid-template-columns: auto;
+	}
 }
 
 /* 
@@ -1256,8 +1354,6 @@ footer {
 }
 
 .cartSection {
-	/* padding-left: 300px;
-	padding-right: 200px; */
 	width: 1000px;
 	display: flex;
 	flex-direction: column;

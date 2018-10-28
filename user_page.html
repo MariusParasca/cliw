@@ -14,21 +14,22 @@
     <nav>
         <div class="menuDiv">
             <div class="dropdown">
-				<a class="menuLink" id="navMenu" href=""></a>
-				<div class="dropdownContent">
-					<ul>
-						<li><a href="accessory_page_list.html">All Categories</a></li>
-						<li><a href="">Baseball cap</a></li>
-						<li><a href="">Beanie</a></li>
-						<li><a href="">Beret</a></li>
-						<li><a href="">Bobble hat</a></li>
-						<li><a href="">Fedora</a></li>
-						<li><a href="">Cowboy hat</a></li>
-						<li><a href="">Flat cap</a></li>
-						<li><a href="">Knit cap</a></li>
-					</ul>
-				</div>
-			</div>
+                <a class="menuLink" id="navMenu" href=""></a>
+                <div class="dropdownContent">
+                    <h3 class="dropdownCategoriesHeader">Categories:</h3>
+                    <ul>
+                        <li><a href="accessory_page_list.html">All Categories</a></li>
+                        <li><a href="">Baseball cap</a></li>
+                        <li><a href="">Beanie</a></li>
+                        <li><a href="">Beret</a></li>
+                        <li><a href="">Bobble hat</a></li>
+                        <li><a href="">Fedora</a></li>
+                        <li><a href="">Cowboy hat</a></li>
+                        <li><a href="">Flat cap</a></li>
+                        <li><a href="">Knit cap</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
         <div class="logoDiv">
             <a href="home.html">
@@ -45,105 +46,111 @@
         </div>
     </nav>
     <main class="userPage">
-        <section class="userSettings">
-            <h1 class="userPageListHeading">User Page</h1>
-            <hr class="userPageLine">
-            <div class="userSettingsPane">
-                <div class="userPageSettingsImage">
-                    <a href="">
-                        <img class="userImage" src="./images/user_image.jpg" alt="user's image">
-                    </a>
-                    <a href="">
-                        <button class="updateImageButton userPageButton">
-                            Update Image
-                        </button>
-                    </a>
-                </div>
-                <div class="userPageSettingsOptions">
-                    <p class="inputLabel">First Name</p>
-                    <input type="text" name="UserName" value="Marius"><br>
-                    <p class="inputLabel">Last Name</p>
-                    <input type="text" name="UserName" value="Parasca"><br>
-                    <p class="inputLabel">E-mail</p>
-                    <input type="text" name="Email" value="mariusparasca@gmail.com"><br>
-                    <a href="">
-                        <button class="userPageButton">
-                            Update Account
-                        </button>
-                    </a>
-                </div>
-                <div class="userPageSettingsOptions">
-                    <p class="inputLabel">Old Password</p>
-                    <input type="password" name="Password" value=""><br>
-                    <p class="inputLabel">New Password</p>
-                    <input type="password" name="Password" value=""><br>
-                    <p class="inputLabel">Confirm New Password</p>
-                    <input type="password" name="Password" value=""><br>
-                    <a href="">
-                        <button class="userPageButton">
-                            Update Password
-                        </button>
-                    </a>
-                </div>
-            </div>
-        </section>
-        <section class="savedImages">
-            <h1 class="userPageListHeading">Saved Images</h1>
-            <hr class="userPageLine">
-            <div class="savedImagesCards">
-                <div class="userImageTakenCard">
-                    <a href="">
-                        <img class="userImageTaken" src="./images/user_image_photo.jpg" alt="user's image">
-                    </a>
-                    <div class="imageTakenActions">
-                        <a id="deleteImage" title="Delete image" href=""></a>
-                        <p class="imageDate">27.10.2018 18:23</p>
-                        <a id="downloadImage" title="Download image" href=""></a>
+        <div class="userPageContainer">
+            <section class="userSettings">
+                <h1 class="userPageListHeading">User Page</h1>
+                <hr class="userPageLine">
+                <div class="userSettingsPane">
+                    <div class="userPageSettingsImage">
+                        <a href="">
+                            <img class="userImage" src="./images/user_image.jpg" alt="user's image">
+                        </a>
+                        <a href="">
+                            <button class="updateImageButton userPageButton">
+                                Update Image
+                            </button>
+                        </a>
+                    </div>
+                    <div class="userSettingsPaneOptions">
+                        <div class="userPageSettingsOptions">
+                            <p class="inputLabel">First Name</p>
+                            <input type="text" name="UserName" value="Marius"><br>
+                            <p class="inputLabel">Last Name</p>
+                            <input type="text" name="UserName" value="Parasca"><br>
+                            <p class="inputLabel">E-mail</p>
+                            <input type="text" name="Email" value="mariusparasca@gmail.com"><br>
+                            <a href="">
+                                <button class="userPageButton">
+                                    Update Account
+                                </button>
+                            </a>
+                        </div>
+                        <div class="userPageSettingsOptions">
+                            <p class="inputLabel">Old Password</p>
+                            <input type="password" name="Password" value=""><br>
+                            <p class="inputLabel">New Password</p>
+                            <input type="password" name="Password" value=""><br>
+                            <p class="inputLabel">Confirm New Password</p>
+                            <input type="password" name="Password" value=""><br>
+                            <a href="">
+                                <button class="userPageButton">
+                                    Update Password
+                                </button>
+                            </a>
+                        </div>
                     </div>
                 </div>
-                <div class="userImageTakenCard">
-                    <a href="">
-                        <img class="userImageTaken" src="./images/user_image_photo.jpg" alt="user's image">
-                    </a>
-                    <div class="imageTakenActions">
-                        <a id="deleteImage" title="Delete image" href=""></a>
-                        <p class="imageDate">27.10.2018 18:23</p>
-                        <a id="downloadImage" title="Download image" href=""></a>
+            </section>
+            <section class="savedImages">
+                <h1 class="userPageListHeading">Saved Images</h1>
+                <hr class="userPageLine">
+                <div class="savedImagesCardsContainer">
+                    <div class="savedImagesCards">
+                        <div class="userImageTakenCard">
+                            <a href="">
+                                <img class="userImageTaken" src="./images/user_image_photo.jpg" alt="user's image">
+                            </a>
+                            <div class="imageTakenActions">
+                                <a id="deleteImage" title="Delete image" href=""></a>
+                                <p class="imageDate">27.10.2018 18:23</p>
+                                <a id="downloadImage" title="Download image" href=""></a>
+                            </div>
+                        </div>
+                        <div class="userImageTakenCard">
+                            <a href="">
+                                <img class="userImageTaken" src="./images/user_image_photo.jpg" alt="user's image">
+                            </a>
+                            <div class="imageTakenActions">
+                                <a id="deleteImage" title="Delete image" href=""></a>
+                                <p class="imageDate">27.10.2018 18:23</p>
+                                <a id="downloadImage" title="Download image" href=""></a>
+                            </div>
+                        </div>
+                        <div class="userImageTakenCard">
+                            <a href="">
+                                <img class="userImageTaken" src="./images/user_image_photo.jpg" alt="user's image">
+                            </a>
+                            <div class="imageTakenActions">
+                                <a id="deleteImage" title="Delete image" href=""></a>
+                                <p class="imageDate">27.10.2018 18:23</p>
+                                <a id="downloadImage" title="Download image" href=""></a>
+                            </div>
+                        </div>
+                        <div class="userImageTakenCard">
+                            <a href="">
+                                <img class="userImageTaken" src="./images/user_image_photo.jpg" alt="user's image">
+                            </a>
+                            <div class="imageTakenActions">
+                                <a id="deleteImage" title="Delete image" href=""></a>
+                                <p class="imageDate">27.10.2018 18:23</p>
+                                <a id="downloadImage" title="Download image" href=""></a>
+                            </div>
+                        </div>
+                        <div class="userImageTakenCard">
+                            <a href="">
+                                <img class="userImageTaken" src="./images/user_image_photo.jpg" alt="user's image">
+                            </a>
+                            <div class="imageTakenActions">
+                                <a id="deleteImage" title="Delete image" href=""></a>
+                                <p class="imageDate">27.10.2018 18:23</p>
+                                <a id="downloadImage" title="Download image" href=""></a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="userImageTakenCard">
-                    <a href="">
-                        <img class="userImageTaken" src="./images/user_image_photo.jpg" alt="user's image">
-                    </a>
-                    <div class="imageTakenActions">
-                        <a id="deleteImage" title="Delete image" href=""></a>
-                        <p class="imageDate">27.10.2018 18:23</p>
-                        <a id="downloadImage" title="Download image" href=""></a>
-                    </div>
-                </div>
-                <div class="userImageTakenCard">
-                    <a href="">
-                        <img class="userImageTaken" src="./images/user_image_photo.jpg" alt="user's image">
-                    </a>
-                    <div class="imageTakenActions">
-                        <a id="deleteImage" title="Delete image" href=""></a>
-                        <p class="imageDate">27.10.2018 18:23</p>
-                        <a id="downloadImage" title="Download image" href=""></a>
-                    </div>
-                </div>
-                <div class="userImageTakenCard">
-                    <a href="">
-                        <img class="userImageTaken" src="./images/user_image_photo.jpg" alt="user's image">
-                    </a>
-                    <div class="imageTakenActions">
-                        <a id="deleteImage" title="Delete image" href=""></a>
-                        <p class="imageDate">27.10.2018 18:23</p>
-                        <a id="downloadImage" title="Download image" href=""></a>
-                    </div>
-                </div>
-            </div>
-            <hr class="userPageLine">
-        </section>
+                <hr class="userPageLine">
+            </section>
+        </div>
     </main>
     <footer>
         HEGE a headgear company
