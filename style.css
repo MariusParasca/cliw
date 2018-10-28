@@ -1065,7 +1065,7 @@ footer {
 */
 
 #mainItemPage {
-	display: flex; 
+	display: flex; /*/////////////////////////////////*/
 	align-items: center;
 	flex-direction: column;
 	padding-top: 100px;
@@ -1075,7 +1075,7 @@ footer {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	height: 380px;
+
 	width: 68%;
 	margin-bottom: 30px;
 }
@@ -1087,7 +1087,6 @@ footer {
 }
 
 .mainItemPageTopRight {
-	height: 380px;
 	width: 420px;
 	margin-left: 20px;
 	display: flex;
@@ -1098,7 +1097,7 @@ footer {
 
 .mainItemPageTopRight p:nth-of-type(1) {
 	display: block;
-	width: 420px;
+	width: 100%;
 	padding: 5px;
 	border-bottom: 1px solid #262526;
 	font-size: 25px;
@@ -1107,7 +1106,7 @@ footer {
 
 .mainItemPageTopRight p:nth-of-type(2) {
 	display: inline-block;
-	width: 210px;
+	width: 50%;
 	padding: 5px;
 	font-size: 18px;
 	margin: 0;
@@ -1117,7 +1116,7 @@ footer {
 
 .mainItemPageTopRight p:nth-of-type(3) {
 	display: block;
-	width: 420px;
+	width: 100%;
 	padding: 5px;
 	font-size: 14px;
 	margin: 0;
@@ -1126,7 +1125,7 @@ footer {
 
 .mainItemPageTopRight p:nth-of-type(4) {
 	display: block;
-	width: 420px;
+	width: 100%;
 	padding: 5px;
 	font-size: 13px;
 	margin: 0;
@@ -1155,17 +1154,15 @@ footer {
 }
 
 .mainItemPageBottom {
-	height: 250px;
-	width: 68%;
+	width: auto;
 	margin-bottom: 30px;
-	display: flex;
-	justify-content: center;
-	flex-wrap: wrap;
+	display: grid;
+	grid-template-columns: auto auto auto auto;
 }
 
 .itemImage {
-	height: 380px;
-	width: 380px;
+	height: 100%;
+	width: 100%;
 }
 
 .itemPageWidth {
@@ -1175,18 +1172,22 @@ footer {
 #itemHeartItemPage {
 	position: absolute;
 	display: block;
-	width: 30px;
-	height: 30px;
-	right: 1px;
-	top: 6px;
-	background-image: url('./icons/circle_heart_red.png');
+	width: 50px;
+	height: 50px;
+	right: 0px;
+	top: -7px;
+	background-image: url('./icons/circle_red_heart_50px.png');
+	background-size: 40px 40px;
+	background-repeat: no-repeat;
+	background-position: center center;
 }
 
 #itemHeartItemPage:hover {
-	background-image: url('./icons/circle_heard_red_filled.png');
+	background-image: url('./icons/circle_red_heart_filled_50px.png');
 }
 
 #tryIt {
+	display: block;
 	position: relative;
 	width: 380px;
 	height: 48px;
@@ -1259,7 +1260,7 @@ footer {
 	justify-content: center;
 	margin: 0 auto;
 	padding-top: 140px;
-	width: 80%;
+	width: 100%;
 	margin-bottom: 70px;
 }
 
@@ -1339,6 +1340,165 @@ footer {
 
 .itemChoicesCart:hover {
 	background-image: url('./icons/shopping_cart_black_50px.png');
+}
+
+@media only screen and (max-width: 1280px) {
+	.webcam {
+		width: 700px;
+	}
+
+	.webcam img {
+		width: 700px;
+	}
+}
+
+@media only screen and (max-width: 860px) {
+	.webcam {
+		width: 600px;
+	}
+
+	.webcam img {
+		width: 600px;
+	}
+}
+
+@media only screen and (max-width: 860px) {
+	.webcam {
+		width: 500px;
+	}
+
+	.webcam img {
+		width: 500px;
+	}
+}
+
+@media only screen and (max-width: 650px) {
+	.webcam {
+		height: 500px;
+		width: 300px;
+	}
+
+	.webcam img {
+		height: 500px;
+		width: 300px;
+	}
+
+	#mainWebcamPage {
+		padding-top: 100px;
+	}
+}
+
+@media only screen and (max-width: 460px) {
+	.webcam {
+		height: 500px;
+		width: 300px;
+	}
+
+	.webcam img {
+		height: 500px;
+		width: 300px;
+	}
+
+	#mainWebcamPage {
+		flex-direction: column;
+		align-items: center;
+		padding-top: 120px;
+	}
+
+	#backToItem {
+		margin-bottom: 10px;
+	}
+
+	.itemChoices {
+		width: 300px;
+		flex-direction: row-reverse;
+		margin-left: 0;
+		justify-content: center;
+	}
+
+	.takePhoto {
+		margin-bottom: 20px;
+	}
+
+	.itemChoicesCart {
+		padding-right: 10px;
+		background-repeat: no-repeat;
+	}
+}
+
+@media only screen and (max-width: 1280px) {
+	.mainItemPageBottom {
+		display: grid;
+		grid-template-columns: auto auto auto;
+	}
+}
+
+@media only screen and (max-width: 1210px) {
+	.mainItemPageTopRight {
+		width: 300px;
+	}
+
+	.addToCart {
+		width: 300px;
+	}
+}
+
+@media only screen and (max-width: 1020px) {
+	.mainItemPageBottom {
+		display: grid;
+		grid-template-columns: auto auto;
+	}
+
+	.mainItemPageTopLeft {
+		width: 300px;
+		height: 300px;;
+	}
+
+	#tryIt {
+		width: 300px;
+	}
+}
+
+@media only screen and (max-width: 920px) {
+
+	.mainItemPageTop {
+		flex-direction: column;
+		width: auto;
+	}
+
+	.mainItemPageBottom {
+		display: grid;
+		grid-template-columns: auto;
+	}
+
+	.mainItemPageCenter {
+		flex-direction: column;
+	}
+
+	.mainItemPageTopRight {
+		margin-left: 0;
+		margin-top: 30px;
+	}
+
+	.mainItemPageCenter {
+		width: auto;
+		height: auto;
+	}
+
+	.itemPageWidth {
+		width: 300px;;
+	}
+
+	#tryIt {
+		margin-top: 10px;
+		margin-bottom: 10px;
+		width: auto;
+	}
+
+	.addToCart {
+		margin-left: 0;
+	}
+
 }
 
 /*
