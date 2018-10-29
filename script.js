@@ -92,7 +92,7 @@ function changeToWebCam() {
     document.getElementById("mainItemPage").style.display = "none";
     document.getElementById("mainWebcamPage").style.display = "flex";
     document.getElementById("itemPageFooter").style.display = "none";
-    document.getElementById("bodyItemPage").style.overflow = "hidden";
+    //document.getElementById("bodyItemPage").style.overflow = "hidden";
     
 }
 

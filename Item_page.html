@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="en">
 
 <head>
+    <meta charset="utf-8" />
     <title>Navy Cap</title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
@@ -31,12 +32,12 @@
         </div>
         <div class="logoDiv">
             <a href="home.html">
-                <img class="logoLink" src="./Icons/hege_logo_crop.png">
+                <img class="logoLink" src="./Icons/hege_logo_crop.png" alt="hege logo">
             </a>
         </div>
         <div class="userLinksDiv">
-            <a class="iconLink" id="navHeart" href=""></a>
-            <a class="iconLink" id="navCart" href=""></a>
+            <a class="iconLink" id="navHeart" href="favorites_page.html"></a>
+            <a class="iconLink" id="navCart" href="user_cart.html"></a>
             <a class="iconLink" id="navUser" href="login.html"></a>
             <a class="userName" href="login.html">
                 User
@@ -45,6 +46,7 @@
     </nav>
     <main>
         <section id="mainItemPage">
+            <h2>Item</h2>
             <div class="mainItemPageTop">
                 <div class="mainItemPageTopLeft">
                     <img class="itemImage" src="./images/red_hat.jpg" alt="navy cap">
@@ -72,12 +74,10 @@
                     Try it LIVE
                     <div id='imgHat'></div>
                 </div>
-                <a href="">
-                    <button class="addToCart">
-                        Add to cart
-                        <div id='imgCart'></div>
-                    </button>
-                </a>
+                <button class="addToCart">
+                    Add to cart
+                    <span id='imgCart'></span>
+                </button>
             </div>
             Recommendations
             <hr class="horizontalLine itemPageWidth" />
@@ -110,6 +110,7 @@
             <hr class="itemPageWidth" />
         </section>
         <section id="mainWebcamPage">
+            <h2>Try it</h2>
             <div id="backToItem">
             </div>
             <div class="webcam">
