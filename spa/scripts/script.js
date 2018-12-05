@@ -1,7 +1,7 @@
 window.onload = function () {
-    if ((location.href.split("/").slice(-1) == "accessory_page_list.html")) {
+    if ((location.href.split("/").slice(-1) == "#accessory_page_list")) {
         onLoadAccessoryPage();
-    } else if ((location.href.split("/").slice(-1) == "item_page.html")) {
+    } else if ((location.href.split("/").slice(-1) == "#item_page")) {
         onLoadItemPage();
         onLoadPage();
     } else {
@@ -91,14 +91,9 @@ function disableHatImgHover() {
 function changeToWebCam() {
     document.getElementById("mainItemPage").style.display = "none";
     document.getElementById("mainWebcamPage").style.display = "flex";
-    document.getElementById("itemPageFooter").style.display = "none";
-    //document.getElementById("bodyItemPage").style.overflow = "hidden";
-    
 }
 
 function backToItemPage() {
     document.getElementById("mainItemPage").style.display = "flex";
     document.getElementById("mainWebcamPage").style.display = "none";
-    document.getElementById("itemPageFooter").style.display = "inline-block";
-    document.getElementById("bodyItemPage").style.overflow = "auto";
 }
