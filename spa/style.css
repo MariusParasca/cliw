@@ -1293,7 +1293,7 @@ footer {
 	position: absolute;
 	left: 10px;
 	top: 12px;
-	background-image: url('./all_icons/hat_gray_40px.png');
+	background-image: url('./all_icons/hat_gray_simple_40px.png');
 }
 
 .addToCart {
@@ -1354,13 +1354,13 @@ footer {
 #backToItem {
 	width: 50px;
 	height: 50px;
-	background-image: url('./all_icons/back_arrow_gray_50px.png');
+	background-image: url('./all_icons/back_simple_arrow_gray_50px.png');
 	margin-right: 20px;
 	cursor: pointer;
 }
 
 #backToItem:hover {
-	background-image: url('./all_icons/back_arrow_black_50px.png')
+	background-image: url('./all_icons/back_simple_arrow_black_50px.png')
 }
 
 .webcam {

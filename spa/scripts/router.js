@@ -54,6 +54,10 @@ class Router {
             xhttp.onreadystatechange = function () {
                 if (this.readyState === 4 && this.status === 200) {
                     scope.rootElem.innerHTML = this.responseText;
+                    let scriptFile = './state_scripts/' + htmlFile.split('.')[0] + '.js';
+                    import(scriptFile).then(module =>
+                        module.initPage()
+                    ).catch();
                 }
             };
             xhttp.open('GET', url, true);
