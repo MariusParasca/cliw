@@ -562,7 +562,7 @@ footer {
 	height: 30px;
 	top: -50px;
 	right: -210px;
-	background-image: url('./all_icons/circle_red_heart_filled.png');
+	background-image: url('./all_icons/circle_red_heart_filled_30px.png');
 }
 
 .favoritesHeart:hover {
