@@ -10,7 +10,7 @@
     <script src="script.js"></script>
 </head>
 
-<body id="bodyItemPage">
+<body id="bodyItemPage" itemscope itemtype="https://schema.org/Store">
     <nav>
         <div class="menuDiv">
             <div class="dropdown">
@@ -30,7 +30,7 @@
                 </div>
             </div>
         </div>
-        <div class="logoDiv">
+        <div class="logoDiv" itemprop="logo">
             <a href="home.html">
                 <img class="logoLink" src="./Icons/hege_logo_crop.png" alt="hege logo">
             </a>
@@ -49,13 +49,13 @@
             <h2>Item</h2>
             <div class="mainItemPageTop">
                 <div class="mainItemPageTopLeft">
-                    <img class="itemImage" src="./images/red_hat.jpg" alt="navy cap">
+                    <img class="itemImage" src="./images/red_hat.jpg" alt="navy cap" itemprop="image">
                 </div>
-                <div class="mainItemPageTopRight">
-                    <p>Red Hat</p>
-                    <p>Price: 50.00$</p>
+                <div class="mainItemPageTopRight" itempscope itemtype="https://schema.org/Offer">
+                    <p itemprop="name">Red <span itemprop="model">Hat</span></p>
+                    <p>Price: <span itemprop="price">50.00$</span></p>
                     <p>Description:</p>
-                    <p>
+                    <p itemprop="description">
                         This is a hat, did you know that?
                         <!-- <br /> -->
                         A very very beautifull hat.
