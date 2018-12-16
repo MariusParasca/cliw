@@ -93,10 +93,22 @@ function deleteImage(imageKey) {
 }
 
 function downloadImage(imageKey) {
-    var link = document.createElement('a');
-    link.download = imageKey;
-    link.href = localStorage.getItem(imageKey);
-    link.click();
+    let imgElem = document.getElementById(imageKey);
+    let tempImg = document.createElement('img');
+    tempImg.src = imgElem.src;
+    tempImg.width = 320;
+    tempImg.height = 240;
+    tempImg.style.position = 'absolute';
+    
+    imgElem.parentElement.insertBefore(tempImg, imgElem);
+    tempImg.classList.add('zoomOutDown');
+    setTimeout(() => {
+        imgElem.parentElement.removeChild(tempImg);
+        var link = document.createElement('a');
+        link.download = imageKey;
+        link.href = localStorage.getItem(imageKey);
+        link.click();
+    }, 800);
 }
 
 function createAndAppendMessage() {
