@@ -129,8 +129,12 @@ function takePictureButton() {
     let tempCanvas = document.createElement('canvas');
     tempCanvas.width = videoWebCamWidth;
     tempCanvas.height = videoWebCamHeight;
-    tempCanvas.getContext('2d').drawImage(window.videoWebCam, 0, 0, videoWebCamWidth, videoWebCamHeight);
-    tempCanvas.getContext('2d').drawImage(canvasAccessoryLayer, 0, 0);
+
+    let tempContext = tempCanvas.getContext('2d');
+    tempContext.translate(tempCanvas.width, 0);
+    tempContext.scale(-1, 1);
+    tempContext.drawImage(window.videoWebCam, 0, 0, videoWebCamWidth, videoWebCamHeight);
+    tempContext.drawImage(canvasAccessoryLayer, 0, 0);
 
     let localeDate = new Date().toLocaleString('en-GB').replace(',', '').replace(' ', '_');
     let localKey = 'hege_picture_' + videoWebCamWidth + '_' + videoWebCamHeight + '_' + localeDate;
