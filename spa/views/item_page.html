@@ -63,12 +63,14 @@
         <hr class="itemPageWidth" />
     </section>
     <section id="mainWebcamPage">
-        <h2>Try it</h2>
-        <div id="backToItem">
-        </div>
-        <div class="webcam">
-            <img src="./images/woman_wearing_hat.jpg" alt="woman wearing hat">
-            <button class="takePhoto">Take photo</button>
+        <div id="backToItem"></div>
+        <div id="webcam">
+            <video id="videoWebCam"></video>
+            <canvas id="canvasAccessoryLayer"></canvas>
+            <div id="allowMessage">
+                <p>Please allow us to use your camera to continue</p>
+            </div>
+            <button id="takePhoto">Take photo</button>
         </div>
         <div class="itemChoices">
             <a href="#" class="itemChoicesFavorites"></a>
