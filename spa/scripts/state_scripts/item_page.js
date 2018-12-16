@@ -51,12 +51,12 @@ function changeToWebCam() {
     document.getElementById("mainWebcamPage").style.display = "flex";
 
     pageSizeMedia = window.matchMedia('(max-width: 825px)');
-    pageSizeMedia.addListener(changeWebcamSize);
+    pageSizeMedia.addListener(resizeWebcam);
 
-    changeWebcamSize(pageSizeMedia);
+    resizeWebcam(pageSizeMedia);
 }
 
-function changeWebcamSize(mediaEvent) {    
+function resizeWebcam(mediaEvent) {    
     let videoWebCam = document.getElementById('videoWebCam');
     let canvasAccessoryLayer = document.getElementById('canvasAccessoryLayer');
     let webcamDiv = document.getElementById('webcam');
@@ -118,7 +118,7 @@ function backToItemPage() {
     document.getElementById("mainItemPage").style.display = "flex";
     document.getElementById("mainWebcamPage").style.display = "none";
     let videoWebCam = document.getElementById('videoWebCam');
-    pageSizeMedia.removeListener(changeWebcamSize);
+    pageSizeMedia.removeListener(resizeWebcam);
     stopStreamedVideo(videoWebCam);
 }
 
