@@ -28,6 +28,7 @@ export function initPage() {
     document.getElementById("tryIt").addEventListener("mouseout", disableHatImgHover);
     document.getElementById("tryIt").addEventListener("click", changeToWebCam);
     document.getElementById("backToItem").addEventListener("click", backToItemPage);
+    document.getElementById("takePhoto").addEventListener("click", takePictureButton);
 }
 
 function enableCartImgHover() {
@@ -112,6 +113,22 @@ function initTracking(videoId, drawingCanvas, imageConfig) {
             ), WEB_CAM_TIMEOUT);
         });
     });
+}
+
+function takePictureButton() {
+    let videoWebCam = document.getElementById('videoWebCam');
+    let canvasAccessoryLayer = document.getElementById('canvasAccessoryLayer');
+    let videoWebCamWidth = videoWebCam.width;
+    let videoWebCamHeight = videoWebCam.height;
+
+    let tempCanvas = document.createElement('canvas');
+    tempCanvas.width = videoWebCamWidth;
+    tempCanvas.height = videoWebCamHeight;
+    tempCanvas.getContext('2d').drawImage(videoWebCam, 0, 0, videoWebCamWidth, videoWebCamHeight);
+    tempCanvas.getContext('2d').drawImage(canvasAccessoryLayer, 0, 0);
+
+    let localKey = 'hege_picture_' + videoWebCamWidth + '_' + videoWebCamHeight + '_' + new Date().toLocaleString().replace(',', '');
+    localStorage.setItem(localKey, tempCanvas.toDataURL());
 }
 
 function backToItemPage() {
