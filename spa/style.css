@@ -798,6 +798,15 @@ footer {
 	background-image: url('./all_icons/download_icon_30px.png');
 }
 
+.messageDiv {
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	margin-top: 60px;
+    margin-bottom: 60px;
+    font-size: 1.1em;
+}
+
 @media only screen and (max-width: 1200px) {
 	.userPageContainer {
 		width: 90%;

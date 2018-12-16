@@ -6,6 +6,7 @@ export function initPage() {
 function initLocalImages() {
     let imageContainer = document.getElementsByClassName("savedImagesCards")[0];
 
+    let foundKey = false;
     let localKeys = Object.keys(localStorage);
     for (let localKey of localKeys) {
         let localKeySplit = localKey.split('_');
@@ -14,11 +15,16 @@ function initLocalImages() {
         }
         let keyWord = localKeySplit[0] + localKeySplit[1];
         if (keyWord === 'hegepicture') {
+            foundKey = true;
             let imageDate = localKeySplit[4] + ' ' + localKeySplit[5];
             let imageSource = localStorage.getItem(localKey);
             let imageCard = createImageCard(imageSource, imageDate, localKey);
             imageContainer.appendChild(imageCard);
         }
+    }
+    
+    if (!foundKey) {
+        createAndAppendMessage();
     }
 }
 
@@ -87,4 +93,15 @@ function downloadImage(imageKey) {
     link.download = imageKey;
     link.href = localStorage.getItem(imageKey);
     link.click();
+}
+
+function createAndAppendMessage() {
+    let imageContainer = document.getElementsByClassName("savedImagesCards")[0];
+
+    let messageDiv = document.createElement("div");
+    messageDiv.classList += 'messageDiv';
+    messageDiv.innerText = 'Your saved images will be shown here \n \
+                            Explore our store to find what suits you best';
+
+    imageContainer.appendChild(messageDiv);
 }
