@@ -11,7 +11,7 @@ const TRACKER_CONFIG = {
 const WEB_CAM_TIMEOUT = 250;
 
 var imageConfig = {
-    src: './images/hat_red.png',
+    src: './images_with_no_background/red_hat_no_bkgd.png',
     filterX: 0,
     filterY: -0.75,
     filterWidth: 1.1,
