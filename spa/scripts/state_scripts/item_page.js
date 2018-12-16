@@ -126,8 +126,9 @@ function takePictureButton() {
     tempCanvas.height = videoWebCamHeight;
     tempCanvas.getContext('2d').drawImage(videoWebCam, 0, 0, videoWebCamWidth, videoWebCamHeight);
     tempCanvas.getContext('2d').drawImage(canvasAccessoryLayer, 0, 0);
-
-    let localKey = 'hege_picture_' + videoWebCamWidth + '_' + videoWebCamHeight + '_' + new Date().toLocaleString().replace(',', '');
+    
+    let localeDate = new Date().toLocaleString('en-GB').replace(',', '').replace(' ', '_');
+    let localKey = 'hege_picture_' + videoWebCamWidth + '_' + videoWebCamHeight + '_' + localeDate;
     localStorage.setItem(localKey, tempCanvas.toDataURL());
 }
 
