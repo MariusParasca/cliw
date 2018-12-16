@@ -1384,6 +1384,7 @@ footer {
 }
 
 #videoWebCam {
+	/* for flipping the webcam */
 	transform: scaleX(-1);
 }
 

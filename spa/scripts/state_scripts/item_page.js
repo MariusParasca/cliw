@@ -18,8 +18,10 @@ var imageConfig = {
     filterHeight: 1.2
 };
 
-// needed the global variable in order to remove the listener at the end
-var pageSizeMedia;
+// global variables used
+window.pageSizeMedia;
+window.videoWebCam;
+window.observer;
 
 export function initPage() {
     document.getElementsByClassName("addToCart")[0].addEventListener("mouseover", enableCartImgHover);
@@ -29,6 +31,7 @@ export function initPage() {
     document.getElementById("tryIt").addEventListener("click", changeToWebCam);
     document.getElementById("backToItem").addEventListener("click", backToItemPage);
     document.getElementById("takePhoto").addEventListener("click", takePictureButton);
+    initObserver();
 }
 
 function enableCartImgHover() {
@@ -51,31 +54,31 @@ function changeToWebCam() {
     document.getElementById("mainItemPage").style.display = "none";
     document.getElementById("mainWebcamPage").style.display = "flex";
 
-    pageSizeMedia = window.matchMedia('(max-width: 825px)');
-    pageSizeMedia.addListener(resizeWebcam);
+    window.pageSizeMedia = window.matchMedia('(max-width: 825px)');
+    window.pageSizeMedia.addListener(resizeWebcam);
 
-    resizeWebcam(pageSizeMedia);
+    resizeWebcam(window.pageSizeMedia);
 }
 
-function resizeWebcam(mediaEvent) {    
-    let videoWebCam = document.getElementById('videoWebCam');
+function resizeWebcam(mediaEvent) {
+    window.videoWebCam = document.getElementById('videoWebCam');
     let canvasAccessoryLayer = document.getElementById('canvasAccessoryLayer');
     let webcamDiv = document.getElementById('webcam');
     let takePictureButton = document.getElementById('takePhoto');
 
-    if (videoWebCam.srcObject !== null) {
-        stopStreamedVideo(videoWebCam);
+    if (window.videoWebCam.srcObject !== null) {
+        stopStreamedVideo(window.videoWebCam);
     }
 
     if ((mediaEvent !== undefined) && (mediaEvent.matches)) {
-        videoWebCam.width = canvasAccessoryLayer.width = WEB_CAM_WIDTH_MIN;
-        videoWebCam.height = canvasAccessoryLayer.height = WEB_CAM_HEIGHT_MIN;
+        window.videoWebCam.width = canvasAccessoryLayer.width = WEB_CAM_WIDTH_MIN;
+        window.videoWebCam.height = canvasAccessoryLayer.height = WEB_CAM_HEIGHT_MIN;
         webcamDiv.style.width = WEB_CAM_WIDTH_MIN + 'px';
         webcamDiv.style.height = WEB_CAM_HEIGHT_MIN + 45 + 'px';
         takePictureButton.style.marginTop = WEB_CAM_HEIGHT_MIN + 10 + 'px';
     } else {
-        videoWebCam.width = canvasAccessoryLayer.width = WEB_CAM_WIDTH_MAX;
-        videoWebCam.height = canvasAccessoryLayer.height = WEB_CAM_HEIGHT_MAX;
+        window.videoWebCam.width = canvasAccessoryLayer.width = WEB_CAM_WIDTH_MAX;
+        window.videoWebCam.height = canvasAccessoryLayer.height = WEB_CAM_HEIGHT_MAX;
         webcamDiv.style.width = WEB_CAM_WIDTH_MAX + 'px';
         webcamDiv.style.height = WEB_CAM_HEIGHT_MAX + 50 + 'px';
         takePictureButton.style.marginTop = WEB_CAM_HEIGHT_MAX + 15 + 'px';
@@ -119,28 +122,43 @@ function initTracking(videoId, drawingCanvas, imageConfig) {
 }
 
 function takePictureButton() {
-    let videoWebCam = document.getElementById('videoWebCam');
     let canvasAccessoryLayer = document.getElementById('canvasAccessoryLayer');
-    let videoWebCamWidth = videoWebCam.width;
-    let videoWebCamHeight = videoWebCam.height;
+    let videoWebCamWidth = window.videoWebCam.width;
+    let videoWebCamHeight = window.videoWebCam.height;
 
     let tempCanvas = document.createElement('canvas');
     tempCanvas.width = videoWebCamWidth;
     tempCanvas.height = videoWebCamHeight;
-    tempCanvas.getContext('2d').drawImage(videoWebCam, 0, 0, videoWebCamWidth, videoWebCamHeight);
+    tempCanvas.getContext('2d').drawImage(window.videoWebCam, 0, 0, videoWebCamWidth, videoWebCamHeight);
     tempCanvas.getContext('2d').drawImage(canvasAccessoryLayer, 0, 0);
-    
+
     let localeDate = new Date().toLocaleString('en-GB').replace(',', '').replace(' ', '_');
     let localKey = 'hege_picture_' + videoWebCamWidth + '_' + videoWebCamHeight + '_' + localeDate;
     localStorage.setItem(localKey, tempCanvas.toDataURL());
 }
 
+function initObserver() {
+    window.observer = new MutationObserver(checkAndDisableWebcam);
+    
+    window.observer.observe(document, { 
+        atributes: true,
+        childList: true,
+        subtree: true 
+    });
+}
+
+function checkAndDisableWebcam() {
+    if ((window.videoWebCam !== null) && (window.videoWebCam !== undefined)) {
+        stopStreamedVideo(window.videoWebCam);
+        window.observer.disconnect();
+    }
+}
+
 function backToItemPage() {
     document.getElementById("mainItemPage").style.display = "flex";
     document.getElementById("mainWebcamPage").style.display = "none";
-    let videoWebCam = document.getElementById('videoWebCam');
-    pageSizeMedia.removeListener(resizeWebcam);
-    stopStreamedVideo(videoWebCam);
+    window.pageSizeMedia.removeListener(resizeWebcam);
+    stopStreamedVideo(window.videoWebCam);
 }
 
 function stopStreamedVideo(videoElem) {
