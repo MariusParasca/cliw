@@ -91,6 +91,9 @@ function enableFaceTracking() {
 
 function initTracking(videoId, drawingCanvas, imageConfig) {
     let drawingContext = drawingCanvas.getContext('2d');
+    // for flipping the webcam
+    drawingContext.translate(drawingCanvas.width, 0);
+    drawingContext.scale(-1, 1);
 
     let tracker = new tracking.ObjectTracker('face');
     tracker.setInitialScale(TRACKER_CONFIG.initialScale);

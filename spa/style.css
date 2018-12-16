@@ -1383,6 +1383,10 @@ footer {
     position: absolute;
 }
 
+#videoWebCam {
+	transform: scaleX(-1);
+}
+
 #allowMessage {
 	z-index: -1;
 	font-size: 1.1em;
