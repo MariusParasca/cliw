@@ -22,7 +22,7 @@ function initLocalImages() {
             imageContainer.appendChild(imageCard);
         }
     }
-    
+
     if (!foundKey) {
         createAndAppendMessage();
     }
@@ -77,15 +77,19 @@ function initButtonActions() {
 }
 
 function deleteImage(imageKey) {
-    localStorage.removeItem(imageKey);
+    let imageCard = document.getElementById(imageKey).parentNode;
+    imageCard.classList.add('zoomOut');
+    setTimeout(() => {
+        localStorage.removeItem(imageKey);
 
-    let imageContainer = document.getElementsByClassName("savedImagesCards")[0];
-    while (imageContainer.firstChild) {
-        imageContainer.removeChild(imageContainer.firstChild);
-    }
+        let imageContainer = document.getElementsByClassName("savedImagesCards")[0];
+        while (imageContainer.firstChild) {
+            imageContainer.removeChild(imageContainer.firstChild);
+        }
 
-    initLocalImages();
-    initButtonActions();
+        initLocalImages();
+        initButtonActions();
+    }, 1000);
 }
 
 function downloadImage(imageKey) {
