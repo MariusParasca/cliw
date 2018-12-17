@@ -126,6 +126,17 @@ function takePictureButton() {
     let videoWebCamWidth = window.videoWebCam.width;
     let videoWebCamHeight = window.videoWebCam.height;
 
+    let flashCanvas = document.createElement('canvas');
+    flashCanvas.style.position = 'absolute';
+    flashCanvas.width = videoWebCamWidth;
+    flashCanvas.height = videoWebCamHeight;
+    flashCanvas.style.backgroundColor = 'white';
+    canvasAccessoryLayer.parentElement.appendChild(flashCanvas);
+    flashCanvas.classList.add('flash');
+    setTimeout(() => {
+        canvasAccessoryLayer.parentElement.removeChild(flashCanvas);
+    }, 200);
+
     let tempCanvas = document.createElement('canvas');
     tempCanvas.width = videoWebCamWidth;
     tempCanvas.height = videoWebCamHeight;
@@ -134,6 +145,9 @@ function takePictureButton() {
     tempContext.translate(tempCanvas.width, 0);
     tempContext.scale(-1, 1);
     tempContext.drawImage(window.videoWebCam, 0, 0, videoWebCamWidth, videoWebCamHeight);
+    
+    tempContext.translate(tempCanvas.width, 0);
+    tempContext.scale(-1, 1);
     tempContext.drawImage(canvasAccessoryLayer, 0, 0);
 
     let localeDate = new Date().toLocaleString('en-GB').replace(',', '').replace(' ', '_');
@@ -151,10 +165,12 @@ function initObserver() {
     });
 }
 
-function checkAndDisableWebcam() {
-    if ((window.videoWebCam !== null) && (window.videoWebCam !== undefined)) {
-        stopStreamedVideo(window.videoWebCam);
-        window.observer.disconnect();
+function checkAndDisableWebcam(mutation) {
+    if ((window.videoWebCam !== null) && (window.videoWebCam !== undefined)) {        
+        if ((mutation[0].addedNodes[0] !== undefined) && (!mutation[0].addedNodes[0].classList.contains('flash'))) {
+            stopStreamedVideo(window.videoWebCam);
+            window.observer.disconnect();
+        }
     }
 }
 

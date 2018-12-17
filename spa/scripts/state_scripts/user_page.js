@@ -89,7 +89,7 @@ function deleteImage(imageKey) {
 
         initLocalImages();
         initButtonActions();
-    }, 1000);
+    }, 300);
 }
 
 function downloadImage(imageKey) {

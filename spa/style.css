@@ -904,7 +904,7 @@ footer {
 
 .zoomOut {
 	animation-name: zoomOut;
-	animation-duration: 1s;
+	animation-duration: 0.5s;
 }
 
 @keyframes zoomOutDown {
@@ -1585,6 +1585,22 @@ footer {
 		margin-left: 0;
 	}
 
+}
+
+@keyframes flash {
+	from,
+	to {
+	  	opacity: 0;
+	}
+  
+	50% {
+		opacity: 1;
+	}
+}
+  
+.flash {
+	animation-name: flash;
+	animation-duration: 0.2s;
 }
 
 /*
