@@ -23,14 +23,30 @@ class Router {
         this.hasChanged(this, this.savedRoutes);
     }
 
+    transformToDictionary(string) {
+        let result = {};
+        let params = string.split('&&');
+        for (var i in params) {
+            let array = params[i].split("=");
+            result[decodeURIComponent(array[0])] = decodeURIComponent(array[1]);
+        }
+        return result;
+    }
+
     hasChanged(scope, routes) {
         (function (scope) {
             let foundPage = false;
             if (window.location.hash.length > 0) {
                 routes.forEach(route => {
-                    if (route.isActiveRoute(window.location.hash.substr(1))) {
+                    let urlAfterDomain = window.location.hash.substr(1).split('?');
+                    let params = null;
+                    if (urlAfterDomain[1] != null) {
+                        params = scope.transformToDictionary(urlAfterDomain[1]);
+                    }
+                    if (route.isActiveRoute(urlAfterDomain[0])) {
                         foundPage = true;
-                        scope.goToRoute(route.htmlFile);
+                        console.log(params);
+                        scope.goToRoute(route.htmlFile, params);
                     }
                 });
             } else {
@@ -47,7 +63,7 @@ class Router {
         })(scope);
     }
 
-    goToRoute(htmlFile) {
+    goToRoute(htmlFile, params) {
         (function (scope) {
             let url = 'views/' + htmlFile,
                 xhttp = new XMLHttpRequest();
@@ -55,8 +71,9 @@ class Router {
                 if (this.readyState === 4 && this.status === 200) {
                     scope.rootElem.innerHTML = this.responseText;
                     let scriptFile = './state_scripts/' + htmlFile.split('.')[0] + '.js';
+                    window.scrollTo(0, 0);
                     import(scriptFile).then(module =>
-                        module.initPage()
+                        module.initPage(params)
                     ).catch();
                 }
             };

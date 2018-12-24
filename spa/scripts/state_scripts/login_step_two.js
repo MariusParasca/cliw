@@ -1,3 +1,3 @@
-export function initPage() { 
+export function initPage(params) { 
     
 }

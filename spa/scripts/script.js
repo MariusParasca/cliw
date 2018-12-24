@@ -23,17 +23,43 @@ firebase.initializeApp(config);
 const firestore = firebase.firestore();
 const settings = {/* your settings... */ timestampsInSnapshots: true };
 firestore.settings(settings);
-firestore.enablePersistence()
-    .catch(function (err) {
-        if (err.code == 'failed-precondition') {
-            console.log('failed-precondition');
-        } else if (err.code == 'unimplemented') {
-            console.log('unimplemented');
-        }
-    });
+// firestore.enablePersistence()
+//     .catch(function (err) {
+//         if (err.code == 'failed-precondition') {
+//             console.log('failed-precondition');
+//         } else if (err.code == 'unimplemented') {
+//             console.log('unimplemented');
+//         }
+//     });
 const db = firebase.firestore();
 const storage = firebase.storage();
 const SITE_FOLDER = 'site/'
+
+function renderImage(img, doc) {
+    let imgPath = SITE_FOLDER + img.alt;
+    let imageSource = null; //localStorage.getItem(imgPath);
+
+    if (imageSource === null) {
+        storage.ref(imgPath).getDownloadURL().then(
+            (url) => {
+                // let xhr = new XMLHttpRequest();
+                // xhr.responseType = 'blob';
+                // xhr.onload = (event) => {
+                //     let blob = xhr.response;
+                //     let dataURL = URL.createObjectURL(blob);
+                //     // img.setAttribute("src", dataURL);
+                //     // localStorage.setItem(imgPath, dataURL);
+                // };
+                // xhr.open('GET', url);
+                // xhr.send();
+                img.setAttribute("src", url);
+                // localStorage.setItem(imgPath, url);
+            }
+        );
+    } else {
+        img.setAttribute("src", imageSource);
+    }
+}
 
 
 //------------------------ Tool bar ------------------------//

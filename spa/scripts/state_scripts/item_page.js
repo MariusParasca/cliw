@@ -10,6 +10,8 @@ const TRACKER_CONFIG = {
 }
 const WEB_CAM_TIMEOUT = 250;
 
+const CURRENCY = "$";
+
 var imageConfig = {
     src: './images_with_no_background/red_hat_no_bkgd.png',
     filterX: 0,
@@ -23,7 +25,8 @@ window.pageSizeMedia;
 window.videoWebCam;
 window.observer;
 
-export function initPage() {
+export function initPage(params) {
+    getDataFromDb(params);
     document.getElementsByClassName("addToCart")[0].addEventListener("mouseover", enableCartImgHover);
     document.getElementsByClassName("addToCart")[0].addEventListener("mouseout", disableCartImgHover);
     document.getElementById("tryIt").addEventListener("mouseover", enableHatImgHover);
@@ -32,6 +35,46 @@ export function initPage() {
     document.getElementById("backToItem").addEventListener("click", backToItemPage);
     document.getElementById("takePhoto").addEventListener("click", takePictureButton);
     initObserver();
+}
+
+function getDataFromDb(params) {
+    db.collection(params["category"]).where("name", "==", params["name"])
+        .limit(1).get().then(renderMainItem);
+    
+}
+
+function renderMainItem(querySnapshot) {
+    querySnapshot.forEach((doc) => {
+        let imageContainer = document.getElementsByClassName('mainItemPageTopLeft')[0];
+        let dataContainer = document.getElementsByClassName('mainItemPageTopRight')[0];
+        addMainItem(imageContainer, dataContainer, doc);
+    });   
+}
+
+function addMainItem(imageContainer, dataContainer, doc) {
+    let img = document.createElement('IMG');
+    img.setAttribute("class", "itemImage");
+    img.setAttribute("alt", doc.data().img_name);
+    renderImage(img, doc);
+    imageContainer.appendChild(img)
+
+    let childRef = dataContainer.firstChild;
+    let title = document.createElement('p');
+    title.innerText = doc.data().name;
+    dataContainer.insertBefore(title, childRef);
+
+    let price = document.createElement('p');
+    price.innerText = "Price: " + doc.data().price + " " + CURRENCY;
+    dataContainer.insertBefore(price, childRef);
+
+    let p = document.createElement('p');
+    p.innerText = "Description: ";
+    dataContainer.insertBefore(p, childRef);
+
+    let description = document.createElement('p');
+    description.innerText = doc.data().description;
+    dataContainer.insertBefore(description, childRef);
+
 }
 
 function enableCartImgHover() {

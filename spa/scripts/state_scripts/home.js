@@ -1,58 +1,45 @@
-export function initPage() { 
+export function initPage(params) { 
     db.collection("last_added")
         .orderBy("added_date")
         .get()
-        .then(render_last_added);
+        .then(renderLastAdded);
 }
 
-function render_last_added(querySnapshot) {
+function renderLastAdded(querySnapshot) {
     querySnapshot.forEach((doc) => {
-        var container = document.getElementsByClassName('mainHomeBottom')[0];
-        add_elements_to_container(container, doc);
+        let container = document.getElementsByClassName('mainHomeBottom')[0];
+        addElementsToContainer(container, doc);
     });   
 }
 
-function render_images(img, doc) {
-    var imgPath = SITE_FOLDER + img.alt;
-    var imageSource = localStorage.getItem(imgPath);
-    
-    if (imageSource === null) {
-        storage.ref(SITE_FOLDER + doc.data().img_name).getDownloadURL().then(
-            (url) => {
-                var xhr = new XMLHttpRequest();
-                xhr.responseType = 'blob';
-                xhr.onload = (event) => {
-                    var blob = xhr.response;
-                    var dataURL = URL.createObjectURL(blob);
-                    img.setAttribute("src", dataURL);
-                    localStorage.setItem(imgPath, dataURL);
-                };
-                xhr.open('GET', url);
-                xhr.send();
-            }
-        );
-    } else {
-        img.src = imageSource;
-    }   
+function getBase64Image(img) {
+    var canvas = document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+
+    return canvas.toDataURL();
 }
 
-function add_elements_to_container(container, doc) {
-    var div = document.createElement('DIV');
+function addElementsToContainer(container, doc) {
+    let div = document.createElement('DIV');
     container.appendChild(div);
     div.setAttribute("class", "lastAccessoryAdded");
 
-    var a = document.createElement('A');
+    let a = document.createElement('A');
     a.setAttribute("class", "accessoryLink");
-    a.setAttribute("href", "#item_page");
+    a.setAttribute("href", "#item_page?name=" + doc.data().name + "&&category=" + doc.data().category);
     div.appendChild(a);
 
-    var img = document.createElement('IMG');
+    let img = document.createElement('IMG');
     img.setAttribute("class", "lastAccessoryImage");
     img.setAttribute("alt", doc.data().img_name);
-    render_images(img, doc);
+    renderImage(img, doc);
 
     a.appendChild(img);
-    var p = document.createElement('P');
+    let p = document.createElement('P');
     p.setAttribute("class", "accessoryTitle");
     p.innerHTML = doc.data().name;
     a.appendChild(p);
