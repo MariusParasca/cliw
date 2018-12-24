@@ -23,8 +23,17 @@ firebase.initializeApp(config);
 const firestore = firebase.firestore();
 const settings = {/* your settings... */ timestampsInSnapshots: true };
 firestore.settings(settings);
+firestore.enablePersistence()
+    .catch(function (err) {
+        if (err.code == 'failed-precondition') {
+            console.log('failed-precondition');
+        } else if (err.code == 'unimplemented') {
+            console.log('unimplemented');
+        }
+    });
 const db = firebase.firestore();
 const storage = firebase.storage();
+const SITE_FOLDER = 'site/'
 
 
 //------------------------ Tool bar ------------------------//
