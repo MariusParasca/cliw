@@ -45,7 +45,6 @@ class Router {
                     }
                     if (route.isActiveRoute(urlAfterDomain[0])) {
                         foundPage = true;
-                        console.log(params);
                         scope.goToRoute(route.htmlFile, params);
                     }
                 });

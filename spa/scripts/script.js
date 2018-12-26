@@ -21,19 +21,42 @@ var config = {
 };
 firebase.initializeApp(config);
 const firestore = firebase.firestore();
-const settings = {/* your settings... */ timestampsInSnapshots: true };
+const settings = { timestampsInSnapshots: true };
 firestore.settings(settings);
-// firestore.enablePersistence()
-//     .catch(function (err) {
-//         if (err.code == 'failed-precondition') {
-//             console.log('failed-precondition');
-//         } else if (err.code == 'unimplemented') {
-//             console.log('unimplemented');
-//         }
-//     });
 const db = firebase.firestore();
 const storage = firebase.storage();
+
+//------------------------ COMMON ------------------------//
+
+//db.collection("beanie").get().then(test);
+// function test(querySnapshot){
+//     querySnapshot.forEach((doc) => {
+//         console.log(doc);
+//     });
+// }
+
 const SITE_FOLDER = 'site/'
+function addElementsToContainer(container, doc, category) {
+    let div = document.createElement('DIV');
+    container.appendChild(div);
+    div.setAttribute("class", "lastAccessoryAdded");
+
+    let a = document.createElement('A');
+    a.setAttribute("class", "accessoryLink");
+    a.setAttribute("href", "#item_page?name=" + doc.data().name + "&&category=" + category);
+    div.appendChild(a);
+
+    let img = document.createElement('IMG');
+    img.setAttribute("class", "lastAccessoryImage");
+    img.setAttribute("alt", doc.data().img_name);
+    renderImage(img, doc);
+
+    a.appendChild(img);
+    let p = document.createElement('P');
+    p.setAttribute("class", "accessoryTitle");
+    p.innerHTML = doc.data().name;
+    a.appendChild(p);
+}
 
 function renderImage(img, doc) {
     let imgPath = SITE_FOLDER + img.alt;
@@ -60,7 +83,6 @@ function renderImage(img, doc) {
         img.setAttribute("src", imageSource);
     }
 }
-
 
 //------------------------ Tool bar ------------------------//
 
