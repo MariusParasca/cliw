@@ -48,7 +48,7 @@ function addElementsToContainer(container, doc, category) {
 
     let img = document.createElement('IMG');
     img.setAttribute("class", "lastAccessoryImage");
-    img.setAttribute("alt", doc.data().img_name);
+    img.setAttribute("alt", doc.data().name);
     renderImage(img, doc);
 
     a.appendChild(img);
@@ -59,7 +59,7 @@ function addElementsToContainer(container, doc, category) {
 }
 
 function renderImage(img, doc) {
-    let imgPath = SITE_FOLDER + img.alt;
+    let imgPath = SITE_FOLDER + doc.data().img_name;
     let imageSource = null; //localStorage.getItem(imgPath);
 
     if (imageSource === null) {

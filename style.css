@@ -1254,14 +1254,15 @@ footer {
 	height: 50px;
 	right: 0px;
 	top: -7px;
-	background-image: url('./icons/circle_red_heart_50px.png');
+	background-image: url('./all_icons/circle_red_heart_50px.png');
 	background-size: 40px 40px;
 	background-repeat: no-repeat;
 	background-position: center center;
 }
 
 #itemHeartItemPage:hover {
-	background-image: url('./icons/circle_red_heart_filled_50px.png');
+	background-image: url('./all_icons/circle_red_heart_filled_50px.png');
+	cursor: pointer;
 }
 
 #tryIt {

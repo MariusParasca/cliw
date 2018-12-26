@@ -150,7 +150,9 @@ export function initPage(params) {
     document.getElementById("tryIt").addEventListener("click", changeToWebCam);
     document.getElementById("backToItem").addEventListener("click", backToItemPage);
     document.getElementById("takePhoto").addEventListener("click", takePictureButton);
+    document.getElementById("itemHeartItemPage").addEventListener("click", toggleFavoriteItem);
     initObserver();
+    initFavoriteItem(params);
 }
 
 var numberOfRecomandations = 0;
@@ -158,6 +160,33 @@ var MAX_NUMBER_OF_RECOMANDATIONS = 4;
 var currentSeason = getCurrentSeason();
 var currentItemName = "";
 var currentItemCategory = ""
+const unfilledHeartImgPath = 'url("./all_icons/circle_red_heart_50px.png")';
+const filledHeartImgPath = 'url("./all_icons/circle_red_heart_filled_50px.png")';
+
+function initFavoriteItem(params) {
+    let localKeys = Object.keys(localStorage);
+    let favoriteHeart = document.getElementById("itemHeartItemPage");
+    for (let localKey of localKeys) {
+        if (localKey == "favorite_" + params["name"]) {
+            favoriteHeart.style.backgroundImage = filledHeartImgPath;
+            break;
+        }
+    }
+}
+
+function toggleFavoriteItem() {
+    let favoriteHeart = document.getElementById("itemHeartItemPage");
+    let img = document.getElementsByClassName("itemImage")[0];
+    let isFavorite = localStorage.getItem("favorite_" + img.alt);
+    if(isFavorite == null) {
+        favoriteHeart.style.backgroundImage = filledHeartImgPath;
+        localStorage.setItem("favorite_" + img.alt, img.alt);
+    } else {
+        favoriteHeart.style.backgroundImage = unfilledHeartImgPath;
+        localStorage.removeItem("favorite_" + img.alt);
+    }
+
+}
 
 function getDataFromDb(params) {
     currentItemName = params["name"];
@@ -219,7 +248,7 @@ function renderMainItem(querySnapshot) {
 function addMainItem(imageContainer, dataContainer, doc) {
     let img = document.createElement('IMG');
     img.setAttribute("class", "itemImage");
-    img.setAttribute("alt", doc.data().img_name);
+    img.setAttribute("alt", doc.data().name);
     renderImage(img, doc);
     imageContainer.appendChild(img)
 
