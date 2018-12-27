@@ -37,6 +37,7 @@ const storage = firebase.storage();
 
 const SITE_FOLDER = 'site/';
 const FAVORITE = "favorite_";
+const CART = "cart_";
 function addElementsToContainer(container, doc, category) {
     let div = document.createElement('DIV');
     container.appendChild(div);

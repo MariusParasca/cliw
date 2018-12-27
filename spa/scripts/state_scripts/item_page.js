@@ -8,6 +8,7 @@ export function initPage(params) {
     document.getElementById("backToItem").addEventListener("click", backToItemPage);
     document.getElementById("takePhoto").addEventListener("click", takePictureButton);
     document.getElementById("itemHeartItemPage").addEventListener("click", toggleFavoriteItem);
+    document.getElementsByClassName("addToCart")[0].addEventListener("click", storeInSeasonStorageItemCart);
     initObserver();
     initFavoriteItem(params);
 }
@@ -162,6 +163,12 @@ var currentItemName = "";
 const unfilledHeartImgPath = 'url("./all_icons/circle_red_heart_50px.png")';
 const filledHeartImgPath = 'url("./all_icons/circle_red_heart_filled_50px.png")';
 
+function storeInSeasonStorageItemCart() {
+    let price = document.getElementById("price").innerText.match(/\d+/)[0];
+    let img = document.getElementsByClassName("itemImage")[0];
+    sessionStorage.setItem("cart_" + img.alt, img.alt + ":" + price);
+}
+
 function initFavoriteItem(params) {
     let localKeys = Object.keys(localStorage);
     let favoriteHeart = document.getElementById("itemHeartItemPage");
@@ -202,12 +209,11 @@ function toggleFavoriteItem() {
 function getDataFromDb(params) {
     currentItemName = params["name"];
     numberOfRecomandations = 0;
-
+    let imageContainer = document.getElementsByClassName('mainItemPageTopLeft')[0];
+    let dataContainer = document.getElementsByClassName('mainItemPageTopRight')[0];
     db.collection(params["category"]).where("name", "==", params["name"])
         .limit(1).get().then( function(querySnapshot) {
                 querySnapshot.forEach((doc) => {
-                    let imageContainer = document.getElementsByClassName('mainItemPageTopLeft')[0];
-                    let dataContainer = document.getElementsByClassName('mainItemPageTopRight')[0];
                     addMainItem(imageContainer, dataContainer, doc, this.category);
                 });
             }.bind({category: params["category"] })
@@ -264,10 +270,12 @@ function addMainItem(imageContainer, dataContainer, doc, category) {
 
     let childRef = dataContainer.firstChild;
     let title = document.createElement('p');
+    title.setAttribute("id", "title");
     title.innerText = doc.data().name;
     dataContainer.insertBefore(title, childRef);
 
     let price = document.createElement('p');
+    price.setAttribute("id", "price");
     price.innerText = "Price: " + doc.data().price + " " + CURRENCY;
     dataContainer.insertBefore(price, childRef);
 

@@ -1684,6 +1684,10 @@ footer {
 	background-image: url('./all_icons/delete_20px.png');
 }
 
+.deleteOrder {
+	cursor: pointer;
+}
+
 .orderTotal {
 	display: flex;
 	flex-direction: column;
