@@ -1,3 +1,17 @@
+export function initPage(params) {
+    getDataFromDb(params);
+    document.getElementsByClassName("addToCart")[0].addEventListener("mouseover", enableCartImgHover);
+    document.getElementsByClassName("addToCart")[0].addEventListener("mouseout", disableCartImgHover);
+    document.getElementById("tryIt").addEventListener("mouseover", enableHatImgHover);
+    document.getElementById("tryIt").addEventListener("mouseout", disableHatImgHover);
+    document.getElementById("tryIt").addEventListener("click", changeToWebCam);
+    document.getElementById("backToItem").addEventListener("click", backToItemPage);
+    document.getElementById("takePhoto").addEventListener("click", takePictureButton);
+    document.getElementById("itemHeartItemPage").addEventListener("click", toggleFavoriteItem);
+    initObserver();
+    initFavoriteItem(params);
+}
+
 const WEB_CAM_WIDTH_MAX = 640;
 const WEB_CAM_HEIGHT_MAX = 480;
 const WEB_CAM_WIDTH_MIN = 320;
@@ -141,25 +155,10 @@ Math.degRad = degRad;
 Math.degSin = degSin;
 Math.degCos = degCos;
 
-export function initPage(params) {
-    getDataFromDb(params);
-    document.getElementsByClassName("addToCart")[0].addEventListener("mouseover", enableCartImgHover);
-    document.getElementsByClassName("addToCart")[0].addEventListener("mouseout", disableCartImgHover);
-    document.getElementById("tryIt").addEventListener("mouseover", enableHatImgHover);
-    document.getElementById("tryIt").addEventListener("mouseout", disableHatImgHover);
-    document.getElementById("tryIt").addEventListener("click", changeToWebCam);
-    document.getElementById("backToItem").addEventListener("click", backToItemPage);
-    document.getElementById("takePhoto").addEventListener("click", takePictureButton);
-    document.getElementById("itemHeartItemPage").addEventListener("click", toggleFavoriteItem);
-    initObserver();
-    initFavoriteItem(params);
-}
-
 var numberOfRecomandations = 0;
 var MAX_NUMBER_OF_RECOMANDATIONS = 4;
 var currentSeason = getCurrentSeason();
 var currentItemName = "";
-var currentItemCategory = ""
 const unfilledHeartImgPath = 'url("./all_icons/circle_red_heart_50px.png")';
 const filledHeartImgPath = 'url("./all_icons/circle_red_heart_filled_50px.png")';
 
@@ -167,7 +166,7 @@ function initFavoriteItem(params) {
     let localKeys = Object.keys(localStorage);
     let favoriteHeart = document.getElementById("itemHeartItemPage");
     for (let localKey of localKeys) {
-        if (localKey == "favorite_" + params["name"]) {
+        if (localKey == FAVORITE + params["name"]) {
             favoriteHeart.style.backgroundImage = filledHeartImgPath;
             break;
         }
@@ -177,23 +176,30 @@ function initFavoriteItem(params) {
 function toggleFavoriteItem() {
     let favoriteHeart = document.getElementById("itemHeartItemPage");
     let img = document.getElementsByClassName("itemImage")[0];
-    let isFavorite = localStorage.getItem("favorite_" + img.alt);
+    let isFavorite = localStorage.getItem(FAVORITE + img.alt);
     if(isFavorite == null) {
         favoriteHeart.style.backgroundImage = filledHeartImgPath;
-        localStorage.setItem("favorite_" + img.alt, img.alt);
+        localStorage.setItem(FAVORITE + img.alt, img.alt);
     } else {
         favoriteHeart.style.backgroundImage = unfilledHeartImgPath;
-        localStorage.removeItem("favorite_" + img.alt);
+        localStorage.removeItem(FAVORITE + img.alt);
     }
-
 }
 
 function getDataFromDb(params) {
     currentItemName = params["name"];
-    currentItemCategory = params["category"];
+    numberOfRecomandations = 0;
+
     db.collection(params["category"]).where("name", "==", params["name"])
-        .limit(1).get().then(renderMainItem);
-    numberOfRecomandations  = 0;
+        .limit(1).get().then( function(querySnapshot) {
+                querySnapshot.forEach((doc) => {
+                    let imageContainer = document.getElementsByClassName('mainItemPageTopLeft')[0];
+                    let dataContainer = document.getElementsByClassName('mainItemPageTopRight')[0];
+                    addMainItem(imageContainer, dataContainer, doc, this.category);
+                });
+            }.bind({category: params["category"] })
+        );
+    
     // db.collection(params["category"])
     //     .limit(2).get().then(addItemSameCategory);
     db.collection("categories").get().then(searchInAllCategories);
@@ -236,19 +242,10 @@ function renderRecomandation(doc, category) {
     addElementsToContainer(container, doc, category)
 }
 
-
-function renderMainItem(querySnapshot) {
-    querySnapshot.forEach((doc) => {
-        let imageContainer = document.getElementsByClassName('mainItemPageTopLeft')[0];
-        let dataContainer = document.getElementsByClassName('mainItemPageTopRight')[0];
-        addMainItem(imageContainer, dataContainer, doc);
-    });   
-}
-
-function addMainItem(imageContainer, dataContainer, doc) {
+function addMainItem(imageContainer, dataContainer, doc, category) {
     let img = document.createElement('IMG');
     img.setAttribute("class", "itemImage");
-    img.setAttribute("alt", doc.data().name);
+    img.setAttribute("alt", category + ":" + doc.data().name);
     renderImage(img, doc);
     imageContainer.appendChild(img)
 

@@ -35,7 +35,8 @@ const storage = firebase.storage();
 //     });
 // }
 
-const SITE_FOLDER = 'site/'
+const SITE_FOLDER = 'site/';
+const FAVORITE = "favorite_";
 function addElementsToContainer(container, doc, category) {
     let div = document.createElement('DIV');
     container.appendChild(div);
@@ -48,7 +49,7 @@ function addElementsToContainer(container, doc, category) {
 
     let img = document.createElement('IMG');
     img.setAttribute("class", "lastAccessoryImage");
-    img.setAttribute("alt", doc.data().name);
+    img.setAttribute("alt", category + ":" + doc.data().name);
     renderImage(img, doc);
 
     a.appendChild(img);
