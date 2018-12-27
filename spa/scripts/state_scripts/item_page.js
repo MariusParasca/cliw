@@ -166,11 +166,22 @@ function initFavoriteItem(params) {
     let localKeys = Object.keys(localStorage);
     let favoriteHeart = document.getElementById("itemHeartItemPage");
     for (let localKey of localKeys) {
-        if (localKey == FAVORITE + params["name"]) {
+        if (localKey == FAVORITE + params["category"] + ":" + params["name"]) {
             favoriteHeart.style.backgroundImage = filledHeartImgPath;
+            addHeartHoverStyle(unfilledHeartImgPath, filledHeartImgPath);
             break;
         }
     }
+}
+
+function addHeartHoverStyle(mouseOnimgURL, mouseOutImgURL) {
+    let heartElement = document.getElementById("itemHeartItemPage");
+    heartElement.addEventListener("mouseover", (event) => {
+        heartElement.style.backgroundImage = mouseOnimgURL;
+    });
+    heartElement.addEventListener("mouseout", (event) => {
+        heartElement.style.backgroundImage = mouseOutImgURL;
+    });
 }
 
 function toggleFavoriteItem() {
@@ -180,9 +191,11 @@ function toggleFavoriteItem() {
     if(isFavorite == null) {
         favoriteHeart.style.backgroundImage = filledHeartImgPath;
         localStorage.setItem(FAVORITE + img.alt, img.alt);
+        addHeartHoverStyle(unfilledHeartImgPath, filledHeartImgPath)
     } else {
         favoriteHeart.style.backgroundImage = unfilledHeartImgPath;
         localStorage.removeItem(FAVORITE + img.alt);
+        addHeartHoverStyle(filledHeartImgPath, unfilledHeartImgPath)
     }
 }
 

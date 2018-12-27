@@ -422,8 +422,9 @@ footer {
 	background-image: url('./all_icons/circle_red_heart_30px.png');
 }
 
-.itemHeart:hover {
-	background-image: url('./all_icons/circle_red_heart_filled_30px.png');
+#itemHeartItemPage:hover {
+	background-image: url('./all_icons/circle_red_heart_filled_50px.png');
+	cursor: pointer;
 }
 
 .likeAccessory {
