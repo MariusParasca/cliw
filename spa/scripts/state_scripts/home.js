@@ -4,6 +4,7 @@ export function initPage(params) {
         .get()
         .then(renderLastAdded);
     setBarEventListeners();
+    getAndRenderCategories();
 }
 
 function renderLastAdded(querySnapshot) {

@@ -12,6 +12,7 @@ export function initPage(params) {
     setBarEventListeners();
     initObserver();
     initFavoriteItem(params);
+    getAndRenderCategories();
 }
 
 const WEB_CAM_WIDTH_MAX = 640;
@@ -176,7 +177,7 @@ function initFavoriteItem(params) {
     for (let localKey of localKeys) {
         if (localKey == FAVORITE + params["category"] + ":" + params["name"]) {
             favoriteHeart.style.backgroundImage = filledHeartImgPath;
-            addHeartHoverStyle(unfilledHeartImgPath, filledHeartImgPath);
+            addHeartHoverStyle(unfilledHeartImgPath, filledHeartImgPath, favoriteHeart);
             break;
         }
     }
@@ -185,8 +186,7 @@ function initFavoriteItem(params) {
 function toggleFavoriteItemOnItemPage() {
     let container = document.getElementById("itemHeartItemPage");
     let img = document.getElementsByClassName("itemImage")[0];
-    let toggledContainer = document.getElementById("itemHeartItemPage");
-    toggleFavoriteItem(container, img, toggledContainer, unfilledHeartImgPath, filledHeartImgPath);
+    toggleFavoriteItem(container, img, unfilledHeartImgPath, filledHeartImgPath);
 }
 
 function getDataFromDb(params) {

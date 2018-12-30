@@ -1,18 +1,7 @@
 export function initPage(params) { 
     addFavoriteItems();
     setBarEventListeners();
-}
-
-function deleteFavoriteItem(event) {
-    let currentElement = event.target;
-    let localKey = FAVORITE + currentElement.id;
-    let favoriteLocalItem = localStorage.getItem(localKey);
-    if(favoriteLocalItem != null) {
-        localStorage.removeItem(localKey);
-        let favoriteItemsContainer = currentElement.parentElement.parentElement;
-        let favoriteItem = currentElement.parentElement;
-        favoriteItemsContainer.removeChild(favoriteItem)
-    }
+    getAndRenderCategories();
 }
 
 function addFavoriteItems() {
@@ -28,6 +17,18 @@ function addFavoriteItems() {
                     });
                 }.bind({ category: data[0] }));
         }
+    }
+}
+
+function deleteFavoriteItem(event) {
+    let currentElement = event.target;
+    let localKey = FAVORITE + currentElement.id;
+    let favoriteLocalItem = localStorage.getItem(localKey);
+    if (favoriteLocalItem != null) {
+        localStorage.removeItem(localKey);
+        let favoriteItemsContainer = currentElement.parentElement.parentElement;
+        let favoriteItem = currentElement.parentElement;
+        favoriteItemsContainer.removeChild(favoriteItem)
     }
 }
 

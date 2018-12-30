@@ -1,10 +1,3 @@
-window.onload = function () {
-    url = location.href.split("/").slice(-1);
-    if ((url == "#home" || url == "" || url == "#")) {
-        getAndRenderCategories();
-    }
-}
-
 //------------------------ Firebase ------------------------//
 
 var config = {
@@ -116,23 +109,26 @@ function addHeartHoverStyle(mouseOnimgURL, mouseOutImgURL, container) {
     });
 }
 
-function toggleFavoriteItem(container, img, toggledContainer, unfilledHeartImgPath, filledHeartImgPath) {
+function toggleFavoriteItem(container, img, unfilledHeartImgPath, filledHeartImgPath) {
     let isFavorite = localStorage.getItem(FAVORITE + img.alt);
     if (isFavorite == null) {
         container.style.backgroundImage = filledHeartImgPath;
         localStorage.setItem(FAVORITE + img.alt, img.alt);
-        addHeartHoverStyle(unfilledHeartImgPath, filledHeartImgPath, toggledContainer)
+        addHeartHoverStyle(unfilledHeartImgPath, filledHeartImgPath, container)
     } else {
         container.style.backgroundImage = unfilledHeartImgPath;
         localStorage.removeItem(FAVORITE + img.alt);
-        addHeartHoverStyle(filledHeartImgPath, unfilledHeartImgPath, toggledContainer)
+        addHeartHoverStyle(filledHeartImgPath, unfilledHeartImgPath, container)
     }
 }
 
 //------------------------ Index ------------------------//
 function getAndRenderCategories() {
     container = document.getElementsByClassName("dropdownContent")[0];
-    db.collection("categories").get().then(renderCategoriesContainer.bind({ container: container }));
+    containerBox = document.getElementsByClassName("dropdown")[0];
+    if (containerBox.style.display == 'none' || container.children.length == 1) {
+        db.collection("categories").get().then(renderCategoriesContainer.bind({ container: container }));
+    }
 }
 
 //------------------------ Tool bar ------------------------//

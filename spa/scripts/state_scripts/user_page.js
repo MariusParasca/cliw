@@ -2,6 +2,7 @@ export function initPage(params) {
     initLocalImages();
     initButtonActions();
     setBarEventListeners();
+    getAndRenderCategories();
 }
 
 function initLocalImages() {
