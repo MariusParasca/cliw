@@ -1,5 +1,6 @@
 export function initPage(params) { 
     addFavoriteItems();
+    setBarEventListeners();
 }
 
 function deleteFavoriteItem(event) {

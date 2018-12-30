@@ -1,6 +1,7 @@
 export function initPage(params) {
     initLocalImages();
     initButtonActions();
+    setBarEventListeners();
 }
 
 function initLocalImages() {

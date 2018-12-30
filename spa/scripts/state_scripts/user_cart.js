@@ -1,5 +1,6 @@
 export function initPage(params) { 
     iniItemstFromSeasonStorage();
+    setBarEventListeners();
 }
 
 var totalPrice = 0;

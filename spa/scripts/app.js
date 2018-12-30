@@ -1,7 +1,75 @@
-function initPage() {
-    setBarEventListeners();
+//------------------------ Firebase ------------------------//
+
+var config = {
+    apiKey: "AIzaSyBHnTWJNR2XeCF9lwpqA4H-65cXcC5ackQ",
+    authDomain: "cliw-c5b4b.firebaseapp.com",
+    databaseURL: "https://cliw-c5b4b.firebaseio.com",
+    projectId: "cliw-c5b4b",
+    storageBucket: "cliw-c5b4b.appspot.com",
+    messagingSenderId: "330716252761"
+};
+firebase.initializeApp(config);
+const firestore = firebase.firestore();
+const settings = { timestampsInSnapshots: true };
+firestore.settings(settings);
+const db = firebase.firestore();
+const storage = firebase.storage();
+
+//------------------------ COMMON ------------------------//
+
+const SITE_FOLDER = 'site/';
+const WEB_FOLDER = 'web/';
+const FAVORITE = "favorite_";
+const CART = "cart_";
+function addElementsToContainer(container, doc, category) {
+    let div = document.createElement('DIV');
+    container.appendChild(div);
+    div.setAttribute("class", "lastAccessoryAdded");
+
+    let a = document.createElement('A');
+    a.setAttribute("class", "accessoryLink");
+    a.setAttribute("href", "#item_page?name=" + doc.data().name + "&&category=" + category);
+    div.appendChild(a);
+
+    let img = document.createElement('IMG');
+    img.setAttribute("class", "lastAccessoryImage");
+    img.setAttribute("alt", category + ":" + doc.data().name);
+    renderImage(img, doc);
+
+    a.appendChild(img);
+    let p = document.createElement('P');
+    p.setAttribute("class", "accessoryTitle");
+    p.innerHTML = doc.data().name;
+    a.appendChild(p);
 }
 
+function renderImage(img, doc) {
+    let imgPath = SITE_FOLDER + doc.data().img_name;
+    let imageSource = null; //localStorage.getItem(imgPath);
+
+    if (imageSource === null) {
+        storage.ref(imgPath).getDownloadURL().then(
+            (url) => {
+                // let xhr = new XMLHttpRequest();
+                // xhr.responseType = 'blob';
+                // xhr.onload = (event) => {
+                //     let blob = xhr.response;
+                //     let dataURL = URL.createObjectURL(blob);
+                //     // img.setAttribute("src", dataURL);
+                //     // localStorage.setItem(imgPath, dataURL);
+                // };
+                // xhr.open('GET', url);
+                // xhr.send();
+                img.setAttribute("src", url);
+                // localStorage.setItem(imgPath, url);
+            }
+        );
+    } else {
+        img.setAttribute("src", imageSource);
+    }
+}
+
+//------------------------ Tool bar ------------------------//
 function setBarEventListeners() {
     document.getElementsByClassName("dropdownContent")[0].addEventListener("mouseover", maitainMenuHover);
     document.getElementsByClassName("dropdownContent")[0].addEventListener("mouseout", disableMenuHover);
@@ -14,10 +82,10 @@ function setBarEventListeners() {
 }
 
 function maitainMenuHover() {
-    document.getElementById("navMenu").style.backgroundImage ="url('./all_icons/menu_gray_40px.png')";
+    document.getElementById("navMenu").style.backgroundImage = "url('./all_icons/menu_gray_40px.png')";
 }
 
-function disableMenuHover() {   
+function disableMenuHover() {
     document.getElementById("navMenu").style.backgroundImage = "url('./all_icons/menu_40px.png')";
 }
 
@@ -29,4 +97,22 @@ function maitainUserNameHover() {
 function disableUserNameHover() {
     document.getElementById("navUser").style.backgroundImage = "url('./all_icons/user_avatar_white_40px.png')"
     document.getElementsByClassName("userName")[0].style.color = "#ffffff"
+}
+
+//db.collection("beanie").get().then(test);
+// function test(querySnapshot){
+//     querySnapshot.forEach((doc) => {
+//         console.log(doc);
+//     });
+// }
+
+function getBase64Image(img) {
+    var canvas = document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+
+    return canvas.toDataURL();
 }

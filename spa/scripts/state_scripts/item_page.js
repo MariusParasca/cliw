@@ -9,6 +9,7 @@ export function initPage(params) {
     document.getElementById("takePhoto").addEventListener("click", takePictureButton);
     document.getElementById("itemHeartItemPage").addEventListener("click", toggleFavoriteItem);
     document.getElementsByClassName("addToCart")[0].addEventListener("click", storeInSeasonStorageItemCart);
+    setBarEventListeners();
     initObserver();
     initFavoriteItem(params);
 }
