@@ -1,3 +1,10 @@
+window.onload = function () {
+    url = location.href.split("/").slice(-1);
+    if ((url == "#home" || url == "" || url == "#")) {
+        getAndRenderCategories();
+    }
+}
+
 //------------------------ Firebase ------------------------//
 
 var config = {
@@ -69,8 +76,69 @@ function renderImage(img, doc) {
     }
 }
 
+function toFirstUpperAndSpaceBetween(string) {
+    let aux = string.replace('_', ' ');
+    return aux.charAt(0).toUpperCase() + aux.slice(1);
+}
+
+function renderCategoriesContainer(querySnapshot) {
+    querySnapshot.forEach((doc) => {
+        let categories = doc.data().categories;
+        renderCategories(categories.sort(), this.container);
+    });
+}
+
+function renderCategories(categories, container) {
+    let ul = document.createElement('UL');
+    let li = document.createElement('LI');
+    let a = document.createElement('A');
+    a.href = "#accessory_page_list?category=all_categories";
+    a.innerText = "All Categories";
+    li.appendChild(a);
+    ul.appendChild(li);
+    for (let category of categories) {
+        li = document.createElement('LI');
+        a = document.createElement('A');
+        a.href = "#accessory_page_list?category=" + category;
+        a.innerText = toFirstUpperAndSpaceBetween(category);
+        li.appendChild(a);
+        ul.appendChild(li);
+    }
+    container.appendChild(ul);
+}
+
+function addHeartHoverStyle(mouseOnimgURL, mouseOutImgURL, container) {
+    container.addEventListener("mouseover", (event) => {
+        container.style.backgroundImage = mouseOnimgURL;
+    });
+    container.addEventListener("mouseout", (event) => {
+        container.style.backgroundImage = mouseOutImgURL;
+    });
+}
+
+function toggleFavoriteItem(container, img, toggledContainer, unfilledHeartImgPath, filledHeartImgPath) {
+    let isFavorite = localStorage.getItem(FAVORITE + img.alt);
+    if (isFavorite == null) {
+        container.style.backgroundImage = filledHeartImgPath;
+        localStorage.setItem(FAVORITE + img.alt, img.alt);
+        addHeartHoverStyle(unfilledHeartImgPath, filledHeartImgPath, toggledContainer)
+    } else {
+        container.style.backgroundImage = unfilledHeartImgPath;
+        localStorage.removeItem(FAVORITE + img.alt);
+        addHeartHoverStyle(filledHeartImgPath, unfilledHeartImgPath, toggledContainer)
+    }
+}
+
+//------------------------ Index ------------------------//
+function getAndRenderCategories() {
+    container = document.getElementsByClassName("dropdownContent")[0];
+    db.collection("categories").get().then(renderCategoriesContainer.bind({ container: container }));
+}
+
 //------------------------ Tool bar ------------------------//
+
 function setBarEventListeners() {
+    document.getElementsByClassName("dropdown")[0].style.display = "block";
     document.getElementsByClassName("dropdownContent")[0].addEventListener("mouseover", maitainMenuHover);
     document.getElementsByClassName("dropdownContent")[0].addEventListener("mouseout", disableMenuHover);
     document.getElementsByClassName("menuLink")[0].addEventListener("mouseover", maitainMenuHover);

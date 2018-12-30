@@ -7,7 +7,7 @@ export function initPage(params) {
     document.getElementById("tryIt").addEventListener("click", changeToWebCam);
     document.getElementById("backToItem").addEventListener("click", backToItemPage);
     document.getElementById("takePhoto").addEventListener("click", takePictureButton);
-    document.getElementById("itemHeartItemPage").addEventListener("click", toggleFavoriteItem);
+    document.getElementById("itemHeartItemPage").addEventListener("click", toggleFavoriteItemOnItemPage);
     document.getElementsByClassName("addToCart")[0].addEventListener("click", storeInSeasonStorageItemCart);
     setBarEventListeners();
     initObserver();
@@ -182,29 +182,11 @@ function initFavoriteItem(params) {
     }
 }
 
-function addHeartHoverStyle(mouseOnimgURL, mouseOutImgURL) {
-    let heartElement = document.getElementById("itemHeartItemPage");
-    heartElement.addEventListener("mouseover", (event) => {
-        heartElement.style.backgroundImage = mouseOnimgURL;
-    });
-    heartElement.addEventListener("mouseout", (event) => {
-        heartElement.style.backgroundImage = mouseOutImgURL;
-    });
-}
-
-function toggleFavoriteItem() {
-    let favoriteHeart = document.getElementById("itemHeartItemPage");
+function toggleFavoriteItemOnItemPage() {
+    let container = document.getElementById("itemHeartItemPage");
     let img = document.getElementsByClassName("itemImage")[0];
-    let isFavorite = localStorage.getItem(FAVORITE + img.alt);
-    if(isFavorite == null) {
-        favoriteHeart.style.backgroundImage = filledHeartImgPath;
-        localStorage.setItem(FAVORITE + img.alt, img.alt);
-        addHeartHoverStyle(unfilledHeartImgPath, filledHeartImgPath)
-    } else {
-        favoriteHeart.style.backgroundImage = unfilledHeartImgPath;
-        localStorage.removeItem(FAVORITE + img.alt);
-        addHeartHoverStyle(filledHeartImgPath, unfilledHeartImgPath)
-    }
+    let toggledContainer = document.getElementById("itemHeartItemPage");
+    toggleFavoriteItem(container, img, toggledContainer, unfilledHeartImgPath, filledHeartImgPath);
 }
 
 function getDataFromDb(params) {
@@ -213,16 +195,21 @@ function getDataFromDb(params) {
     let imageContainer = document.getElementsByClassName('mainItemPageTopLeft')[0];
     let dataContainer = document.getElementsByClassName('mainItemPageTopRight')[0];
     db.collection(params["category"]).where("name", "==", params["name"])
-        .limit(1).get().then( function(querySnapshot) {
-                querySnapshot.forEach((doc) => {
-                    addMainItem(imageContainer, dataContainer, doc, this.category);
-                });
-            }.bind({category: params["category"] })
-        );
+        .limit(1).get().then(addMainItemPromise.bind({
+            category: params["category"],
+            imageContainer: imageContainer,
+            dataContainer: dataContainer
+         }));
     
     // db.collection(params["category"])
     //     .limit(2).get().then(addItemSameCategory);
     db.collection("categories").get().then(searchInAllCategories);
+}
+
+function addMainItemPromise(querySnapshot) {
+    querySnapshot.forEach((doc) => {
+        addMainItem(this.imageContainer, this.dataContainer, doc, this.category);
+    });
 }
 
 // function addItemSameCategory(querySnapshot) {
@@ -240,22 +227,22 @@ function searchInAllCategories(querySnapshot) {
         for (let i in categories )  {
             if (numberOfRecomandations == MAX_NUMBER_OF_RECOMANDATIONS) 
                 break;
-            db.collection(categories[i]).get().then(
-            function (querySnapshot) {
-                querySnapshot.forEach((doc) => {
-                    let seasons = doc.data().season;
-                    for (let i in seasons) {
-                        if (seasons[i] == currentSeason && doc.data().name != currentItemName) {
-                            numberOfRecomandations++;
-                            renderRecomandation(doc, this.category);
-                        }
-                    }    
-                });
-            }.bind({ category: categories[i]}));
+            db.collection(categories[i]).get().then(getItemRecomandations.bind({ category: categories[i]}));
        }
     });
 }
 
+function getItemRecomandations(querySnapshot) {
+    querySnapshot.forEach((doc) => {
+        let seasons = doc.data().season;
+        for (let i in seasons) {
+            if (seasons[i] == currentSeason && doc.data().name != currentItemName) {
+                numberOfRecomandations++;
+                renderRecomandation(doc, this.category);
+            }
+        }
+    });
+}
 
 function renderRecomandation(doc, category) {
     let container = document.getElementsByClassName('mainItemPageBottom')[0];
