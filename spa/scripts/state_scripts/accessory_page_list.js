@@ -6,20 +6,22 @@ export function initPage(params) {
 
 const unfilledHeartImgPath = 'url("./all_icons/circle_red_heart_30px.png")';
 const filledHeartImgPath = 'url("./all_icons/circle_red_heart_filled_30px.png")';
+const filterGender = 'filterGender';
+const filterPrice = 'filterPrice';
 
 function initFiltersURLs() {
-    addFiltersToURL("genderMan", "filterGender");
-    addFiltersToURL("genderWomen", "filterGender");
-    addFiltersToURL("priceAscending", "filterPrice");
-    addFiltersToURL("priceDescending", "filterPrice");
+    addFiltersToURL("genderMan", filterGender, "man");
+    addFiltersToURL("genderWomen", filterGender, "women");
+    addFiltersToURL("priceAscending", filterPrice, "asc");
+    addFiltersToURL("priceDescending", filterPrice, "desc");
 }
 
-function addFiltersToURL(id, filterName) {
+function addFiltersToURL(id, filterName, value) {
     if (!window.location.href.includes(filterName)) {
-        document.getElementById(id).href = window.location.href + '&&' + filterName + '=' + id;
+        document.getElementById(id).href = window.location.href + '&&' + filterName + '=' + value;
     } else {
         let re = new RegExp(filterName + '=\\w+');
-        document.getElementById(id).href = window.location.href.replace(re, filterName + '=' + id);
+        document.getElementById(id).href = window.location.href.replace(re, filterName + '=' + value);
     }
 }
 
@@ -44,7 +46,17 @@ function getDataFromDB(params) {
     let container = document.getElementsByClassName("categories")[0];
     db.collection("categories").get().then(renderCategoriesContainer.bind({container: container}));
     if (params['category'] != 'all_categories') {
-        db.collection(params['category']).orderBy("name").get().then(renderItems.bind({ category: params['category'] }));
+        if(params[filterPrice] && params[filterGender]) 
+            db.collection(params['category']).where("gender", "==", params[filterGender])
+                .orderBy("price", params[filterPrice]).get().then(renderItems.bind({ category: params['category'] }));
+        else if (params[filterPrice])
+            db.collection(params['category']).orderBy("price", params[filterPrice]).
+                get().then(renderItems.bind({ category: params['category'] }));
+        else if (params[filterGender])
+            db.collection(params['category']).where("gender", "==", params[filterGender])
+                .get().then(renderItems.bind({ category: params['category'] }));
+        else
+            db.collection(params['category']).orderBy("name").get().then(renderItems.bind({ category: params['category'] }));
     } else {
         db.collection('categories').get().then(searchInAllCategories);
     }
