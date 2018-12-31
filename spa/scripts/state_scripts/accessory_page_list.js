@@ -1,13 +1,36 @@
 export function initPage(params) {
     setAccesoryEventListeners();
-    getDataFromDB();
-    if (params['category'] != 'all_categories') {
-        db.collection(params['category']).orderBy("name").get().then(renderItems.bind({ category: params['category'] }));
-    }
+    getDataFromDB(params);
+    initFiltersURLs();
 }
 
 const unfilledHeartImgPath = 'url("./all_icons/circle_red_heart_30px.png")';
 const filledHeartImgPath = 'url("./all_icons/circle_red_heart_filled_30px.png")';
+
+function initFiltersURLs() {
+    addFiltersToURL("genderMan", "filterGender");
+    addFiltersToURL("genderWomen", "filterGender");
+    addFiltersToURL("priceAscending", "filterPrice");
+    addFiltersToURL("priceDescending", "filterPrice");
+}
+
+function addFiltersToURL(id, filterName) {
+    if (!window.location.href.includes(filterName)) {
+        document.getElementById(id).href = window.location.href + '&&' + filterName + '=' + id;
+    } else {
+        let re = new RegExp(filterName + '=\\w+');
+        document.getElementById(id).href = window.location.href.replace(re, filterName + '=' + id);
+    }
+}
+
+function searchInAllCategories(querySnapshot) {
+    querySnapshot.forEach((doc) => {
+        let categories = doc.data().categories;
+        for (let i in categories) {
+            db.collection(categories[i]).get().then(renderItems.bind({ category: categories[i] }));
+        }
+    });
+}
 
 function setAccesoryEventListeners() {
     document.getElementsByClassName("dropdown")[0].style.display = "none";
@@ -17,15 +40,22 @@ function setAccesoryEventListeners() {
     document.getElementsByClassName("userName")[0].addEventListener("mouseout", disableUserNameHover);
 }
 
-function getDataFromDB() {
+function getDataFromDB(params) {
     let container = document.getElementsByClassName("categories")[0];
     db.collection("categories").get().then(renderCategoriesContainer.bind({container: container}));
+    if (params['category'] != 'all_categories') {
+        db.collection(params['category']).orderBy("name").get().then(renderItems.bind({ category: params['category'] }));
+    } else {
+        db.collection('categories').get().then(searchInAllCategories);
+    }
 }
 
 function renderItems(querySnapshot) {
     let container = document.getElementsByClassName("accesoryItemsList")[0];
     querySnapshot.forEach((doc) => {
-        addAccessoryItem(container, doc, this.category);
+        if(doc.data().name) {
+            addAccessoryItem(container, doc, this.category);
+        }
     });
 }
 
