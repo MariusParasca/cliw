@@ -141,8 +141,6 @@ function setBarEventListeners() {
     document.getElementsByClassName("menuLink")[0].addEventListener("mouseout", disableMenuHover);
     document.getElementById("navUser").addEventListener("mouseover", maitainUserNameHover);
     document.getElementById("navUser").addEventListener("mouseout", disableUserNameHover);
-    document.getElementsByClassName("userName")[0].addEventListener("mouseover", maitainUserNameHover);
-    document.getElementsByClassName("userName")[0].addEventListener("mouseout", disableUserNameHover)
 }
 
 function maitainMenuHover() {
@@ -155,12 +153,10 @@ function disableMenuHover() {
 
 function maitainUserNameHover() {
     document.getElementById("navUser").style.backgroundImage = "url('./all_icons/user_avatar_gray_40px.png')"
-    document.getElementsByClassName("userName")[0].style.color = "#bbbbbb"
 }
 
 function disableUserNameHover() {
     document.getElementById("navUser").style.backgroundImage = "url('./all_icons/user_avatar_white_40px.png')"
-    document.getElementsByClassName("userName")[0].style.color = "#ffffff"
 }
 
 //db.collection("beanie").get().then(test);
