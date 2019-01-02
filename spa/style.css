@@ -424,7 +424,7 @@ footer {
 
 .itemHeart:hover {
 	background-image: url('./all_icons/circle_red_heart_filled_30px.png');
-	cursor: default;
+	cursor: pointer;
 }
 
 #itemHeartItemPage:hover {
@@ -573,6 +573,7 @@ footer {
 
 .favoritesHeart:hover {
 	background-image: url('./all_icons/circle_red_heart_30px.png');
+	cursor: pointer;
 }
 
 .likeAccessory {

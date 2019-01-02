@@ -10,7 +10,6 @@ export function initPage(params) {
     document.getElementById("itemHeartItemPage").addEventListener("click", toggleFavoriteItemOnItemPage);
     document.getElementsByClassName("addToCart")[0].addEventListener("click", storeInSeasonStorageItemCart);
     setBarEventListeners();
-    initObserver();
     initFavoriteItem(params);
     getAndRenderCategories();
 }
@@ -30,11 +29,11 @@ const WEB_CAM_TIMEOUT = 250;
 const CURRENCY = "$";
 
 var imageConfig = {
-    src: './images_with_no_background/red_hat_no_bkgd.png',
-    filterX: 0,
-    filterY: -0.75,
-    filterWidth: 1.1,
-    filterHeight: 1.2
+    src: './images_with_no_background/red_hat.png',
+    filterX: -0.1,
+    filterY: -0.8,
+    filterWidth: 1.2,
+    filterHeight: 1.3
 };
 
 // global variables used
@@ -294,6 +293,8 @@ function disableHatImgHover() {
 }
 
 function changeToWebCam() {
+    initObserver();
+
     document.getElementById("mainItemPage").style.display = "none";
     document.getElementById("mainWebcamPage").style.display = "flex";
 
@@ -413,6 +414,7 @@ function checkAndDisableWebcam(mutation) {
         if ((mutation[0].addedNodes[0] !== undefined) && (!mutation[0].addedNodes[0].classList.contains('flash'))) {
             stopStreamedVideo(window.videoWebCam);
             window.observer.disconnect();
+            window.videoWebCam = null;
         }
     }
 }
@@ -426,7 +428,9 @@ function backToItemPage() {
 
 function stopStreamedVideo(videoElem) {
     let stream = videoElem.srcObject;
-    let tracks = stream.getTracks();
-    tracks.forEach(track => track.stop());
-    videoElem.srcObject = null;
+    if (stream !== null) {
+        let tracks = stream.getTracks();
+        tracks.forEach(track => track.stop());
+        videoElem.srcObject = null;
+    }
 }
