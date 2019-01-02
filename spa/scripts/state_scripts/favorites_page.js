@@ -1,4 +1,4 @@
-export function initPage(params) { 
+export function initPage(params) {
     addFavoriteItems();
     setBarEventListeners();
     getAndRenderCategories();
@@ -7,8 +7,10 @@ export function initPage(params) {
 function addFavoriteItems() {
     let localKeys = Object.keys(localStorage);
     let container = document.getElementsByClassName("favoritesItemsList")[0];
+    let foundFavorites = false;
     for (let localKey of localKeys) {
         if (localKey.includes(FAVORITE)) {
+            foundFavorites = true;
             let data = localStorage[localKey].split(":");
             db.collection(data[0]).where("name", "==", data[1])
                 .limit(1).get().then(function (querySnapshot) {
@@ -17,6 +19,13 @@ function addFavoriteItems() {
                     });
                 }.bind({ category: data[0] }));
         }
+    }
+    if (!foundFavorites) {
+        let messageDiv = document.createElement("div");
+        messageDiv.classList += 'messageDiv';
+        messageDiv.innerText = 'Your favorite accessories will be shown here \n \
+                            Click on the small heart to add them';
+        container.appendChild(messageDiv);
     }
 }
 
