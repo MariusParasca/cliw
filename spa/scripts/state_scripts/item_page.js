@@ -167,7 +167,23 @@ const filledHeartImgPath = 'url("./all_icons/circle_red_heart_filled_50px.png")'
 function storeInSeasonStorageItemCart() {
     let price = document.getElementById("price").innerText.match(/\d+/)[0];
     let img = document.getElementsByClassName("itemImage")[0];
-    sessionStorage.setItem("cart_" + img.alt, img.alt + ":" + price);
+
+    let sessionKeys = Object.keys(sessionStorage);
+    let lastItemCartId = -1;
+    for (let sessionKey of sessionKeys) {
+        if (sessionKey.includes(CART)) {
+            let itemCartId = +sessionKey.split("_")[1];
+            if (itemCartId > lastItemCartId) {
+                lastItemCartId = itemCartId;
+            }
+        }
+    }
+    if (lastItemCartId === -1) {
+        lastItemCartId = 0;
+    } else {
+        lastItemCartId++;
+    }
+    sessionStorage.setItem("cart_" + lastItemCartId + "_" + img.alt, img.alt + ":" + price);
 }
 
 function initFavoriteItem(params) {

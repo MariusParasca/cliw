@@ -1710,7 +1710,7 @@ footer {
 	margin-bottom: 20px;
 }
 
-.checkOutButton {
+#checkOutButton {
 	position: relative;
 	width: 200px;
 	height: 43px;
@@ -1725,7 +1725,7 @@ footer {
 	border-radius: 3px;
 }
 
-.checkOutButton:hover {
+#checkOutButton:hover {
 	color: #afb2b7;
 }
 
@@ -1794,7 +1794,7 @@ footer {
 		margin-bottom: 20px;
 	}
 
-	.checkOutButton {
+	#checkOutButton {
 		width: 140px;
 		height: 43px;
 		font-size: 15px;

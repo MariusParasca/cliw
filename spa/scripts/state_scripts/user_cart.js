@@ -1,31 +1,43 @@
-export function initPage(params) { 
+export function initPage(params) {
     iniItemstFromSeasonStorage();
     setBarEventListeners();
     getAndRenderCategories();
+    document.getElementById("checkOutButton").addEventListener("click", checkOutAction);
 }
 
 var totalPrice = 0;
+
+function checkOutAction() {
+    alert("This feature will be coming soon \n\nThank you for choosing HEGE");
+}
 
 function iniItemstFromSeasonStorage() {
     totalPrice = 0;
     let localKeys = Object.keys(sessionStorage);
     let container = document.getElementsByClassName("usersOrder")[0];
     let firstContainerChild = container.children[0];
+    let foundItems = false;
     for (let localKey of localKeys) {
         if (localKey.includes(CART)) {
+            foundItems = true;
             let data = sessionStorage[localKey].split(":");
             totalPrice += parseInt(data[2]);
-            addItemToUserCart(container, firstContainerChild, data[0], data[1]);
-        }     
+            let itemCartId = +localKey.split("_")[1];
+            addItemToUserCart(container, firstContainerChild, data[0], data[1], itemCartId);
+        }
     }
-    document.getElementsByClassName("totalPrice")[0].innerText = totalPrice;
+    if (!foundItems) {
+        showEmptyMessage();
+    } else {
+        document.getElementsByClassName("totalPrice")[0].innerText = totalPrice;
+    }
 }
 
-function addItemToUserCart(container, firstContainerChild, category, title) {
+function addItemToUserCart(container, firstContainerChild, category, title, itemCartId) {
     db.collection(category).where("name", "==", title)
         .limit(1).get().then(function (querySnapshot) {
             querySnapshot.forEach((doc) => {
-                renderItemsToUserCart(doc, this.container, this.firstContainerChild, this.category)
+                renderItemsToUserCart(doc, this.container, this.firstContainerChild, this.category, itemCartId)
             });
         }.bind({ category: category, container: container, firstContainerChild: firstContainerChild })
         );
@@ -45,10 +57,12 @@ function deletItemFromCart(event) {
         let currentCartItem = currentElement.parentElement.parentElement;
         cartItemsContainer.removeChild(currentCartItem)
     }
-    
+    if (totalPrice === 0) {
+        showEmptyMessage();
+    }
 }
 
-function renderItemsToUserCart(doc, container, firstContainerChild, category) {
+function renderItemsToUserCart(doc, container, firstContainerChild, category, itemCartId) {
     let div = document.createElement('DIV');
     div.setAttribute("class", "cartSingleOrder");
     container.insertBefore(div, firstContainerChild);
@@ -66,7 +80,7 @@ function renderItemsToUserCart(doc, container, firstContainerChild, category) {
     let span = document.createElement('SPAN');
     span.setAttribute("class", "deleteOrder");
     span.addEventListener('click', deletItemFromCart);
-    span.setAttribute("id", img.alt);
+    span.setAttribute("id", itemCartId + "_" + img.alt);
     interiorDiv.appendChild(span);
 
     let title = document.createElement('P');
@@ -78,4 +92,15 @@ function renderItemsToUserCart(doc, container, firstContainerChild, category) {
     price.setAttribute("class", "orderPrice");
     price.innerHTML = doc.data().price;
     interiorDiv.appendChild(price);
+}
+
+function showEmptyMessage() {
+    let orderTotalElement = document.getElementsByClassName("orderTotal")[0];
+    orderTotalElement.style.display = "none";
+    let usersOrderElement = orderTotalElement.parentElement;
+
+    let messageDiv = document.createElement("div");
+    messageDiv.classList += 'messageDiv';
+    messageDiv.innerText = 'Your desired accessories will wait for you here';
+    usersOrderElement.appendChild(messageDiv);
 }
