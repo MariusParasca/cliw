@@ -265,20 +265,26 @@ function renderRecomandation(doc, category) {
 }
 
 function addMainItem(imageContainer, dataContainer, doc, category) {
+    let parrentDataContainer = dataContainer.parentElement;
+    parrentDataContainer.setAttribute("imtepscope", "");
+    parrentDataContainer.setAttribute("itemptype", "https://schema.org/Offer");
     let img = document.createElement('IMG');
     img.setAttribute("class", "itemImage");
     img.setAttribute("alt", category + ":" + doc.data().name);
+    img.setAttribute("itemprop", "image");
     renderImage(img, doc);
     imageContainer.appendChild(img)
 
     let childRef = dataContainer.firstChild;
     let title = document.createElement('p');
     title.setAttribute("id", "title");
+    title.setAttribute("itemprop", "name");
     title.innerText = doc.data().name;
     dataContainer.insertBefore(title, childRef);
 
     let price = document.createElement('p');
     price.setAttribute("id", "price");
+    price.setAttribute("itemprop", "price");
     price.innerText = "Price: " + doc.data().price + " " + CURRENCY;
     dataContainer.insertBefore(price, childRef);
 
@@ -287,6 +293,7 @@ function addMainItem(imageContainer, dataContainer, doc, category) {
     dataContainer.insertBefore(p, childRef);
 
     let description = document.createElement('p');
+    description.setAttribute("itemprop", "description");
     description.innerText = doc.data().description;
     dataContainer.insertBefore(description, childRef);
 

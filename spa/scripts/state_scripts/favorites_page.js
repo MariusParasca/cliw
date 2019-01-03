@@ -44,6 +44,8 @@ function deleteFavoriteItem(event) {
 function addFavoriteItem(container, doc, category) {
     let div = document.createElement('DIV');
     div.setAttribute("class", "favoritesItem");
+    div.setAttribute("imtepscope", "");
+    div.setAttribute("itemptype", "https://schema.org/Offer");
     container.appendChild(div);
 
     let a = document.createElement('A');
@@ -54,11 +56,13 @@ function addFavoriteItem(container, doc, category) {
     let img = document.createElement('IMG');
     img.setAttribute("class", "favoritesImage");
     img.setAttribute("alt", category + ":" + doc.data().name);
+    img.setAttribute("itemprop", "image");
     a.appendChild(img);
     renderImage(img, doc);
 
     let p = document.createElement('P');
     p.setAttribute("class", "favoritesTitle");
+    p.setAttribute("itemprop", "name");
     p.innerHTML = doc.data().name;
     a.appendChild(p);
 
@@ -70,6 +74,7 @@ function addFavoriteItem(container, doc, category) {
 
     let price = document.createElement('P');
     price.setAttribute("class", "favoritesPrice");
+    price.setAttribute("itemprop", "price");
     price.innerHTML = doc.data().price;
     div.appendChild(price);
 }

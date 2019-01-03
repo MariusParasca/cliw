@@ -65,17 +65,21 @@ function deletItemFromCart(event) {
 function renderItemsToUserCart(doc, container, firstContainerChild, category, itemCartId) {
     let div = document.createElement('DIV');
     div.setAttribute("class", "cartSingleOrder");
+    div.setAttribute("imtepscope", "");
+    div.setAttribute("itemptype", "https://schema.org/Offer");
     container.insertBefore(div, firstContainerChild);
 
     let img = document.createElement('IMG');
     img.setAttribute("class", "orderImage");
     img.setAttribute("alt", category + ":" + doc.data().name);
+    img.setAttribute("itemprop", "image");
     div.appendChild(img);
     renderImage(img, doc);
 
     let interiorDiv = document.createElement('DIV');
     div.appendChild(interiorDiv);
     interiorDiv.setAttribute("class", "orderDescription");
+    div.setAttribute("itemprop", "description");
 
     let span = document.createElement('SPAN');
     span.setAttribute("class", "deleteOrder");
@@ -85,11 +89,13 @@ function renderItemsToUserCart(doc, container, firstContainerChild, category, it
 
     let title = document.createElement('P');
     title.setAttribute("class", "orderTitle");
+    title.setAttribute("itemprop", "name");
     title.innerHTML = doc.data().name;
     interiorDiv.appendChild(title);
 
     let price = document.createElement('P');
     price.setAttribute("class", "orderPrice");
+    price.setAttribute("itemprop", "price");
     price.innerHTML = doc.data().price;
     interiorDiv.appendChild(price);
 }
