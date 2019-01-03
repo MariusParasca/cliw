@@ -1,16 +1,16 @@
 // filterX_filterY_filterWidth_filterHeight
 
-beret.png 				: -0.1_-0.8_1.2_1.3 
-black_cowboy_hat.png 	: -0.4_-1.0_1.7_1.6
-black_hat.png 			: -0.1_-0.6_1.2_0.9
-blue_bobble_hat.png 	: -0.2_-0.85_1.35_1.1
-blue_sun_hat.png 		: -0.5_-0.6_2.0_1.2
-bowler_hat.png 			: 0_-0.7_1.1_1.0
-brown_cowboy_hat.png 	: -0.3_-1.0_1.7_1.6
-fedora.png 				: -0.3_-1.4_1.7_2.2
-flat_cap.png 			: -0.2_-1.1_1.5_1.8
-grey_cap.png 			: 0_-0.6_1.2_1.1
-grey_hat.png 			: -0.1_-0.6_1.2_0.9
-red_hat.png 			: -0.1_-0.8_1.2_1.3
-navy_cap.png 			: -0.5_-0.9_1.7_1.6
-warm_hat.png 			: -0.35_-0.75_1.7_2.2
+beret.png 				: -0.1_-0.8_1.2_1.3 #
+black_cowboy_hat.png 	: -0.4_-1.0_1.7_1.6 #
+black_hat.png 			: -0.1_-0.6_1.2_0.9 #
+blue_bobble_hat.png 	: -0.2_-0.85_1.35_1.1 #
+blue_sun_hat.png 		: -0.5_-0.6_2.0_1.2 #
+bowler_hat.png 			: 0_-0.7_1.1_1.0 #
+brown_cowboy_hat.png 	: -0.3_-1.0_1.7_1.6 #
+fedora.png 				: -0.3_-1.4_1.7_2.2 #
+flat_cap.png 			: -0.2_-1.1_1.5_1.8 #
+grey_cap.png 			: 0_-0.6_1.2_1.1 #
+grey_hat.png 			: -0.1_-0.6_1.2_0.9 #
+red_hat.png 			: -0.1_-0.8_1.2_1.3 #
+navy_cap.png 			: -0.5_-0.9_1.7_1.6 #
+warm_hat.png 			: -0.35_-0.75_1.7_2.2 #

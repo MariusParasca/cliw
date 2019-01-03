@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
+    <script src="scripts/app.js"></script>
+    <script>
+
+        function deleteFirstItemInLastAdded() {
+            db.collection("last_added").orderBy("added_date", "asc").limit(1).get().then(
+                (querySnapshot) => {
+                    querySnapshot.forEach((doc) => {
+                        var d = String(doc.id);
+                        db.collection("last_added").doc(d).delete().then(function () {
+                            console.log("Document successfully deleted!");
+                        }).catch(function (error) {
+                            console.error("Error removing document: ", error);
+                        });
+                    })
+                }
+            );
+        }
+        
+        function addItem(category, added_date, color, description, gender, img_name, name, parameters, price, season) {
+            let itemData = { added_date: added_date, color: color, description: description, gender: gender,
+                img_name: img_name, name: name, parameters, price: price, season: season }
+            let lastAddedData = { added_date: added_date, category: category, img_name: img_name, name: name }
+
+            db.collection(category).doc().set(itemData).then(function () {
+                console.log("Document successfully written!");
+            }).catch(function (error) {
+                console.error("Error writing document: ", error);
+            });
+
+            deleteFirstItemInLastAdded();
+
+            db.collection("last_added").doc().set(lastAddedData).then(function () {
+                console.log("Document successfully written in last_added!");
+            }).catch(function (error) {
+                console.error("Error writing document(last_added): ", error);
+            });
+        }
+        //category, added_date, color, description, gender, img_name, name, 
+        //parameters, price, season
+        addItem(
+            "cowboy_hat",
+            new Date(),
+            "brown",
+            "",
+            "man",
+            "brown_cowboy_hat.jpg",
+            "Brown Cowboy Hat",
+            "-0.3_-1.0_1.7_1.6",
+            150,
+            ["summer", "spring", "fall"]
+        );
+        
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
