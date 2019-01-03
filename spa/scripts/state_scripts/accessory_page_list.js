@@ -1,35 +1,163 @@
 export function initPage(params) {
     setAccesoryEventListeners();
     getDataFromDB(params);
-    initFiltersURLs();
+    // initFiltersURLs();
+    initFilters()
 }
 
 const unfilledHeartImgPath = 'url("./all_icons/circle_red_heart_30px.png")';
 const filledHeartImgPath = 'url("./all_icons/circle_red_heart_filled_30px.png")';
-const filterGender = 'filterGender';
-const filterPrice = 'filterPrice';
+const filterGender = 'gender';
+const filterPrice = 'price';
+let allItems = [];
 
-function initFiltersURLs() {
-    addFiltersToURL("genderMan", filterGender, "man");
-    addFiltersToURL("genderWomen", filterGender, "women");
-    addFiltersToURL("priceAscending", filterPrice, "asc");
-    addFiltersToURL("priceDescending", filterPrice, "desc");
+var filters = {
+    color: null,
+    gender: null,
+    price: null
+};
+
+function initFilters() {
+    addFilterListener("genderMan", filterGender, "man");
+    addFilterListener("genderWoman", filterGender, "woman");
+    addFilterListener("priceAscending", filterPrice, "asc");
+    addFilterListener("priceDescending", filterPrice, "desc");
+
+    addColorFilters();
+
+    document.getElementById("resetAll").addEventListener('click', resetFilters);
 }
 
-function addFiltersToURL(id, filterName, value) {
-    if (!window.location.href.includes(filterName)) {
-        document.getElementById(id).href = window.location.href + '&&' + filterName + '=' + value;
-    } else {
-        let re = new RegExp(filterName + '=\\w+');
-        document.getElementById(id).href = window.location.href.replace(re, filterName + '=' + value);
+// function initFiltersURLs() {
+//     addFiltersToURL("genderMan", filterGender, "man");
+//     addFiltersToURL("genderWoman", filterGender, "woman");
+//     addFiltersToURL("priceAscending", filterPrice, "asc");
+//     addFiltersToURL("priceDescending", filterPrice, "desc");
+
+//     addColorFilters();
+// }
+
+function addColorFilters() {
+    let colorChoise = document.getElementById('colorChoice');
+    colorChoise.style.paddingLeft = '15px';
+    colorChoise.style.display = 'flex';
+
+    for (let colorName in COLORS) {
+        let colorDiv = document.createElement('div');
+        colorDiv.style.backgroundColor = COLORS[colorName];
+        colorDiv.style.height = '15px';
+        colorDiv.style.width = '15px';
+        colorDiv.style.margin = '3px';
+
+        let colorAnchr = document.createElement('a');
+        colorAnchr.id = COLORS[colorName];
+        colorAnchr.style.height = '15px';
+        colorAnchr.style.display = 'block';
+        colorAnchr.title = colorName;
+
+        colorDiv.appendChild(colorAnchr);
+        colorChoise.appendChild(colorDiv);
+
+        addFilterListener(COLORS[colorName], 'color', colorName);
     }
 }
+
+function addFilterListener(elementId, filterName, filterValue) {
+    let targetedElement = document.getElementById(elementId);
+    targetedElement.addEventListener('click', () => {
+        for (let child of targetedElement.parentNode.parentNode.children) {
+            child.firstChild.style.borderStyle = 'none';
+        }
+        targetedElement.style.borderStyle = 'none none solid none';
+        targetedElement.style.borderColor = 'white';
+        filters[filterName] = filterValue;
+        applyFilters();
+    });
+}
+
+function applyFilters() {
+    let accessoriesElems = document.getElementsByClassName('accessoryTitle');
+    for (let elem of accessoriesElems) {
+        let hasColor = true; 
+        let hasGender = true;
+        if (filters.color !== null) {
+            hasColor = allItems.find(item => item.name === elem.innerHTML).color === filters.color;
+        }
+        if (filters.gender !== null) {
+            hasGender = allItems.find(item => item.name === elem.innerHTML).gender === filters.gender;
+        }
+        
+        if (hasColor && hasGender) {
+            elem.parentNode.parentNode.style.display = 'block';
+        } else {
+            elem.parentNode.parentNode.style.display = 'none';
+        }
+    }
+
+    if (filters.price !== null) {
+        orderItems();
+    }
+}
+
+function orderItems() {
+    allItems.sort(comparePrice);
+    if (filters.price === 'desc') {
+        allItems.reverse();
+    }
+    let accessoriesElems = document.getElementsByClassName('accessoryTitle');
+    for (let elem of accessoriesElems) {
+        let itemIndex = allItems.findIndex(item => item.name === elem.innerHTML);
+        elem.parentNode.parentNode.style.order = itemIndex;
+    }
+}
+
+function comparePrice(itemA, itemB) {
+    if (itemA.price < itemB.price) {
+        return -1;
+    }
+    if (itemA.price > itemB.price) {
+        return 1;
+    }
+    return 0
+}
+
+function resetFilters() {
+    let accessoriesElems = document.getElementsByClassName('accessoryTitle');
+    for (let elem of accessoriesElems) {
+        elem.parentNode.parentNode.style.display = 'block';
+    }
+    
+    document.getElementById('genderMan').style.borderStyle = 'none';
+    document.getElementById('genderWoman').style.borderStyle = 'none';
+    document.getElementById('priceAscending').style.borderStyle = 'none';
+    document.getElementById('priceDescending').style.borderStyle = 'none';
+    
+    let colorChoise = document.getElementById('colorChoice');
+    for (let child of colorChoise.children) {
+        child.firstChild.style.borderStyle = 'none';
+    }
+
+    filters = {
+        color: null,
+        gender: null,
+        price: null
+    };
+}
+
+// function addFiltersToURL(id, filterName, value) {
+//     if (!window.location.href.includes(filterName)) {
+//         document.getElementById(id).href = window.location.href + '&&' + filterName + '=' + value;
+//     } else {
+//         let re = new RegExp(filterName + '=\\w+');
+//         document.getElementById(id).href = window.location.href.replace(re, filterName + '=' + value);
+//     }
+// }
 
 function searchInAllCategories(querySnapshot) {
     querySnapshot.forEach((doc) => {
         let categories = doc.data().categories;
         for (let i in categories) {
-            db.collection(categories[i]).get().then(renderItems.bind({ category: categories[i] }));
+            db.collection(categories[i]).orderBy("name").get().then(renderItems.bind({ category: categories[i] }));
         }
     });
 }
@@ -41,29 +169,41 @@ function setAccesoryEventListeners() {
 }
 
 function getDataFromDB(params) {
+    allItems.length = 0;
     let container = document.getElementsByClassName("categories")[0];
-    db.collection("categories").get().then(renderCategoriesContainer.bind({container: container}));
+    db.collection("categories").get().then(renderCategoriesContainer.bind({ container: container }));
     if (params['category'] != 'all_categories') {
-        if(params[filterPrice] && params[filterGender]) 
-            db.collection(params['category']).where("gender", "==", params[filterGender])
-                .orderBy("price", params[filterPrice]).get().then(renderItems.bind({ category: params['category'] }));
-        else if (params[filterPrice])
-            db.collection(params['category']).orderBy("price", params[filterPrice]).
-                get().then(renderItems.bind({ category: params['category'] }));
-        else if (params[filterGender])
-            db.collection(params['category']).where("gender", "==", params[filterGender])
-                .get().then(renderItems.bind({ category: params['category'] }));
-        else
-            db.collection(params['category']).orderBy("name").get().then(renderItems.bind({ category: params['category'] }));
+        db.collection(params['category']).orderBy("name").get().then(renderItems.bind({ category: params['category'] }));
+        
+        let titleHeading = params['category'].replace('_', ' ');
+        titleHeading = titleHeading[0].toUpperCase() + titleHeading.slice(1);
+        document.getElementsByClassName("accesoryListHeading")[0].innerText = titleHeading;
+
+        // if (params[filterPrice] && params[filterGender])
+        //     db.collection(params['category']).where("gender", "==", params[filterGender])
+        //         .orderBy("price", params[filterPrice]).get().then(renderItems.bind({ category: params['category'] }));
+        // else if (params[filterPrice])
+        //     db.collection(params['category']).orderBy("price", params[filterPrice]).
+        //         get().then(renderItems.bind({ category: params['category'] }));
+        // else if (params[filterGender])
+        //     db.collection(params['category']).where("gender", "==", params[filterGender])
+        //         .get().then(renderItems.bind({ category: params['category'] }));
+        // else if (params['color'])
+        //     db.collection(params['category']).where("color", "==", params['color'])
+        //         .get().then(renderItems.bind({ category: params['category'] }));
+        // else
+        //     db.collection(params['category']).orderBy("name").get().then(renderItems.bind({ category: params['category'] }));
     } else {
         db.collection('categories').get().then(searchInAllCategories);
+        document.getElementsByClassName("accesoryListHeading")[0].innerText = "All accessories";
     }
 }
 
 function renderItems(querySnapshot) {
     let container = document.getElementsByClassName("accesoryItemsList")[0];
     querySnapshot.forEach((doc) => {
-        if(doc.data().name) {
+        if (doc.data().name) {
+            allItems.push(doc.data());
             addAccessoryItem(container, doc, this.category);
         }
     });
@@ -78,7 +218,7 @@ function toggleFavoriteItemOnAccessoryListPage(event) {
 function initIfItemLoved(key, tag, background) {
     let localKeys = Object.keys(localStorage);
     for (let localKey of localKeys) {
-        if (localKey ==  FAVORITE + key) {
+        if (localKey == FAVORITE + key) {
             tag.style.backgroundImage = background;
         }
     }
@@ -124,6 +264,3 @@ function addAccessoryItem(container, doc, category) {
     price.innerHTML = doc.data().price;
     div.appendChild(price);
 }
-
-
-
