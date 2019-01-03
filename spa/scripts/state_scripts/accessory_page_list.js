@@ -174,6 +174,11 @@ function getDataFromDB(params) {
     db.collection("categories").get().then(renderCategoriesContainer.bind({ container: container }));
     if (params['category'] != 'all_categories') {
         db.collection(params['category']).orderBy("name").get().then(renderItems.bind({ category: params['category'] }));
+        
+        let titleHeading = params['category'].replace('_', ' ');
+        titleHeading = titleHeading[0].toUpperCase() + titleHeading.slice(1);
+        document.getElementsByClassName("accesoryListHeading")[0].innerText = titleHeading;
+
         // if (params[filterPrice] && params[filterGender])
         //     db.collection(params['category']).where("gender", "==", params[filterGender])
         //         .orderBy("price", params[filterPrice]).get().then(renderItems.bind({ category: params['category'] }));
@@ -190,6 +195,7 @@ function getDataFromDB(params) {
         //     db.collection(params['category']).orderBy("name").get().then(renderItems.bind({ category: params['category'] }));
     } else {
         db.collection('categories').get().then(searchInAllCategories);
+        document.getElementsByClassName("accesoryListHeading")[0].innerText = "All accessories";
     }
 }
 
@@ -258,6 +264,3 @@ function addAccessoryItem(container, doc, category) {
     price.innerHTML = doc.data().price;
     div.appendChild(price);
 }
-
-
-
