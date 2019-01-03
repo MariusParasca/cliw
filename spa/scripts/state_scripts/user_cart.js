@@ -68,10 +68,17 @@ function renderItemsToUserCart(doc, container, firstContainerChild, category, it
     container.insertBefore(div, firstContainerChild);
 
     let img = document.createElement('IMG');
-    img.setAttribute("class", "orderImage");
     img.setAttribute("alt", category + ":" + doc.data().name);
-    div.appendChild(img);
+    img.style.height = "200px";
+    img.style.width = "200px";
+    img.style.visibility = "hidden";
+    img.onload = () => {
+        img.style.visibility = "visible";
+        img.style.objectFit = "contain";
+        img.setAttribute("class", "orderImage");
+    }
     renderImage(img, doc);
+    div.appendChild(img);
 
     let interiorDiv = document.createElement('DIV');
     div.appendChild(interiorDiv);

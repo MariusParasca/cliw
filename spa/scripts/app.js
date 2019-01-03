@@ -32,8 +32,15 @@ function addElementsToContainer(container, doc, category) {
     div.appendChild(a);
 
     let img = document.createElement('IMG');
-    img.setAttribute("class", "lastAccessoryImage");
     img.setAttribute("alt", category + ":" + doc.data().name);
+    img.style.height = "200px";
+    img.style.width = "200px";
+    img.style.visibility = "hidden";
+    img.onload = () => {
+        img.style.visibility = "visible";
+        img.style.objectFit = "contain";
+        img.setAttribute("class", "lastAccessoryImage");
+    }
     renderImage(img, doc);
 
     a.appendChild(img);

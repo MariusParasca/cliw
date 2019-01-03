@@ -266,8 +266,13 @@ function renderRecomandation(doc, category) {
 
 function addMainItem(imageContainer, dataContainer, doc, category) {
     let img = document.createElement('IMG');
-    img.setAttribute("class", "itemImage");
     img.setAttribute("alt", category + ":" + doc.data().name);
+    img.style.visibility = "hidden";
+    img.onload = () => {
+        img.style.visibility = "visible";
+        img.style.objectFit = "contain";
+        img.setAttribute("class", "itemImage");
+    }
     renderImage(img, doc);
     imageContainer.appendChild(img)
 
