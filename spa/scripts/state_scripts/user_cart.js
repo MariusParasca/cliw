@@ -74,15 +74,7 @@ function renderItemsToUserCart(doc, container, firstContainerChild, category, it
     img.setAttribute("itemprop", "image");
     div.appendChild(img);
 
-    img.style.height = "200px";
-    img.style.width = "200px";
-    img.style.visibility = "hidden";
-    img.onload = () => {
-        img.style.visibility = "visible";
-        img.style.objectFit = "contain";
-        img.setAttribute("class", "orderImage");
-    }
-
+    waitImage(img, "200px", "200px", "orderImage");
     renderImage(img, doc);
     div.appendChild(img);
 

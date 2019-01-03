@@ -279,13 +279,7 @@ function addMainItem(imageContainer, dataContainer, doc, category) {
     img.setAttribute("alt", category + ":" + doc.data().name);
     img.setAttribute("itemprop", "image");
 
-    img.style.visibility = "hidden";
-    img.onload = () => {
-        img.style.visibility = "visible";
-        img.style.objectFit = "contain";
-        img.setAttribute("class", "itemImage");
-    }
-
+    waitImage(img, null, null, "itemImage");
     renderImage(img, doc);
     imageContainer.appendChild(img)
 

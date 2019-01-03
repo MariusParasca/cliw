@@ -48,15 +48,7 @@ function addElementsToContainer(container, doc, category) {
     img.setAttribute("alt", category + ":" + doc.data().name);
     img.setAttribute("itemprop", "image");
 
-    img.style.height = "200px";
-    img.style.width = "200px";
-    img.style.visibility = "hidden";
-    img.onload = () => {
-        img.style.visibility = "visible";
-        img.style.objectFit = "contain";
-        img.setAttribute("class", "lastAccessoryImage");
-    }
-
+    waitImage(img, '200px', '200px', "lastAccessoryImage");
     renderImage(img, doc);
 
     a.appendChild(img);
@@ -66,6 +58,21 @@ function addElementsToContainer(container, doc, category) {
     p.innerHTML = doc.data().name;
     a.appendChild(p);
 }
+
+function waitImage(imgElem, height, width, className) {
+    if (height !== null) {
+        imgElem.style.height = height;
+    }
+    if (width !== null) {
+        imgElem.style.width = width;
+    }
+    imgElem.style.visibility = "hidden";
+    imgElem.onload = () => {
+        imgElem.style.visibility = "visible";
+        imgElem.style.objectFit = "contain";
+        imgElem.setAttribute("class", className);
+    }
+} 
 
 function renderImage(img, doc) {
     let imgPath = SITE_FOLDER + doc.data().img_name;

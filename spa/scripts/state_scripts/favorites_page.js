@@ -57,14 +57,8 @@ function addFavoriteItem(container, doc, category) {
     img.setAttribute("alt", category + ":" + doc.data().name);
     img.setAttribute("itemprop", "image");
     a.appendChild(img);
-    img.style.height = "250px";
-    img.style.width = "250px";
-    img.style.visibility = "hidden";
-    img.onload = () => {
-        img.style.visibility = "visible";
-        img.style.objectFit = "contain";
-        img.setAttribute("class", "favoritesImage");
-    }
+
+    waitImage(img, "250px", "250px", "favoritesImage");
     renderImage(img, doc);
 
     let p = document.createElement('P');
