@@ -1,8 +1,78 @@
 export function initPage(params) {
+    initPreferedColors();
     initLocalImages();
     initButtonActions();
     setBarEventListeners();
     getAndRenderCategories();
+}
+
+var userColorPreference
+
+function initPreferedColors() {
+    let parentElement = document.getElementsByClassName("userSettingsPane")[0];
+    
+    for (let colorName in COLORS) {
+        let colorChoiceDiv = document.createElement('div');
+        colorChoiceDiv.setAttribute('class', 'colorChoice');
+                
+        let colorDiv = document.createElement('div');
+        colorDiv.style.backgroundColor = COLORS[colorName];
+        colorDiv.setAttribute('class', 'colorDiv');
+
+        colorChoiceDiv.appendChild(colorDiv);
+
+        let tickElem = document.createElement('img');
+        tickElem.src = './all_icons/tick.png';
+        tickElem.setAttribute('class', 'tick');
+
+        let colorLabel = document.createElement('p');
+        colorLabel.innerText = colorName;
+        colorLabel.setAttribute('class', 'colorLabel');
+        
+        colorChoiceDiv.appendChild(colorLabel);
+
+        userColorPreference = localStorage.getItem('userColorPreference');
+        if (userColorPreference !== null) {
+            if (userColorPreference.includes(colorName)) {
+                tickElem.style.visibility = 'visible';
+            } else {
+                tickElem.style.visibility = 'hidden';
+            }
+        }
+        colorChoiceDiv.appendChild(tickElem);
+
+        colorDiv.addEventListener('mouseover', event => {
+            if (!userColorPreference.includes(colorName)) {
+                event.target.nextSibling.nextSibling.style.visibility = 'visible';
+            }
+        });
+        colorDiv.addEventListener('mouseout', event => {
+            if (!userColorPreference.includes(colorName)) {
+                event.target.nextSibling.nextSibling.style.visibility = 'hidden';
+            }
+        });
+        colorDiv.addEventListener('click', event => {
+            toggleColor(colorName, event);
+        });
+
+        parentElement.appendChild(colorChoiceDiv);
+    }
+}
+
+function toggleColor(colorName, event) {
+    if (userColorPreference !== null && userColorPreference.includes(colorName)) {
+        userColorPreference = userColorPreference.replace(colorName + ';', '');
+        event.target.nextSibling.nextSibling.style.visibility = 'hidden';
+    } else {
+        if (userColorPreference === null) {
+            userColorPreference = colorName + ';';    
+        } else {
+            userColorPreference += colorName + ';';    
+        }
+        event.target.nextSibling.nextSibling.style.visibility = 'visible';
+    }
+    localStorage.setItem('userColorPreference', userColorPreference);
+    userColorPreference = localStorage.getItem('userColorPreference');
 }
 
 function initLocalImages() {

@@ -634,6 +634,35 @@ footer {
 	margin-top: 5px;
 }
 
+.colorChoice {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100px;
+	width: 50px;
+	margin: 15px;
+}
+
+.colorDiv {
+	cursor: pointer;
+	height: 50px;
+	width: 50px;
+	margin-bottom: 5px;
+	border-radius: 50%;
+}
+
+.colorLabel {
+	margin: 0 auto;
+}
+
+.tick {
+	pointer-events: none;
+	position: relative;
+	visibility: hidden;
+	top: -62px;
+}
+
 .savedImages {
 	display: flex;
 	flex-direction: column;
