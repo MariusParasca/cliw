@@ -29,7 +29,7 @@ function iniItemstFromSeasonStorage() {
     if (!foundItems) {
         showEmptyMessage();
     } else {
-        document.getElementsByClassName("totalPrice")[0].innerText = totalPrice;
+        document.getElementsByClassName("totalPrice")[0].innerText = totalPrice + " " + CURRENCY;
     }
 }
 
@@ -97,7 +97,7 @@ function renderItemsToUserCart(doc, container, firstContainerChild, category, it
 
     let price = document.createElement('P');
     price.setAttribute("class", "orderPrice");
-    price.innerHTML = doc.data().price;
+    price.innerHTML = doc.data().price + " " + CURRENCY;
     interiorDiv.appendChild(price);
 }
 

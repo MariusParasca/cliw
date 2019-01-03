@@ -1,7 +1,6 @@
 export function initPage(params) {
     setAccesoryEventListeners();
     getDataFromDB(params);
-    // initFiltersURLs();
     initFilters()
 }
 
@@ -27,15 +26,6 @@ function initFilters() {
 
     document.getElementById("resetAll").addEventListener('click', resetFilters);
 }
-
-// function initFiltersURLs() {
-//     addFiltersToURL("genderMan", filterGender, "man");
-//     addFiltersToURL("genderWoman", filterGender, "woman");
-//     addFiltersToURL("priceAscending", filterPrice, "asc");
-//     addFiltersToURL("priceDescending", filterPrice, "desc");
-
-//     addColorFilters();
-// }
 
 function addColorFilters() {
     let colorChoise = document.getElementById('colorChoice');
@@ -144,15 +134,6 @@ function resetFilters() {
     };
 }
 
-// function addFiltersToURL(id, filterName, value) {
-//     if (!window.location.href.includes(filterName)) {
-//         document.getElementById(id).href = window.location.href + '&&' + filterName + '=' + value;
-//     } else {
-//         let re = new RegExp(filterName + '=\\w+');
-//         document.getElementById(id).href = window.location.href.replace(re, filterName + '=' + value);
-//     }
-// }
-
 function searchInAllCategories(querySnapshot) {
     querySnapshot.forEach((doc) => {
         let categories = doc.data().categories;
@@ -178,21 +159,6 @@ function getDataFromDB(params) {
         let titleHeading = params['category'].replace('_', ' ');
         titleHeading = titleHeading[0].toUpperCase() + titleHeading.slice(1);
         document.getElementsByClassName("accesoryListHeading")[0].innerText = titleHeading;
-
-        // if (params[filterPrice] && params[filterGender])
-        //     db.collection(params['category']).where("gender", "==", params[filterGender])
-        //         .orderBy("price", params[filterPrice]).get().then(renderItems.bind({ category: params['category'] }));
-        // else if (params[filterPrice])
-        //     db.collection(params['category']).orderBy("price", params[filterPrice]).
-        //         get().then(renderItems.bind({ category: params['category'] }));
-        // else if (params[filterGender])
-        //     db.collection(params['category']).where("gender", "==", params[filterGender])
-        //         .get().then(renderItems.bind({ category: params['category'] }));
-        // else if (params['color'])
-        //     db.collection(params['category']).where("color", "==", params['color'])
-        //         .get().then(renderItems.bind({ category: params['category'] }));
-        // else
-        //     db.collection(params['category']).orderBy("name").get().then(renderItems.bind({ category: params['category'] }));
     } else {
         db.collection('categories').get().then(searchInAllCategories);
         document.getElementsByClassName("accesoryListHeading")[0].innerText = "All accessories";
@@ -261,6 +227,6 @@ function addAccessoryItem(container, doc, category) {
 
     let price = document.createElement('P');
     price.setAttribute("class", "accesoryPrice");
-    price.innerHTML = doc.data().price;
+    price.innerHTML = doc.data().price + " " + CURRENCY;
     div.appendChild(price);
 }

@@ -30,8 +30,6 @@ const TRACKER_CONFIG = {
 }
 const WEB_CAM_TIMEOUT = 250;
 
-const CURRENCY = "$";
-
 // global variables used
 window.pageSizeMedia;
 window.videoWebCam;

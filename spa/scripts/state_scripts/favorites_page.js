@@ -77,7 +77,7 @@ function addFavoriteItem(container, doc, category) {
 
     let price = document.createElement('P');
     price.setAttribute("class", "favoritesPrice");
-    price.innerHTML = doc.data().price;
+    price.innerHTML = doc.data().price + " " + CURRENCY;
     div.appendChild(price);
 }
 

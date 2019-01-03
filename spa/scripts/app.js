@@ -30,6 +30,7 @@ const COLORS = {
     blue: '#325bb3',
     red: '#ec3a3a'
 }
+const CURRENCY = "$";
 
 function addElementsToContainer(container, doc, category) {
     let div = document.createElement('DIV');
