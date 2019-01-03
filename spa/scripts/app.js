@@ -19,8 +19,10 @@ const storage = firebase.storage();
 
 const SITE_FOLDER = 'site/';
 const WEB_FOLDER = 'web/';
+const WEBCAM_FOLDER = 'webcam/'
 const FAVORITE = "favorite_";
 const CART = "cart_";
+
 function addElementsToContainer(container, doc, category) {
     let div = document.createElement('DIV');
     container.appendChild(div);
@@ -34,9 +36,18 @@ function addElementsToContainer(container, doc, category) {
     div.appendChild(a);
 
     let img = document.createElement('IMG');
-    img.setAttribute("class", "lastAccessoryImage");
     img.setAttribute("alt", category + ":" + doc.data().name);
     img.setAttribute("itemprop", "image");
+
+    img.style.height = "200px";
+    img.style.width = "200px";
+    img.style.visibility = "hidden";
+    img.onload = () => {
+        img.style.visibility = "visible";
+        img.style.objectFit = "contain";
+        img.setAttribute("class", "lastAccessoryImage");
+    }
+
     renderImage(img, doc);
 
     a.appendChild(img);
@@ -113,16 +124,24 @@ function addHeartHoverStyle(mouseOnimgURL, mouseOutImgURL, container) {
     });
 }
 
-function toggleFavoriteItem(container, img, unfilledHeartImgPath, filledHeartImgPath) {
+function toggleFavoriteItem(container, img, unfilledHeartImgPath, filledHeartImgPath, secondContainer) {
     let isFavorite = localStorage.getItem(FAVORITE + img.alt);
     if (isFavorite == null) {
         container.style.backgroundImage = filledHeartImgPath;
         localStorage.setItem(FAVORITE + img.alt, img.alt);
-        addHeartHoverStyle(unfilledHeartImgPath, filledHeartImgPath, container)
+        addHeartHoverStyle(unfilledHeartImgPath, filledHeartImgPath, container);
+        if (secondContainer !== undefined) {
+            secondContainer.style.backgroundImage = filledHeartImgPath;
+            addHeartHoverStyle(unfilledHeartImgPath, filledHeartImgPath, secondContainer);
+        }
     } else {
         container.style.backgroundImage = unfilledHeartImgPath;
         localStorage.removeItem(FAVORITE + img.alt);
-        addHeartHoverStyle(filledHeartImgPath, unfilledHeartImgPath, container)
+        addHeartHoverStyle(filledHeartImgPath, unfilledHeartImgPath, container);
+        if (secondContainer !== undefined) {
+            secondContainer.style.backgroundImage = unfilledHeartImgPath;
+            addHeartHoverStyle(filledHeartImgPath, unfilledHeartImgPath, secondContainer);
+        }
     }
 }
 

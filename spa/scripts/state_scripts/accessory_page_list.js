@@ -95,9 +95,16 @@ function addAccessoryItem(container, doc, category) {
     div.appendChild(a);
 
     let img = document.createElement('IMG');
-    img.setAttribute("class", "accessoryImage");
     img.setAttribute("alt", category + ":" + doc.data().name);
     a.appendChild(img);
+    img.style.height = "250px";
+    img.style.width = "250px";
+    img.style.visibility = "hidden";
+    img.onload = () => {
+        img.style.visibility = "visible";
+        img.style.objectFit = "contain";
+        img.setAttribute("class", "accessoryImage");
+    }
     renderImage(img, doc);
 
     let p = document.createElement('P');

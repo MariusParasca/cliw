@@ -21,11 +21,7 @@ function addFavoriteItems() {
         }
     }
     if (!foundFavorites) {
-        let messageDiv = document.createElement("div");
-        messageDiv.classList += 'messageDiv';
-        messageDiv.innerText = 'Your favorite accessories will be shown here \n \
-                            Click on the small heart to add them';
-        container.appendChild(messageDiv);
+        showEmptyMessage();
     }
 }
 
@@ -38,6 +34,10 @@ function deleteFavoriteItem(event) {
         let favoriteItemsContainer = currentElement.parentElement.parentElement;
         let favoriteItem = currentElement.parentElement;
         favoriteItemsContainer.removeChild(favoriteItem)
+    }
+    let favoritesItemsListElement = document.getElementsByClassName("favoritesItemsList")[0];
+    if (favoritesItemsListElement.childElementCount === 0) {
+        showEmptyMessage();
     }
 }
 
@@ -54,10 +54,17 @@ function addFavoriteItem(container, doc, category) {
     div.appendChild(a);
 
     let img = document.createElement('IMG');
-    img.setAttribute("class", "favoritesImage");
     img.setAttribute("alt", category + ":" + doc.data().name);
     img.setAttribute("itemprop", "image");
     a.appendChild(img);
+    img.style.height = "250px";
+    img.style.width = "250px";
+    img.style.visibility = "hidden";
+    img.onload = () => {
+        img.style.visibility = "visible";
+        img.style.objectFit = "contain";
+        img.setAttribute("class", "favoritesImage");
+    }
     renderImage(img, doc);
 
     let p = document.createElement('P');
@@ -77,4 +84,13 @@ function addFavoriteItem(container, doc, category) {
     price.setAttribute("itemprop", "price");
     price.innerHTML = doc.data().price;
     div.appendChild(price);
+}
+
+function showEmptyMessage() {
+    let container = document.getElementsByClassName("favoritesItemsList")[0];
+    let messageDiv = document.createElement("div");
+    messageDiv.classList += 'messageDiv';
+    messageDiv.innerText = 'Your favorite accessories will be shown here \n \
+                            Click on the small heart to add them';
+    container.appendChild(messageDiv);
 }
