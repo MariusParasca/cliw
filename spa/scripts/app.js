@@ -36,6 +36,8 @@ function addElementsToContainer(container, doc, category) {
     let div = document.createElement('DIV');
     container.appendChild(div);
     div.setAttribute("class", "lastAccessoryAdded");
+    div.setAttribute("imtepscope", "");
+    div.setAttribute("itemptype", "https://schema.org/Offer");
 
     let a = document.createElement('A');
     a.setAttribute("class", "accessoryLink");
@@ -44,6 +46,8 @@ function addElementsToContainer(container, doc, category) {
 
     let img = document.createElement('IMG');
     img.setAttribute("alt", category + ":" + doc.data().name);
+    img.setAttribute("itemprop", "image");
+
     img.style.height = "200px";
     img.style.width = "200px";
     img.style.visibility = "hidden";
@@ -52,11 +56,13 @@ function addElementsToContainer(container, doc, category) {
         img.style.objectFit = "contain";
         img.setAttribute("class", "lastAccessoryImage");
     }
+
     renderImage(img, doc);
 
     a.appendChild(img);
     let p = document.createElement('P');
     p.setAttribute("class", "accessoryTitle");
+    p.setAttribute("itemprop", "name");
     p.innerHTML = doc.data().name;
     a.appendChild(p);
 }
