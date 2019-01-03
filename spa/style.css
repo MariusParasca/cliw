@@ -312,6 +312,7 @@ footer {
 }
 
 .filters > ul > li {
+	color: #7f8084;
 	list-style-type: none;
 }
 
@@ -343,6 +344,10 @@ footer {
 
 .filters > ul > li > a:hover, .filters > ul > li > ul > li > a:hover {
 	color: white;
+}
+
+.filters a {
+	cursor: pointer;
 }
 
 .accesoryList {

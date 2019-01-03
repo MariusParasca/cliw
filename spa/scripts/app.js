@@ -22,6 +22,14 @@ const WEB_FOLDER = 'web/';
 const WEBCAM_FOLDER = 'webcam/'
 const FAVORITE = "favorite_";
 const CART = "cart_";
+const COLORS = {
+    black: '#1b1b1c',
+    grey: '#69686e',
+    navy: '#293952',
+    brown: '#422218',
+    blue: '#325bb3',
+    red: '#ec3a3a'
+}
 
 function addElementsToContainer(container, doc, category) {
     let div = document.createElement('DIV');
