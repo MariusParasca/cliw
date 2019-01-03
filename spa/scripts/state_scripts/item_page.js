@@ -32,18 +32,11 @@ const WEB_CAM_TIMEOUT = 250;
 
 const CURRENCY = "$";
 
-var imageConfig = {
-    src: './images_with_no_background/red_hat.png',
-    filterX: -0.1,
-    filterY: -0.8,
-    filterWidth: 1.2,
-    filterHeight: 1.3
-};
-
 // global variables used
 window.pageSizeMedia;
 window.videoWebCam;
 window.observer;
+var imageConfig;
 
 function backToItemPageEnableHover() {
     document.getElementById("backToItem").style.backgroundImage = "url('./all_icons/back_simple_arrow_black_50px.png')";
@@ -151,7 +144,7 @@ function getCurrentSeason() {
     let firstWinter = mine[4];
 
     if (today >= firstSpring && today < firstSummer) {
-        return'spring';
+        return 'spring';
     } else if (today >= firstSummer && today < firstFall) {
         return 'summer';
     } else if (today >= firstFall && today < firstWinter) {
@@ -230,8 +223,8 @@ function getDataFromDb(params) {
             category: params["category"],
             imageContainer: imageContainer,
             dataContainer: dataContainer
-         }));
-    
+        }));
+
     // db.collection(params["category"])
     //     .limit(2).get().then(addItemSameCategory);
     db.collection("categories").get().then(searchInAllCategories);
@@ -255,11 +248,11 @@ function addMainItemPromise(querySnapshot) {
 function searchInAllCategories(querySnapshot) {
     querySnapshot.forEach((doc) => {
         let categories = doc.data().categories;
-        for (let i in categories )  {
-            if (numberOfRecomandations == MAX_NUMBER_OF_RECOMANDATIONS) 
+        for (let i in categories) {
+            if (numberOfRecomandations == MAX_NUMBER_OF_RECOMANDATIONS)
                 break;
-            db.collection(categories[i]).get().then(getItemRecomandations.bind({ category: categories[i]}));
-       }
+            db.collection(categories[i]).get().then(getItemRecomandations.bind({ category: categories[i] }));
+        }
     });
 }
 
@@ -311,6 +304,26 @@ function addMainItem(imageContainer, dataContainer, doc, category) {
     description.innerText = doc.data().description;
     dataContainer.insertBefore(description, childRef);
 
+    imageConfig = getWebCamConfig(doc);   
+}
+
+function getWebCamConfig(doc) {
+    let imageWebCamParam = doc.data().parameters.split('_');
+    imageWebCamParam = imageWebCamParam.map(param => +param);
+
+    let imageConfig = {
+        filterX: imageWebCamParam[0],
+        filterY: imageWebCamParam[1],
+        filterWidth: imageWebCamParam[2],
+        filterHeight: imageWebCamParam[3]
+    };
+
+    let imgPath = WEBCAM_FOLDER + doc.data().img_name.replace('jpg', 'png');
+    storage.ref(imgPath).getDownloadURL().then(
+        url => imageConfig.src = url
+    );
+
+    return imageConfig;
 }
 
 function enableCartImgHover() {
@@ -386,6 +399,7 @@ function initTracking(videoId, drawingCanvas, imageConfig) {
     tracking.track(videoId, tracker, { camera: true });
 
     const accessoryLayerImage = new Image();
+    accessoryLayerImage.crossOrigin = "Anonymous";
     accessoryLayerImage.src = imageConfig.src;
 
     tracker.on('track', function (event) {
@@ -426,7 +440,7 @@ function takePictureButton() {
     tempContext.translate(tempCanvas.width, 0);
     tempContext.scale(-1, 1);
     tempContext.drawImage(window.videoWebCam, 0, 0, videoWebCamWidth, videoWebCamHeight);
-    
+
     tempContext.translate(tempCanvas.width, 0);
     tempContext.scale(-1, 1);
     tempContext.drawImage(canvasAccessoryLayer, 0, 0);
@@ -438,16 +452,16 @@ function takePictureButton() {
 
 function initObserver() {
     window.observer = new MutationObserver(checkAndDisableWebcam);
-    
-    window.observer.observe(document, { 
+
+    window.observer.observe(document, {
         atributes: true,
         childList: true,
-        subtree: true 
+        subtree: true
     });
 }
 
 function checkAndDisableWebcam(mutation) {
-    if ((window.videoWebCam !== null) && (window.videoWebCam !== undefined)) {        
+    if ((window.videoWebCam !== null) && (window.videoWebCam !== undefined)) {
         if ((mutation[0].addedNodes[0] !== undefined) && (!mutation[0].addedNodes[0].classList.contains('flash'))) {
             stopStreamedVideo(window.videoWebCam);
             window.observer.disconnect();
