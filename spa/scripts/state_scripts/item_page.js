@@ -10,7 +10,9 @@ export function initPage(params) {
     document.getElementById("backToItem").addEventListener("mouseout", backToItemPageDisableHover);
     document.getElementById("takePhoto").addEventListener("click", takePictureButton);
     document.getElementById("itemHeartItemPage").addEventListener("click", toggleFavoriteItemOnItemPage);
+    document.getElementById("itemChoicesFavorites").addEventListener("click", toggleFavoriteItemOnItemPage);
     document.getElementsByClassName("addToCart")[0].addEventListener("click", storeInSeasonStorageItemCart);
+    document.getElementsByClassName("itemChoicesCart")[0].addEventListener("click", storeInSeasonStorageItemCart);
     setBarEventListeners();
     initFavoriteItem(params);
     getAndRenderCategories();
@@ -199,10 +201,13 @@ function storeInSeasonStorageItemCart() {
 function initFavoriteItem(params) {
     let localKeys = Object.keys(localStorage);
     let favoriteHeart = document.getElementById("itemHeartItemPage");
+    let favoriteHeartWebCam = document.getElementById("itemChoicesFavorites");
     for (let localKey of localKeys) {
         if (localKey == FAVORITE + params["category"] + ":" + params["name"]) {
             favoriteHeart.style.backgroundImage = filledHeartImgPath;
+            favoriteHeartWebCam.style.backgroundImage = filledHeartImgPath;
             addHeartHoverStyle(unfilledHeartImgPath, filledHeartImgPath, favoriteHeart);
+            addHeartHoverStyle(unfilledHeartImgPath, filledHeartImgPath, favoriteHeartWebCam);
             break;
         }
     }
@@ -210,8 +215,9 @@ function initFavoriteItem(params) {
 
 function toggleFavoriteItemOnItemPage() {
     let container = document.getElementById("itemHeartItemPage");
+    let containerSecond = document.getElementById("itemChoicesFavorites");
     let img = document.getElementsByClassName("itemImage")[0];
-    toggleFavoriteItem(container, img, unfilledHeartImgPath, filledHeartImgPath);
+    toggleFavoriteItem(container, img, unfilledHeartImgPath, filledHeartImgPath, containerSecond);
 }
 
 function getDataFromDb(params) {

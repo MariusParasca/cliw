@@ -116,16 +116,24 @@ function addHeartHoverStyle(mouseOnimgURL, mouseOutImgURL, container) {
     });
 }
 
-function toggleFavoriteItem(container, img, unfilledHeartImgPath, filledHeartImgPath) {
+function toggleFavoriteItem(container, img, unfilledHeartImgPath, filledHeartImgPath, secondContainer) {
     let isFavorite = localStorage.getItem(FAVORITE + img.alt);
     if (isFavorite == null) {
         container.style.backgroundImage = filledHeartImgPath;
         localStorage.setItem(FAVORITE + img.alt, img.alt);
-        addHeartHoverStyle(unfilledHeartImgPath, filledHeartImgPath, container)
+        addHeartHoverStyle(unfilledHeartImgPath, filledHeartImgPath, container);
+        if (secondContainer !== undefined) {
+            secondContainer.style.backgroundImage = filledHeartImgPath;
+            addHeartHoverStyle(unfilledHeartImgPath, filledHeartImgPath, secondContainer);
+        }
     } else {
         container.style.backgroundImage = unfilledHeartImgPath;
         localStorage.removeItem(FAVORITE + img.alt);
-        addHeartHoverStyle(filledHeartImgPath, unfilledHeartImgPath, container)
+        addHeartHoverStyle(filledHeartImgPath, unfilledHeartImgPath, container);
+        if (secondContainer !== undefined) {
+            secondContainer.style.backgroundImage = unfilledHeartImgPath;
+            addHeartHoverStyle(filledHeartImgPath, unfilledHeartImgPath, secondContainer);
+        }
     }
 }
 
