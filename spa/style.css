@@ -1394,10 +1394,6 @@ footer {
 	cursor: pointer;
 }
 
-#backToItem:hover {
-	background-image: url('./all_icons/back_simple_arrow_black_50px.png')
-}
-
 #webcam {
 	display: flex;
 	justify-content: center;

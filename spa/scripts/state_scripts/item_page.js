@@ -6,6 +6,8 @@ export function initPage(params) {
     document.getElementById("tryIt").addEventListener("mouseout", disableHatImgHover);
     document.getElementById("tryIt").addEventListener("click", changeToWebCam);
     document.getElementById("backToItem").addEventListener("click", backToItemPage);
+    document.getElementById("backToItem").addEventListener("mouseover", backToItemPageEnableHover);
+    document.getElementById("backToItem").addEventListener("mouseout", backToItemPageDisableHover);
     document.getElementById("takePhoto").addEventListener("click", takePictureButton);
     document.getElementById("itemHeartItemPage").addEventListener("click", toggleFavoriteItemOnItemPage);
     document.getElementsByClassName("addToCart")[0].addEventListener("click", storeInSeasonStorageItemCart);
@@ -40,6 +42,14 @@ var imageConfig = {
 window.pageSizeMedia;
 window.videoWebCam;
 window.observer;
+
+function backToItemPageEnableHover() {
+    document.getElementById("backToItem").style.backgroundImage = "url('./all_icons/back_simple_arrow_black_50px.png')";
+}
+
+function backToItemPageDisableHover() {
+    document.getElementById("backToItem").style.backgroundImage = "url('./all_icons/back_simple_arrow_gray_50px.png')";
+}
 
 function fromJulian(j) {
     j = (+j) + (30.0 / (24 * 60 * 60));
