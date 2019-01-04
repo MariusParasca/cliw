@@ -160,6 +160,7 @@ Math.degRad = degRad;
 Math.degSin = degSin;
 Math.degCos = degCos;
 
+//Global variables
 var MAX_NUMBER_OF_RECOMANDATIONS = 3;
 var currentSeason = getCurrentSeason();
 const unfilledHeartImgPath = 'url("./all_icons/circle_red_heart_50px.png")';
@@ -218,9 +219,6 @@ function getDataFromDb(params) {
             imageContainer: imageContainer,
             dataContainer: dataContainer
         }));
-
-    // db.collection(params["category"])
-    //     .limit(2).get().then(addItemSameCategory);
     db.collection("categories").get().then(searchInAllCategories.bind({ currentItemName: params["name"] }));
 }
 
