@@ -1,7 +1,8 @@
 export function initPage(params) {
     setAccesoryEventListeners();
     getDataFromDB(params);
-    initFilters()
+    initFilters();
+    initAlternativeMenuAndFooter();
 }
 
 const unfilledHeartImgPath = 'url("./all_icons/circle_red_heart_30px.png")';
@@ -15,6 +16,47 @@ var filters = {
     gender: null,
     price: null
 };
+
+function initAlternativeMenuAndFooter() {
+    document.getElementById('navMenuAlt').addEventListener('mouseover', maintainAlternativeDropdown);
+    document.getElementsByClassName('selectionMenus')[0].addEventListener('mouseover', maintainAlternativeDropdown);
+    document.getElementById('navMenuAlt').addEventListener('mouseout', closeAlternativeDropdown);
+    document.getElementsByClassName('selectionMenus')[0].addEventListener('mouseout', closeAlternativeDropdown);
+
+    window.matchMedia('(min-width: 500px)').addEventListener('change', event => {
+        if (event.matches) {
+            maintainAlternativeDropdown();
+        } else {
+            closeAlternativeDropdown();
+        }
+    });
+}
+
+function maintainAlternativeDropdown() {
+    let categories = document.getElementsByClassName('categories')[0];
+    if (categories !== undefined) {
+        categories.style.display = 'block'
+    }
+
+    let filters = document.getElementsByClassName('filters')[0];
+    if (filters !== undefined) {
+        filters.style.display = 'block'
+    }
+}
+
+function closeAlternativeDropdown() {
+    if (window.matchMedia('(max-width: 500px)').matches) {
+        let categories = document.getElementsByClassName('categories')[0];
+        if (categories !== undefined) {
+            categories.style.display = 'none'
+        }
+
+        let filters = document.getElementsByClassName('filters')[0];
+        if (filters !== undefined) {
+            filters.style.display = 'none'
+        }
+    }
+}
 
 function initFilters() {
     addFilterListener("genderMan", filterGender, "man");
@@ -117,18 +159,26 @@ function checkIfEmpty() {
     let parentElement = document.getElementsByClassName('accesoryItemsList')[0];
     let hasChildren = false;
     for (let child of parentElement.children) {
-        if (child.style.display !== 'none') {
+        if (child.style.display !== 'none' && !child.classList.contains('messageDiv')) {
             hasChildren = true;
             break;
         }
     }
-    
+
     if (!hasChildren) {
-        let messageDiv = document.createElement("div");
-        messageDiv.classList += 'messageDiv';
-        messageDiv.innerText = 'At the moment we don\'t have what you are looking for \n \
+        let messageDiv = document.getElementsByClassName('messageDiv')[0];
+        if (messageDiv === undefined) {
+            let newMessageDiv = document.createElement("div");
+            newMessageDiv.classList += 'messageDiv';
+            newMessageDiv.innerText = 'At the moment we don\'t have what you are looking for \n \
                                 Please come back later';
-        parentElement.appendChild(messageDiv);
+            parentElement.appendChild(newMessageDiv);
+        }
+    } else {
+        let messageDiv = document.getElementsByClassName('messageDiv')[0];
+        if (messageDiv !== undefined) {
+            messageDiv.parentNode.removeChild(messageDiv);
+        }
     }
 }
 
@@ -153,6 +203,11 @@ function resetFilters() {
         gender: null,
         price: null
     };
+
+    let messageDiv = document.getElementsByClassName('messageDiv')[0];
+    if (messageDiv !== undefined) {
+        messageDiv.parentNode.removeChild(messageDiv);
+    }
 }
 
 function searchInAllCategories(querySnapshot) {
