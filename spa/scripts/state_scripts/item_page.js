@@ -237,7 +237,7 @@ function choose(choices) {
 
 function searchInAllCategories(querySnapshot) {  
     let userColorPreference = localStorage.getItem('userColorPreference');
-    var color = ""
+    var color;
     if(userColorPreference != null) {
         let colors = userColorPreference.split(";");
         colors.pop();
@@ -252,8 +252,10 @@ function searchInAllCategories(querySnapshot) {
             if(category) {
                 db.collection(category).get().then(getItemRecomandationsBySeason.
                     bind({ category: category, currentItemName: this.currentItemName, container: container }));
-                db.collection(category).where("color", "==", color).get().then(addUserPreferenceItem.
-                    bind({ category: category, currentItemName: this.currentItemName, container: container }));
+                if (typeof color != "undefined") {
+                    db.collection(category).where("color", "==", color).get().then(addUserPreferenceItem.
+                        bind({ category: category, currentItemName: this.currentItemName, container: container }));
+                }
             } else {
                 break;
             }    
