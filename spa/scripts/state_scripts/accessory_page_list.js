@@ -68,7 +68,7 @@ function addFilterListener(elementId, filterName, filterValue) {
 function applyFilters() {
     let accessoriesElems = document.getElementsByClassName('accessoryTitle');
     for (let elem of accessoriesElems) {
-        let hasColor = true; 
+        let hasColor = true;
         let hasGender = true;
         if (filters.color !== null) {
             hasColor = allItems.find(item => item.name === elem.innerHTML).color === filters.color;
@@ -76,7 +76,7 @@ function applyFilters() {
         if (filters.gender !== null) {
             hasGender = allItems.find(item => item.name === elem.innerHTML).gender === filters.gender;
         }
-        
+
         if (hasColor && hasGender) {
             elem.parentNode.parentNode.style.display = 'block';
         } else {
@@ -87,6 +87,8 @@ function applyFilters() {
     if (filters.price !== null) {
         orderItems();
     }
+
+    checkIfEmpty();
 }
 
 function orderItems() {
@@ -111,17 +113,36 @@ function comparePrice(itemA, itemB) {
     return 0
 }
 
+function checkIfEmpty() {
+    let parentElement = document.getElementsByClassName('accesoryItemsList')[0];
+    let hasChildren = false;
+    for (let child of parentElement.children) {
+        if (child.style.display !== 'none') {
+            hasChildren = true;
+            break;
+        }
+    }
+    
+    if (!hasChildren) {
+        let messageDiv = document.createElement("div");
+        messageDiv.classList += 'messageDiv';
+        messageDiv.innerText = 'At the moment we don\'t have what you are looking for \n \
+                                Please come back later';
+        parentElement.appendChild(messageDiv);
+    }
+}
+
 function resetFilters() {
     let accessoriesElems = document.getElementsByClassName('accessoryTitle');
     for (let elem of accessoriesElems) {
         elem.parentNode.parentNode.style.display = 'block';
     }
-    
+
     document.getElementById('genderMan').style.borderStyle = 'none';
     document.getElementById('genderWoman').style.borderStyle = 'none';
     document.getElementById('priceAscending').style.borderStyle = 'none';
     document.getElementById('priceDescending').style.borderStyle = 'none';
-    
+
     let colorChoise = document.getElementById('colorChoice');
     for (let child of colorChoise.children) {
         child.firstChild.style.borderStyle = 'none';
@@ -155,7 +176,7 @@ function getDataFromDB(params) {
     db.collection("categories").get().then(renderCategoriesContainer.bind({ container: container }));
     if (params['category'] != 'all_categories') {
         db.collection(params['category']).orderBy("name").get().then(renderItems.bind({ category: params['category'] }));
-        
+
         let titleHeading = params['category'].replace('_', ' ');
         titleHeading = titleHeading[0].toUpperCase() + titleHeading.slice(1);
         document.getElementsByClassName("accesoryListHeading")[0].innerText = titleHeading;
@@ -203,7 +224,7 @@ function addAccessoryItem(container, doc, category) {
     let img = document.createElement('IMG');
     img.setAttribute("alt", category + ":" + doc.data().name);
     a.appendChild(img);
-    
+
     waitImage(img, "250px", "250px", "accessoryImage");
     renderImage(img, doc);
 
