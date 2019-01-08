@@ -76,28 +76,11 @@ function waitImage(imgElem, height, width, className) {
 
 function renderImage(img, doc) {
     let imgPath = SITE_FOLDER + doc.data().img_name;
-    let imageSource = null; //localStorage.getItem(imgPath);
-
-    if (imageSource === null) {
-        storage.ref(imgPath).getDownloadURL().then(
-            (url) => {
-                // let xhr = new XMLHttpRequest();
-                // xhr.responseType = 'blob';
-                // xhr.onload = (event) => {
-                //     let blob = xhr.response;
-                //     let dataURL = URL.createObjectURL(blob);
-                //     // img.setAttribute("src", dataURL);
-                //     // localStorage.setItem(imgPath, dataURL);
-                // };
-                // xhr.open('GET', url);
-                // xhr.send();
-                img.setAttribute("src", url);
-                // localStorage.setItem(imgPath, url);
-            }
-        );
-    } else {
-        img.setAttribute("src", imageSource);
-    }
+    storage.ref(imgPath).getDownloadURL().then(
+        (url) => {
+            img.setAttribute("src", url);
+        }
+    );
 }
 
 function toFirstUpperAndSpaceBetween(string) {
@@ -197,13 +180,6 @@ function maitainUserNameHover() {
 function disableUserNameHover() {
     document.getElementById("navUser").style.backgroundImage = "url('./all_icons/user_avatar_white_40px.png')"
 }
-
-//db.collection("beanie").get().then(test);
-// function test(querySnapshot){
-//     querySnapshot.forEach((doc) => {
-//         console.log(doc);
-//     });
-// }
 
 function getBase64Image(img) {
     var canvas = document.createElement("canvas");

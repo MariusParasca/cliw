@@ -135,7 +135,7 @@ function degCos(d) {
 
 function getCurrentSeason() {
     let mine = Date.getSeasons();
-    let today = new Date(); //Date.parse('Mar 21, 2014'); //use Date.parse() to check dates other than today
+    let today = new Date(); //Date.parse('Jul 21, 2019')
     let firstSpring = mine[1];
     let firstSummer = mine[2];
     let firstFall = mine[3];
@@ -160,10 +160,9 @@ Math.degRad = degRad;
 Math.degSin = degSin;
 Math.degCos = degCos;
 
-var numberOfRecomandations = 0;
-var MAX_NUMBER_OF_RECOMANDATIONS = 4;
+//Global variables
+var MAX_NUMBER_OF_RECOMANDATIONS = 3;
 var currentSeason = getCurrentSeason();
-var currentItemName = "";
 const unfilledHeartImgPath = 'url("./all_icons/circle_red_heart_50px.png")';
 const filledHeartImgPath = 'url("./all_icons/circle_red_heart_filled_50px.png")';
 
@@ -212,8 +211,6 @@ function toggleFavoriteItemOnItemPage() {
 }
 
 function getDataFromDb(params) {
-    currentItemName = params["name"];
-    numberOfRecomandations = 0;
     let imageContainer = document.getElementsByClassName('mainItemPageTopLeft')[0];
     let dataContainer = document.getElementsByClassName('mainItemPageTopRight')[0];
     db.collection(params["category"]).where("name", "==", params["name"])
@@ -222,10 +219,7 @@ function getDataFromDb(params) {
             imageContainer: imageContainer,
             dataContainer: dataContainer
         }));
-
-    // db.collection(params["category"])
-    //     .limit(2).get().then(addItemSameCategory);
-    db.collection("categories").get().then(searchInAllCategories);
+    db.collection("categories").get().then(searchInAllCategories.bind({ currentItemName: params["name"] }));
 }
 
 function addMainItemPromise(querySnapshot) {
@@ -234,32 +228,57 @@ function addMainItemPromise(querySnapshot) {
     });
 }
 
-// function addItemSameCategory(querySnapshot) {
-//     querySnapshot.forEach((doc) => {
-//         if (doc.data().name != currentItemName) {
-//             numberOfRecomandations++;
-//             renderRecomandation(doc, currentItemCategory);
-//         }
-//     });
-// }
+function choose(choices) {
+    var index = Math.floor(Math.random() * choices.length);
+    return choices.splice(index, 1);
+}
 
-function searchInAllCategories(querySnapshot) {
+function searchInAllCategories(querySnapshot) {  
+    let userColorPreference = localStorage.getItem('userColorPreference');
+    var color;
+    if(userColorPreference != null) {
+        let colors = userColorPreference.split(";");
+        colors.pop();
+        color = choose(colors)[0];
+    }
+    container = document.getElementsByClassName("mainItemPageBottom")[0];
+    
     querySnapshot.forEach((doc) => {
         let categories = doc.data().categories;
-        for (let i in categories) {
-            if (numberOfRecomandations == MAX_NUMBER_OF_RECOMANDATIONS)
+        while (container.children.length != MAX_NUMBER_OF_RECOMANDATIONS) {
+            let category = choose(categories)[0];
+            if(category) {
+                db.collection(category).get().then(getItemRecomandationsBySeason.
+                    bind({ category: category, currentItemName: this.currentItemName, container: container }));
+                if (typeof color != "undefined") {
+                    db.collection(category).where("color", "==", color).get().then(addUserPreferenceItem.
+                        bind({ category: category, currentItemName: this.currentItemName, container: container }));
+                }
+            } else {
                 break;
-            db.collection(categories[i]).get().then(getItemRecomandations.bind({ category: categories[i] }));
+            }    
         }
     });
 }
 
-function getItemRecomandations(querySnapshot) {
+function getItemRecomandationsBySeason(querySnapshot) {
     querySnapshot.forEach((doc) => {
-        let seasons = doc.data().season;
-        for (let i in seasons) {
-            if (seasons[i] == currentSeason && doc.data().name != currentItemName) {
-                numberOfRecomandations++;
+        if(this.container.children.length <= MAX_NUMBER_OF_RECOMANDATIONS) {
+            let seasons = doc.data().season;
+            for (let i in seasons) {
+                if (seasons[i] == currentSeason && doc.data().name != this.currentItemName) {
+                    renderRecomandation(doc, this.category);
+                    break;
+                }
+            }
+        } 
+    });
+}
+
+function addUserPreferenceItem(querySnapshot) {
+    querySnapshot.forEach((doc) => {
+        if (this.container.children.length < MAX_NUMBER_OF_RECOMANDATIONS) {
+            if (doc.data().name != this.currentItemName) {
                 renderRecomandation(doc, this.category);
             }
         }
@@ -268,6 +287,11 @@ function getItemRecomandations(querySnapshot) {
 
 function renderRecomandation(doc, category) {
     let container = document.getElementsByClassName('mainItemPageBottom')[0];
+    for(let children of container.children) {
+        if (children.firstChild.firstChild.alt == category + ":" + doc.data().name) {
+            return;
+        }
+    }
     addElementsToContainer(container, doc, category)
 }
 
