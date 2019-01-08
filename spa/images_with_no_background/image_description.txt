@@ -1,0 +1,14 @@
+beret.png 				: Pretend that you are french.
+black_cowboy_hat.png 	: Go back to the western world.
+black_hat.png 			: You could look like a thief, but hey it's cold outside.
+blue_bobble_hat.png 	: Especially for the people who want to stand out.
+blue_sun_hat.png 		: For those sunny days.
+bowler_hat.png 			: Wear it, imagine you have one third of a moustache and there you are, a cinema legend.
+brown_cowboy_hat.png 	: Go back to the western world, but in a more brownish manner.
+fedora.png 				: Let's bring '90s men fashion back in style.
+flat_cap.png 			: Nothing beats the good old worker's best friend.
+grey_cap.png 			: Nothing special, just a regular cap.
+grey_hat.png 			: Neutral blending in.
+red_hat.png 			: It's warm, it's colorful, it's just for you.
+navy_cap.png 			: Ahoy, captain!
+warm_hat.png 			: The warmest that there could be.
