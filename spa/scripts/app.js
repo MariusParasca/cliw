@@ -36,12 +36,12 @@ function addElementsToContainer(container, doc, category) {
     let div = document.createElement('DIV');
     container.appendChild(div);
     div.setAttribute("class", "lastAccessoryAdded");
-    div.setAttribute("imtepscope", "");
-    div.setAttribute("itemptype", "https://schema.org/Offer");
+    div.setAttribute("itemscope", "");
+    div.setAttribute("itemtype", "https://schema.org/Offer");
 
     let a = document.createElement('A');
     a.setAttribute("class", "accessoryLink");
-    a.setAttribute("href", "#item_page?name=" + doc.data().name + "&&category=" + category);
+    a.setAttribute("href", encodeURI("#item_page?name=" + doc.data().name + "&&category=" + category));
     div.appendChild(a);
 
     let img = document.createElement('IMG');
@@ -99,14 +99,14 @@ function renderCategories(categories, container) {
     let ul = document.createElement('UL');
     let li = document.createElement('LI');
     let a = document.createElement('A');
-    a.href = "#accessory_page_list?category=all_categories";
+    a.href = encodeURI("#accessory_page_list?category=all_categories");
     a.innerText = "All Categories";
     li.appendChild(a);
     ul.appendChild(li);
     for (let category of categories) {
         li = document.createElement('LI');
         a = document.createElement('A');
-        a.href = "#accessory_page_list?category=" + category;
+        a.href = encodeURI("#accessory_page_list?category=" + category);
         a.innerText = toFirstUpperAndSpaceBetween(category);
         li.appendChild(a);
         ul.appendChild(li);
@@ -124,10 +124,10 @@ function addHeartHoverStyle(mouseOnimgURL, mouseOutImgURL, container) {
 }
 
 function toggleFavoriteItem(container, img, unfilledHeartImgPath, filledHeartImgPath, secondContainer) {
-    let isFavorite = localStorage.getItem(FAVORITE + img.alt);
+    let isFavorite = localStorage.getItem(FAVORITE + img.alt.replace(/\s+/g, '_'));
     if (isFavorite == null) {
         container.style.backgroundImage = filledHeartImgPath;
-        localStorage.setItem(FAVORITE + img.alt, img.alt);
+        localStorage.setItem(FAVORITE + img.alt.replace(/\s+/g, '_'), img.alt.replace(/\s+/g, '_'));
         addHeartHoverStyle(unfilledHeartImgPath, filledHeartImgPath, container);
         if (secondContainer !== undefined) {
             secondContainer.style.backgroundImage = filledHeartImgPath;
@@ -135,7 +135,7 @@ function toggleFavoriteItem(container, img, unfilledHeartImgPath, filledHeartImg
         }
     } else {
         container.style.backgroundImage = unfilledHeartImgPath;
-        localStorage.removeItem(FAVORITE + img.alt);
+        localStorage.removeItem(FAVORITE + img.alt.replace(/\s+/g, '_'));
         addHeartHoverStyle(filledHeartImgPath, unfilledHeartImgPath, container);
         if (secondContainer !== undefined) {
             secondContainer.style.backgroundImage = unfilledHeartImgPath;

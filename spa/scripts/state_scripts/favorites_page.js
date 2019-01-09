@@ -12,7 +12,7 @@ function addFavoriteItems() {
         if (localKey.includes(FAVORITE)) {
             foundFavorites = true;
             let data = localStorage[localKey].split(":");
-            db.collection(data[0]).where("name", "==", data[1])
+            db.collection(data[0]).where("name", "==", data[1].replace(/_/g, ' '))
                 .limit(1).get().then(function (querySnapshot) {
                     querySnapshot.forEach((doc) => {
                         addFavoriteItem(container, doc, this.category);
@@ -44,13 +44,13 @@ function deleteFavoriteItem(event) {
 function addFavoriteItem(container, doc, category) {
     let div = document.createElement('DIV');
     div.setAttribute("class", "favoritesItem");
-    div.setAttribute("imtepscope", "");
-    div.setAttribute("itemptype", "https://schema.org/Offer");
+    div.setAttribute("itemscope", "");
+    div.setAttribute("itemtype", "https://schema.org/Offer");
     container.appendChild(div);
 
     let a = document.createElement('A');
     a.setAttribute("class", "favoritesLink");
-    a.setAttribute("href", "#item_page?name=" + doc.data().name + "&&category=" + category);
+    a.setAttribute("href", encodeURI("#item_page?name=" + doc.data().name + "&&category=" + category));
     div.appendChild(a);
 
     let img = document.createElement('IMG');
@@ -69,7 +69,7 @@ function addFavoriteItem(container, doc, category) {
 
     let favoriteHeart = document.createElement('DIV');
     favoriteHeart.setAttribute("class", "favoritesHeart");
-    favoriteHeart.setAttribute("id", img.alt);
+    favoriteHeart.setAttribute("id", img.alt.replace(/\s+/g, '_'));
     favoriteHeart.addEventListener('click', deleteFavoriteItem);
     div.appendChild(favoriteHeart);
 

@@ -185,7 +185,7 @@ function storeInSeasonStorageItemCart() {
     } else {
         lastItemCartId++;
     }
-    sessionStorage.setItem("cart_" + lastItemCartId + "_" + img.alt, img.alt + ":" + price);
+    sessionStorage.setItem(CART + lastItemCartId + "_" + img.alt.replace(/\s+/g, '_'), img.alt.replace(/\s+/g, '_') + ":" + price);
 }
 
 function initFavoriteItem(params) {
@@ -193,7 +193,7 @@ function initFavoriteItem(params) {
     let favoriteHeart = document.getElementById("itemHeartItemPage");
     let favoriteHeartWebCam = document.getElementById("itemChoicesFavorites");
     for (let localKey of localKeys) {
-        if (localKey == FAVORITE + params["category"] + ":" + params["name"]) {
+        if (localKey == FAVORITE + params["category"] + ":" + params["name"].replace(/\s+/g, '_')) {
             favoriteHeart.style.backgroundImage = filledHeartImgPath;
             favoriteHeartWebCam.style.backgroundImage = filledHeartImgPath;
             addHeartHoverStyle(unfilledHeartImgPath, filledHeartImgPath, favoriteHeart);
@@ -297,8 +297,8 @@ function renderRecomandation(doc, category) {
 
 function addMainItem(imageContainer, dataContainer, doc, category) {
     let parrentDataContainer = dataContainer.parentElement;
-    parrentDataContainer.setAttribute("imtepscope", "");
-    parrentDataContainer.setAttribute("itemptype", "https://schema.org/Offer");
+    parrentDataContainer.setAttribute("itemscope", "");
+    parrentDataContainer.setAttribute("itemtype", "https://schema.org/Offer");
     let img = document.createElement('IMG');
     img.setAttribute("alt", category + ":" + doc.data().name);
     img.setAttribute("itemprop", "image");

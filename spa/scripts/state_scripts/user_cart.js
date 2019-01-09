@@ -23,7 +23,7 @@ function iniItemstFromSeasonStorage() {
             let data = sessionStorage[localKey].split(":");
             totalPrice += parseInt(data[2]);
             let itemCartId = +localKey.split("_")[1];
-            addItemToUserCart(container, firstContainerChild, data[0], data[1], itemCartId);
+            addItemToUserCart(container, firstContainerChild, data[0], data[1].replace(/\_/g, ' '), itemCartId);
         }
     }
     if (!foundItems) {
@@ -65,8 +65,8 @@ function deletItemFromCart(event) {
 function renderItemsToUserCart(doc, container, firstContainerChild, category, itemCartId) {
     let div = document.createElement('DIV');
     div.setAttribute("class", "cartSingleOrder");
-    div.setAttribute("imtepscope", "");
-    div.setAttribute("itemptype", "https://schema.org/Offer");
+    div.setAttribute("itemscope", "");
+    div.setAttribute("itemtype", "https://schema.org/Offer");
     container.insertBefore(div, firstContainerChild);
 
     let img = document.createElement('IMG');
@@ -86,7 +86,7 @@ function renderItemsToUserCart(doc, container, firstContainerChild, category, it
     let span = document.createElement('SPAN');
     span.setAttribute("class", "deleteOrder");
     span.addEventListener('click', deletItemFromCart);
-    span.setAttribute("id", itemCartId + "_" + img.alt);
+    span.setAttribute("id", itemCartId + "_" + img.alt.replace(/\s+/g, '_'));
     interiorDiv.appendChild(span);
 
     let title = document.createElement('P');

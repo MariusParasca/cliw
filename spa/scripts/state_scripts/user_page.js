@@ -24,6 +24,7 @@ function initPreferedColors() {
         let tickElem = document.createElement('img');
         tickElem.src = './all_icons/tick.png';
         tickElem.setAttribute('class', 'tick');
+        tickElem.setAttribute('alt', 'tickColor');
 
         let colorLabel = document.createElement('p');
         colorLabel.innerText = colorName;

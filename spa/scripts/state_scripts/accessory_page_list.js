@@ -75,7 +75,7 @@ function addColorFilters() {
     colorChoise.style.display = 'flex';
 
     for (let colorName in COLORS) {
-        let colorDiv = document.createElement('div');
+        let colorDiv = document.createElement('LI');
         colorDiv.style.backgroundColor = COLORS[colorName];
         colorDiv.style.height = '15px';
         colorDiv.style.width = '15px';
@@ -270,14 +270,17 @@ function addAccessoryItem(container, doc, category) {
     let div = document.createElement('DIV');
     div.setAttribute("class", "accesoryItem");
     container.appendChild(div);
+    container.setAttribute("itemscope", "");
+    container.setAttribute("itemtype", "https://schema.org/Offer");
 
     let a = document.createElement('A');
     a.setAttribute("class", "accessoryLink");
-    a.setAttribute("href", "#item_page?name=" + doc.data().name + "&&category=" + category);
+    a.setAttribute("href", encodeURI("#item_page?name=" + doc.data().name + "&&category=" + category));
     div.appendChild(a);
 
     let img = document.createElement('IMG');
     img.setAttribute("alt", category + ":" + doc.data().name);
+    img.setAttribute("itemprop", "image");
     a.appendChild(img);
 
     waitImage(img, "250px", "250px", "accessoryImage");
@@ -285,18 +288,21 @@ function addAccessoryItem(container, doc, category) {
 
     let p = document.createElement('P');
     p.setAttribute("class", "accessoryTitle");
+    p.setAttribute("itemprop", "title");
     p.innerHTML = doc.data().name;
     a.appendChild(p);
 
     let itemHeart = document.createElement('DIV');
     itemHeart.setAttribute("class", "itemHeart");
-    itemHeart.setAttribute("id", img.alt);
+    let imgAlt = img.alt.replace(/\s+/g, '_')
+    itemHeart.setAttribute("id", imgAlt);
     itemHeart.addEventListener("click", toggleFavoriteItemOnAccessoryListPage);
     div.appendChild(itemHeart);
-    initIfItemLoved(img.alt, itemHeart, filledHeartImgPath);
+    initIfItemLoved(imgAlt, itemHeart, filledHeartImgPath);
 
     let price = document.createElement('P');
     price.setAttribute("class", "accesoryPrice");
+    price.setAttribute("itemprop", "price");
     price.innerHTML = doc.data().price + " " + CURRENCY;
     div.appendChild(price);
 }
