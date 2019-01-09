@@ -312,7 +312,6 @@ function addMainItem(imageContainer, dataContainer, doc, category) {
     renderImage(img, doc).then(() => {
         let cartButton = document.getElementsByClassName("addToCart")[0];
         cartButton.addEventListener("click", storeInSeasonStorageItemCart);
-        cartButton.parentElement.setAttribute("href", "#user_cart");
     });
     imageContainer.appendChild(img)
 
