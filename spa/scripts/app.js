@@ -76,7 +76,7 @@ function waitImage(imgElem, height, width, className) {
 
 function renderImage(img, doc) {
     let imgPath = SITE_FOLDER + doc.data().img_name;
-    storage.ref(imgPath).getDownloadURL().then(
+    return storage.ref(imgPath).getDownloadURL().then(
         (url) => {
             img.setAttribute("src", url);
         }

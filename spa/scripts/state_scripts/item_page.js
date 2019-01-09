@@ -11,7 +11,6 @@ export function initPage(params) {
     document.getElementById("takePhoto").addEventListener("click", takePictureButton);
     document.getElementById("itemHeartItemPage").addEventListener("click", toggleFavoriteItemOnItemPage);
     document.getElementById("itemChoicesFavorites").addEventListener("click", toggleFavoriteItemOnItemPage);
-    document.getElementsByClassName("addToCart")[0].addEventListener("click", storeInSeasonStorageItemCart);
     document.getElementsByClassName("itemChoicesCart")[0].addEventListener("click", storeInSeasonStorageItemCart);
     setBarEventListeners();
     initFavoriteItem(params);
@@ -170,6 +169,10 @@ function storeInSeasonStorageItemCart() {
     let price = document.getElementById("price").innerText.match(/\d+/)[0];
     let img = document.getElementsByClassName("itemImage")[0];
 
+    if (img === undefined) {
+        return;
+    }
+
     let sessionKeys = Object.keys(sessionStorage);
     let lastItemCartId = -1;
     for (let sessionKey of sessionKeys) {
@@ -287,12 +290,14 @@ function addUserPreferenceItem(querySnapshot) {
 
 function renderRecomandation(doc, category) {
     let container = document.getElementsByClassName('mainItemPageBottom')[0];
-    for(let children of container.children) {
-        if (children.firstChild.firstChild.alt == category + ":" + doc.data().name) {
-            return;
+    if (container !== undefined) {
+        for(let children of container.children) {
+            if (children.firstChild.firstChild.alt == category + ":" + doc.data().name) {
+                return;
+            }
         }
+        addElementsToContainer(container, doc, category)
     }
-    addElementsToContainer(container, doc, category)
 }
 
 function addMainItem(imageContainer, dataContainer, doc, category) {
@@ -304,7 +309,11 @@ function addMainItem(imageContainer, dataContainer, doc, category) {
     img.setAttribute("itemprop", "image");
 
     waitImage(img, null, null, "itemImage");
-    renderImage(img, doc);
+    renderImage(img, doc).then(() => {
+        let cartButton = document.getElementsByClassName("addToCart")[0];
+        cartButton.addEventListener("click", storeInSeasonStorageItemCart);
+        cartButton.parentElement.setAttribute("href", "#user_cart");
+    });
     imageContainer.appendChild(img)
 
     let childRef = dataContainer.firstChild;
@@ -329,7 +338,7 @@ function addMainItem(imageContainer, dataContainer, doc, category) {
     description.innerText = doc.data().description;
     dataContainer.insertBefore(description, childRef);
 
-    imageConfig = getWebCamConfig(doc);   
+    imageConfig = getWebCamConfig(doc);
 }
 
 function getWebCamConfig(doc) {

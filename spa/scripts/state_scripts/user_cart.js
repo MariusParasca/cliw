@@ -51,7 +51,7 @@ function deletItemFromCart(event) {
         let data = cartSeasonItem.split(":");
         let itemPirce = parseInt(data[2]);
         totalPrice -= itemPirce;
-        document.getElementsByClassName("totalPrice")[0].innerText = totalPrice;
+        document.getElementsByClassName("totalPrice")[0].innerText = totalPrice + " " + CURRENCY;
         sessionStorage.removeItem(localKey);
         let cartItemsContainer = currentElement.parentElement.parentElement.parentElement;
         let currentCartItem = currentElement.parentElement.parentElement;
@@ -98,7 +98,7 @@ function renderItemsToUserCart(doc, container, firstContainerChild, category, it
     let price = document.createElement('P');
     price.setAttribute("class", "orderPrice");
     price.setAttribute("itemprop", "price");
-    price.innerHTML = doc.data().price + " " + CURRENCY;;
+    price.innerHTML = doc.data().price + " " + CURRENCY;
     interiorDiv.appendChild(price);
 }
 
