@@ -127,7 +127,7 @@ function applyFilters() {
     }
 
     if (filters.price !== null) {
-        orderItems();
+        orderItems(false);
     }
 
     checkIfEmpty();
@@ -138,10 +138,18 @@ function orderItems() {
     if (filters.price === 'desc') {
         allItems.reverse();
     }
+    reorderElements();
+}
+
+function reorderElements(reset) {
     let accessoriesElems = document.getElementsByClassName('accessoryTitle');
     for (let elem of accessoriesElems) {
         let itemIndex = allItems.findIndex(item => item.name === elem.innerHTML);
-        elem.parentNode.parentNode.style.order = itemIndex;
+        if (reset) {
+            elem.parentNode.parentNode.style.order = allItems[itemIndex].id;
+        } else {
+            elem.parentNode.parentNode.style.order = itemIndex;
+        }
     }
 }
 
@@ -183,6 +191,8 @@ function checkIfEmpty() {
 }
 
 function resetFilters() {
+    reorderElements(true);
+
     let accessoriesElems = document.getElementsByClassName('accessoryTitle');
     for (let elem of accessoriesElems) {
         elem.parentNode.parentNode.style.display = 'block';
@@ -243,9 +253,14 @@ function getDataFromDB(params) {
 
 function renderItems(querySnapshot) {
     let container = document.getElementsByClassName("accesoryItemsList")[0];
+
     querySnapshot.forEach((doc) => {
         if (doc.data().name) {
-            allItems.push(doc.data());
+            let data = {
+                id: Date.now(),
+                ...doc.data()
+            }
+            allItems.push(data);
             addAccessoryItem(container, doc, this.category);
         }
     });
