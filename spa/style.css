@@ -1003,12 +1003,12 @@ footer {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	min-width: 640px;
+	/* min-width: 640px;
 	min-height: 330px;
 	background-image: url('./images/woman_hat_fade.jpg');
 	background-repeat: no-repeat;
 	background-position: 400px;
-	background-size: 640px 330px;
+	background-size: 640px 330px; */
 }
 
 .welcomeText {
