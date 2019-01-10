@@ -43,12 +43,12 @@ function initPreferedColors() {
         colorChoiceDiv.appendChild(tickElem);
 
         colorDiv.addEventListener('mouseover', event => {
-            if (!userColorPreference.includes(colorName)) {
+            if ((userColorPreference !== null) && (!userColorPreference.includes(colorName))) {
                 event.target.nextSibling.nextSibling.style.visibility = 'visible';
             }
         });
         colorDiv.addEventListener('mouseout', event => {
-            if (!userColorPreference.includes(colorName)) {
+            if ((userColorPreference !== null) &&(!userColorPreference.includes(colorName))) {
                 event.target.nextSibling.nextSibling.style.visibility = 'hidden';
             }
         });

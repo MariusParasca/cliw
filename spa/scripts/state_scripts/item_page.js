@@ -4,7 +4,6 @@ export function initPage(params) {
     document.getElementsByClassName("addToCart")[0].addEventListener("mouseout", disableCartImgHover);
     document.getElementById("tryIt").addEventListener("mouseover", enableHatImgHover);
     document.getElementById("tryIt").addEventListener("mouseout", disableHatImgHover);
-    document.getElementById("tryIt").addEventListener("click", changeToWebCam);
     document.getElementById("backToItem").addEventListener("click", backToItemPage);
     document.getElementById("backToItem").addEventListener("mouseover", backToItemPageEnableHover);
     document.getElementById("backToItem").addEventListener("mouseout", backToItemPageDisableHover);
@@ -244,24 +243,27 @@ function searchInAllCategories(querySnapshot) {
         colors.pop();
         color = choose(colors)[0];
     }
+
     container = document.getElementsByClassName("mainItemPageBottom")[0];
     
-    querySnapshot.forEach((doc) => {
-        let categories = doc.data().categories;
-        while (container.children.length != MAX_NUMBER_OF_RECOMANDATIONS) {
-            let category = choose(categories)[0];
-            if(category) {
-                db.collection(category).get().then(getItemRecomandationsBySeason.
-                    bind({ category: category, currentItemName: this.currentItemName, container: container }));
-                if (typeof color != "undefined") {
-                    db.collection(category).where("color", "==", color).get().then(addUserPreferenceItem.
+    if (container !== undefined) {
+        querySnapshot.forEach((doc) => {
+            let categories = doc.data().categories;
+            while (container.children.length != MAX_NUMBER_OF_RECOMANDATIONS) {
+                let category = choose(categories)[0];
+                if(category) {
+                    db.collection(category).get().then(getItemRecomandationsBySeason.
                         bind({ category: category, currentItemName: this.currentItemName, container: container }));
-                }
-            } else {
-                break;
-            }    
-        }
-    });
+                    if (typeof color != "undefined") {
+                        db.collection(category).where("color", "==", color).get().then(addUserPreferenceItem.
+                            bind({ category: category, currentItemName: this.currentItemName, container: container }));
+                    }
+                } else {
+                    break;
+                }    
+            }
+        });
+    }
 }
 
 function getItemRecomandationsBySeason(querySnapshot) {
@@ -311,7 +313,14 @@ function addMainItem(imageContainer, dataContainer, doc, category) {
     waitImage(img, null, null, "itemImage");
     renderImage(img, doc).then(() => {
         let cartButton = document.getElementsByClassName("addToCart")[0];
-        cartButton.addEventListener("click", storeInSeasonStorageItemCart);
+        if (cartButton !== undefined) {
+            cartButton.setAttribute("href", "#user_cart");
+            cartButton.addEventListener("click", storeInSeasonStorageItemCart);
+        }
+        let tryItButton = document.getElementById("tryIt");
+        if (tryItButton !== undefined) {
+            tryItButton.addEventListener("click", changeToWebCam);
+        }
     });
     imageContainer.appendChild(img)
 
