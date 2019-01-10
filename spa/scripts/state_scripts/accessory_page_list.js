@@ -282,6 +282,10 @@ function initIfItemLoved(key, tag, background) {
 }
 
 function addAccessoryItem(container, doc, category) {
+    if (container === undefined) {
+        return;
+    }
+
     let div = document.createElement('DIV');
     div.setAttribute("class", "accesoryItem");
     container.appendChild(div);
