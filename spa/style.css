@@ -197,6 +197,7 @@ nav {
 
 	.logoLink {
 		width: 70px;
+		margin-left: 60px;
 	}
 
 	.userLinksDiv {
@@ -244,7 +245,8 @@ footer {
 	margin-bottom: 3px;
 	margin-right: 40px;
 	z-index: 200;
-    top: 2px;
+    top: 1px;
+    left: 5px;
 }
 
 #navMenuAlt {
@@ -887,7 +889,7 @@ footer {
 	}
 
 	.userImageTakenCard {
-		margin: 10px;
+		margin: 10px 0;
 	}
 }
 
@@ -998,26 +1000,28 @@ footer {
 }
 
 .welcomeContainer {
-	padding-right: 500px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	align-items: center;
-	/* min-width: 640px;
+	align-items: center;	
 	min-height: 330px;
 	background-image: url('./images/woman_hat_fade.jpg');
 	background-repeat: no-repeat;
-	background-position: 400px;
-	background-size: 640px 330px; */
+	background-size: 640px 330px;
+	background-position: 70%;
+	padding-right: 30%;
+	width: 100%;
 }
 
 .welcomeText {
 	text-align: center;
-	width: 100%;
+	width: 50%;
 }
 
 .firstWelcomeText {
 	font-size: 1.9em;
+	text-align: center;
+	margin: 0;
 }
 
 .secondWelcomeText {
@@ -1089,42 +1093,14 @@ footer {
 	height: 200px;
 }
 
-@media only screen and (max-width: 1200px) {
-	.welcomeContainer {
-		padding-right: 400px;
-	}
-	
-	.welcomeText {
-		width: 70%;
-	}
-}
-
-@media only screen and (max-width: 900px) {
-	.welcomeContainer {
-		padding-right: 300px;
-		background-position: 300px;
-	}
-}
-
-@media only screen and (max-width: 750px) {
-	.welcomeContainer {
-		padding-right: 200px;
-		background-position: 220px;
-	}
-}
-
 @media only screen and (max-width: 650px) {
 	.welcomeContainer {
-		padding-right: 100px;
-		background-position: 120px;
-	}
-
-	.welcomeText {
-		width: 40%;
+		background-position: 50%;
+		padding-right: 50%;
 	}
 
 	.firstWelcomeText {
-		font-size: 1.6em;
+		font-size: 1.3em;
 	}
 	
 	.secondWelcomeText {
@@ -1649,6 +1625,15 @@ footer {
 
 }
 
+@media only screen and (max-width: 920px) {
+	.mainItemPageTopRight p:nth-of-type(4) {
+		padding: 0;
+		margin: 0;
+		margin-left: 10px;
+    	margin-bottom: 10px;
+	}
+}
+
 @keyframes flash {
 	from,
 	to {
@@ -1867,12 +1852,12 @@ footer {
 	}
 
 	.orederButton {
-		margin-left: 155px;
+		margin-left: 150px;
 		margin-bottom: 20px;
 	}
 
 	#checkOutButton {
-		width: 140px;
+		width: 90px;
 		height: 43px;
 		font-size: 15px;
 	}

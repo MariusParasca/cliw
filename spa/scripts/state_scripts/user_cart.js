@@ -74,7 +74,7 @@ function renderItemsToUserCart(doc, container, firstContainerChild, category, it
     img.setAttribute("itemprop", "image");
     div.appendChild(img);
 
-    waitImage(img, "200px", "200px", "orderImage");
+    waitImage(img, null, null, "orderImage");
     renderImage(img, doc);
     div.appendChild(img);
 
