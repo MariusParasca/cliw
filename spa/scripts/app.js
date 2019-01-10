@@ -148,7 +148,7 @@ function toggleFavoriteItem(container, img, unfilledHeartImgPath, filledHeartImg
 function getAndRenderCategories() {
     container = document.getElementsByClassName("dropdownContent")[0];
     containerBox = document.getElementsByClassName("dropdown")[0];
-    if (containerBox.style.display == 'none' || container.children.length == 1) {
+    if (container.children.length == 1) {
         db.collection("categories").get().then(renderCategoriesContainer.bind({ container: container }));
     }
 }
