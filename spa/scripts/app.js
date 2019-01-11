@@ -111,7 +111,9 @@ function renderCategories(categories, container) {
         li.appendChild(a);
         ul.appendChild(li);
     }
-    container.appendChild(ul);
+    if (container.children.length === 1) {
+        container.appendChild(ul);
+    }
 }
 
 function addHeartHoverStyle(mouseOnimgURL, mouseOutImgURL, container) {
@@ -147,8 +149,8 @@ function toggleFavoriteItem(container, img, unfilledHeartImgPath, filledHeartImg
 //------------------------ Index ------------------------//
 function getAndRenderCategories() {
     container = document.getElementsByClassName("dropdownContent")[0];
-    containerBox = document.getElementsByClassName("dropdown")[0];
-    if (container.children.length == 1) {
+    
+    if (container.children.length === 1) {
         db.collection("categories").get().then(renderCategoriesContainer.bind({ container: container }));
     }
 }
