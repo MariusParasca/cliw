@@ -69,14 +69,17 @@ function renderItemsToUserCart(doc, container, firstContainerChild, category, it
     div.setAttribute("itemtype", "https://schema.org/Offer");
     container.insertBefore(div, firstContainerChild);
 
+    let a = document.createElement('A');
+    a.setAttribute("href", encodeURI("#item_page?name=" + doc.data().name + "&&category=" + category));
+    div.appendChild(a);
+
     let img = document.createElement('IMG');
     img.setAttribute("alt", category + ":" + doc.data().name);
     img.setAttribute("itemprop", "image");
-    div.appendChild(img);
+    a.appendChild(img);
 
     waitImage(img, null, null, "orderImage");
     renderImage(img, doc);
-    div.appendChild(img);
 
     let interiorDiv = document.createElement('DIV');
     div.appendChild(interiorDiv);
